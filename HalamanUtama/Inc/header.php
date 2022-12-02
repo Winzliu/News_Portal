@@ -10,24 +10,21 @@
       <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0  mx-0 w-50">
           <li class="nav-item">
-            <a class="nav-link active " aria-current="page" href="#">Home</a>
+            <a class="nav-link " aria-current="page" href="./">Utama</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
+            <a class="nav-link" href="#">Tentang</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Content
+              Kategori
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Teknologi</a></li>
-              <li><a class="dropdown-item" href="#">Hiburan</a></li>
-              <li>
-                <a class="dropdown-item" href="#">Ekonomi</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Politik</a>
-              </li>
+              <?php foreach ($kategori as $row): ?>
+              <li><a class="dropdown-item" href="kategori.php?kategori=<?php echo $row["namaKategori"]; ?>">
+                  <?php echo $row["namaKategori"]; ?>
+                </a></li>
+              <?php endforeach; ?>
             </ul>
           </li>
         </ul>
@@ -35,8 +32,8 @@
           <input class="form-control me-2  border-dark" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-dark " type="submit">Search</button>
         </form>
-        <a href="#" class="btn btn-dark mb-1 me-3 mt-3 mt-lg-1">Login</a>
-        <a href="#" class="btn btn-dark mb-1 mt-3 mt-lg-1">Registrasi</a>
+        <a href="../Registrasi" class="btn btn-dark mb-1 me-3 mt-3 mt-lg-1">Registrasi</a>
+        <a href="../logout.php" class="btn btn-danger mb-1  mt-3 mt-lg-1">LogOut</a>
       </div>
     </div>
   </nav>

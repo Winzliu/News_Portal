@@ -1,6 +1,20 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "tubes_kelompok2c");
 
+// fungsi query
+function query($query)
+{
+  global $conn;
+  $result = mysqli_query($conn, $query);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+  return $rows;
+}
+
+
+// fungsi registrasi
 function registrasi($data)
 {
   global $conn;
@@ -35,6 +49,30 @@ function registrasi($data)
 
   return mysqli_affected_rows($conn);
 }
+// akhir fungsi registrasi
+// fungsi login
+function login($dataUser)
+{
+  global $conn;
+  $username = strtolower($dataUser["username"]);
+  $password = $dataUser["password"];
+  $user = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+
+  // ada gk username yang sama
+  if (mysqli_num_rows($user) === 1) {
+    // cek password
+    $pass = mysqli_fetch_assoc($user);
+    // ada gk password yang sama
+    if (password_verify($password, $pass["password"])) {
+      // set session
+      $_SESSION["login"] = true;
+      header("Location: ../HalamanUtama/index.php");
+      exit;
+    }
+  }
+  return false;
+}
+// akhir fungsi login
 
 
 ?>
