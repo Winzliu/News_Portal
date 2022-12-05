@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["login"])) {
-  header("Location: login");
+  header("Location: ../login");
 }
 require '../koneksi.php';
 $kategori = query("SELECT * FROM kategori")
@@ -15,9 +15,11 @@ $kategori = query("SELECT * FROM kategori")
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Playfair+Display+SC&display=swap">
+  <!-- fontstyle -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merienda+One&family=Playfair+Display+SC:wght@700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body style="font-family: Playfair Display SC, serif">
@@ -71,7 +73,7 @@ $kategori = query("SELECT * FROM kategori")
   </div>
   <!-- akhir carousel -->
 
-  <div class="d-md-none d-block" style="height: 50px;width: 40px;"></div>
+  <div class="d-md-none d-block" style="height: 70px;width: 40px;"></div>
   <!-- bagian utama -->
   <!-- Kategori Berita -->
   <div class="container m-auto text-center mt-3">

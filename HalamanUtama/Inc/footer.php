@@ -1,7 +1,7 @@
 <footer class="bg-dark text-white pb-2 pt-4 fs-5">
   <div class="container row m-auto">
     <!-- Tema Berita -->
-    <div class="col-lg-3 text-center mb-5">
+    <div class="col-lg-4 text-center mb-5">
       <h3 class="">Tema Berita :</h3>
       <hr />
       <div class="list-group">
@@ -13,8 +13,16 @@
         <?php endforeach; ?>
       </div>
     </div>
+    <!-- Alamat -->
+    <div class="col-lg-4 text-center mb-5">
+      <img width="100px" src="../img/Logo-Putih.png" alt="">
+      <div class="list-group">
+        <p style="font-family: 'Merienda One', cursive;">ToSee News</p>
+        <p>ToSee (2C) adalah sebuah website berita yang menyediakan berbagai berita terbaru dan terpopuler.</p>
+      </div>
+    </div>
     <!-- Contact -->
-    <div class="col-lg-9 text-center">
+    <div class="col-lg-4 text-center">
       <h3 class="">Kontak Kami :</h3>
       <hr />
       <div class="list-group">

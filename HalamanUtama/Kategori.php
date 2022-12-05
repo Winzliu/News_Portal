@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+  header("Location: ../login");
+}
 require '../koneksi.php';
 $kategoriHal = $_GET["kategori"];
 $kategori = query("SELECT * FROM kategori");
