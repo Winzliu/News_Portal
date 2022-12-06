@@ -2,8 +2,7 @@
   <!-- navbar -->
   <nav style="transition: .5s;" class="fixed-top navbar navbar-expand-lg bg-opacity-50 bg-light pb-3">
     <div class="container-xl">
-      <a class="navbar-brand fs-2" style="font-family: 'Merienda One', cursive;" href="./"><img width="50px"
-          src="../img/Logo.png" alt=""></a>
+      <a class="navbar-brand" href="./"><img width="50px" src="../img/Logo.png" alt=""></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

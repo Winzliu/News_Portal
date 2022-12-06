@@ -4,8 +4,12 @@ if (!isset($_SESSION["login"])) {
   header("Location: ../login");
 }
 require '../koneksi.php';
-$kategori = query("SELECT * FROM kategori")
-  ?>
+$kategori = query("SELECT * FROM kategori");
+$idUser = $_SESSION["id"];
+$namas = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
+$nama = mysqli_fetch_assoc($namas);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">

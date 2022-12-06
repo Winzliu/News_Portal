@@ -50,6 +50,8 @@ function registrasi($data)
   return mysqli_affected_rows($conn);
 }
 // akhir fungsi registrasi
+
+
 // fungsi login
 function login($dataUser)
 {
@@ -66,13 +68,40 @@ function login($dataUser)
     if (password_verify($password, $pass["password"])) {
       // set session
       $_SESSION["login"] = true;
+      $_SESSION["id"] = $pass["id"];
       header("Location: ../HalamanUtama/index.php");
       exit;
     }
   }
   return false;
 }
-// akhir fungsi login
+// akhir fungsi login 
+
+// login admin
+
+function loginAdmin($dataUser)
+{
+  global $conn;
+  $username = strtolower($dataUser["username"]);
+  $password = $dataUser["password"];
+  $user = mysqli_query($conn, "SELECT * FROM admin WHERE username = '$username'");
+
+  // ada gk username yang sama
+  if (mysqli_num_rows($user) === 1) {
+    // cek password
+    $pass = mysqli_fetch_assoc($user);
+    // ada gk password yang sama
+    if ($password == $pass["password"]) {
+      // set session
+      $_SESSION["loginAdmin"] = true;
+      $_SESSION["idAdmin"] = $pass["id"];
+      header("Location: ../");
+      exit;
+    }
+  }
+  return false;
+}
+// akhir fungsi login admin
 
 
 ?>
