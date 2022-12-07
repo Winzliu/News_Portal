@@ -16,9 +16,10 @@ $kategori = query("SELECT * FROM kategori");
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Playfair+Display+SC&display=swap">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merienda+One&family=Playfair+Display+SC:wght@400&display=swap"
+    rel="stylesheet">
 </head>
 
 <body style="font-family: Playfair Display SC, serif">
@@ -29,7 +30,7 @@ $kategori = query("SELECT * FROM kategori");
   <!-- Kategori Berita -->
   <div style="height: 40px;width: 40px;"></div>
   <div class="container m-auto text-center mt-5">
-    <h1>
+    <h1 class="fw-bolder">
       <?php echo $kategoriHal ?>
     </h1>
     <hr style="height: 3px;" class="bg-primary w-25 m-auto mb-3">
@@ -75,7 +76,7 @@ $kategori = query("SELECT * FROM kategori");
         <ul class="list-group list-group-flush">
           <?php foreach ($kategori as $row): ?>
           <a href="kategori.php?kategori=<?php echo $row["namaKategori"]; ?>" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light fs-5">
+            <li class="list-group-item btn btn-light fs-5 fw-bolder">
               <?php echo $row["namaKategori"]; ?>
             </li>
           </a>
@@ -90,7 +91,7 @@ $kategori = query("SELECT * FROM kategori");
         </div>
         <ul class="list-group list-group-flush">
           <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light">An item</li>
+            <li class="list-group-item btn btn-light fw-bolder">An item</li>
           </a>
           <a href="" style="text-decoration: none;">
             <li class="list-group-item btn btn-light">An item</li>

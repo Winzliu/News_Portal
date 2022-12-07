@@ -21,7 +21,7 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item mt-2">
-              <a class="nav-link" aria-current="page" href="../Dashboard">Home</a>
+              <a class="nav-link" aria-current="page" href="../Dashboard">Beranda</a>
             </li>
             <li class="nav-item mt-2">
               <a class="nav-link" href="#">Kelola Topik Berita</a>

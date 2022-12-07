@@ -6,8 +6,8 @@ if (!isset($_SESSION["login"])) {
 require '../koneksi.php';
 $kategori = query("SELECT * FROM kategori");
 $idUser = $_SESSION["id"];
-$namas = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
-$nama = mysqli_fetch_assoc($namas);
+$users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
+$user = mysqli_fetch_assoc($users);
 
 ?>
 
@@ -20,10 +20,10 @@ $nama = mysqli_fetch_assoc($namas);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap.css" />
   <!-- fontstyle -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merienda+One&family=Playfair+Display+SC:wght@700&display=swap"
-    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Playfair+Display+SC&display=swap"
+    rel="stylesheet" />
 </head>
 
 <body style="font-family: Playfair Display SC, serif">
@@ -76,12 +76,36 @@ $nama = mysqli_fetch_assoc($namas);
     </button>
   </div>
   <!-- akhir carousel -->
+  <!-- cocokan dengan navbar(phone) -->
+  <div class="d-md-none d-block" style="height: 80px;width: 40px;"></div>
+  <!-- akhri cocokan dengan navbar(phone) -->
+  <!-- profile -->
+  <div class="dropdown text-end container mt-4">
+    <img src="img/img-user/<?php echo $user["gambar"]; ?>" width="80px" height="80px"
+      class=" rounded-circle dropdown-toggle" style="object-fit: cover;" type="button" data-bs-toggle="dropdown"
+      aria-expanded="false">
+    </img>
+    <ul class="dropdown-menu">
+      <li>
+        <h5 class="dropdown-item active bg-light text-black">Halo,<span class="fw-bold">
+            <?= $user["username"]; ?>
+          </span> !
+        </h5>
+      </li>
+      <li><a class="dropdown-item fs-5" href="../User/">
+          <ion-icon name="settings-outline" class="fs-6"></ion-icon> Edit Profile
+        </a></li>
+      <li><a class="dropdown-item fs-5" href="../logout.php">
+          <ion-icon name="power" class="fs-6"></ion-icon> Logout
+        </a></li>
+    </ul>
+  </div>
+  <!-- akhir profile -->
 
-  <div class="d-md-none d-block" style="height: 70px;width: 40px;"></div>
   <!-- bagian utama -->
   <!-- Kategori Berita -->
   <div class="container m-auto text-center mt-3">
-    <h1>Berita Terbaru</h1>
+    <h1 class="fw-bolder">Berita Terbaru</h1>
     <hr style="height: 3px;" class="bg-primary w-25 m-auto mb-3">
   </div>
   <!-- akhir kategori -->
@@ -94,7 +118,8 @@ $nama = mysqli_fetch_assoc($namas);
         <img src="img/1.jpg" height="300px" class="card-img-top" style="object-fit: cover;" alt="...">
         <div class="card-body">
           <h5 class="card-title fw-bolder fs-2">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+          <p class="card-text fw-lighter">This is a wider card with supporting text below as a natural lead-in to
+            additional
             content. This content is a little bit longer.</p>
           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
           <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -125,7 +150,7 @@ $nama = mysqli_fetch_assoc($namas);
         <ul class="list-group list-group-flush">
           <?php foreach ($kategori as $row): ?>
           <a href="kategori.php?kategori=<?php echo $row["namaKategori"]; ?>" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light fs-5">
+            <li class="list-group-item btn btn-light fs-5 fw-bolder">
               <?php echo $row["namaKategori"]; ?>
             </li>
           </a>
@@ -140,7 +165,7 @@ $nama = mysqli_fetch_assoc($namas);
         </div>
         <ul class="list-group list-group-flush">
           <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light">An item</li>
+            <li class="list-group-item btn btn-light fw-bolder">An item</li>
           </a>
           <a href="" style="text-decoration: none;">
             <li class="list-group-item btn btn-light">An item</li>

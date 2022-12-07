@@ -38,11 +38,11 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
   <?php include("../Inc/header.php") ?>
   <nav class="navbar navbar-expand-sm navbar-light">
     <div class="container">
-      <span class="navbar-text fs-4">Kelola Berita</span>
+      <span class="navbar-text fs-4">Kelola User</span>
 
       <ul class="breadcrumb fs-5">
         <li class="breadcrumb-item"><a href="../Dashboard">Dashboard</a></li>
-        <li class="breadcrumb-item active">Management Berita</li>
+        <li class="breadcrumb-item active">Kelola User</li>
       </ul>
     </div>
   </nav>
