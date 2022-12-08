@@ -22,7 +22,7 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
       <th class="text-center">#</th>
       <th>Username</th>
       <th>Email</th>
-      <th colspan="2">Action</th>
+      <th colspan="2" class="text-center">Action</th>
     </tr>
   </thead>
   <tbody>

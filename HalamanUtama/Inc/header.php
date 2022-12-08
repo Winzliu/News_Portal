@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0  mx-0 w-50">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="./">Utama</a>
+            <a class="nav-link " aria-current="page" href="./">Beranda</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Tentang</a>

@@ -7,7 +7,7 @@ $id = $_GET["id"];
 
 require "../../koneksi.php";
 
-$hapus = mysqli_query($conn, "DELETE FROM user WHERE id = $id");
+$hapus = mysqli_query($conn, "DELETE FROM kategori WHERE id = $id");
 
 if (mysqli_affected_rows($conn) > 0) {
   $_SESSION["hapus"] = true;

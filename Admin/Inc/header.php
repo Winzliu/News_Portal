@@ -24,13 +24,13 @@
               <a class="nav-link" aria-current="page" href="../Dashboard">Beranda</a>
             </li>
             <li class="nav-item mt-2">
-              <a class="nav-link" href="#">Kelola Topik Berita</a>
+              <a class="nav-link" href="../KelolaKategori">Kelola Kategori Berita</a>
             </li>
             <li class="nav-item mt-2">
               <a class="nav-link" href="../KelolaBerita">Kelola Berita</a>
             </li>
             <li class="nav-item mt-2">
-              <a class="nav-link" href="#">Kelola Komentar</a>
+              <a class="nav-link" href="../KelolaKomentar">Kelola Komentar</a>
             </li>
             <li class="nav-item mt-2">
               <a class="nav-link" href="../KelolaUser">Kelola User</a>

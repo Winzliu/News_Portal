@@ -18,11 +18,10 @@ $kategori = query("SELECT * FROM kategori");
   <link rel="stylesheet" href="bootstrap.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merienda+One&family=Playfair+Display+SC:wght@400&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merienda+One&family=Noto+Serif&display=swap" rel="stylesheet">
 </head>
 
-<body style="font-family: Playfair Display SC, serif">
+<body style="font-family: 'Noto Serif', serif">
   <!-- Header -->
   <?php include('Inc/header.php'); ?>
   <!-- akhir header -->

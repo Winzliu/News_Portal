@@ -20,13 +20,12 @@ $user = mysqli_fetch_assoc($users);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap.css" />
   <!-- fontstyle -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Playfair+Display+SC&display=swap"
-    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merienda+One&family=Noto+Serif&display=swap" rel="stylesheet">
 </head>
 
-<body style="font-family: Playfair Display SC, serif">
+<body style="font-family: 'Noto Serif', serif">
   <!-- header -->
   <?php include('Inc/header.php'); ?>
   <!-- akhir header -->
@@ -82,8 +81,8 @@ $user = mysqli_fetch_assoc($users);
   <!-- profile -->
   <div class="dropdown text-end container mt-4">
     <img src="img/img-user/<?php echo $user["gambar"]; ?>" width="80px" height="80px"
-      class=" rounded-circle dropdown-toggle" style="object-fit: cover;" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false">
+      class=" rounded-circle dropdown-toggle shadow-lg" style="object-fit: cover;" type="button"
+      data-bs-toggle="dropdown" aria-expanded="false">
     </img>
     <ul class="dropdown-menu">
       <li>

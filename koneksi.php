@@ -23,6 +23,7 @@ function registrasi($data)
   $username = strtolower(stripslashes($data["username"]));
   $password = mysqli_real_escape_string($conn, $data["password"]);
   $konfirmasiPass = mysqli_real_escape_string($conn, $data["password2"]);
+  $gambar = "Logo-User.png";
 
   $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
 
@@ -45,7 +46,7 @@ function registrasi($data)
   $password = password_hash($password, PASSWORD_DEFAULT);
 
   // tambah password ke database
-  mysqli_query($conn, "INSERT INTO user VALUES('','$email','$username','$password')");
+  mysqli_query($conn, "INSERT INTO user VALUES('','$email','$username','$password','$gambar')");
 
   return mysqli_affected_rows($conn);
 }
@@ -161,7 +162,7 @@ function edit($edit, $idUser)
   $password = htmlspecialchars($edit["password"]);
   $gambarLama = $edit["gambarLama"];
 
-  if (password_verify($passwordLama, $password)) {
+  if ($password == $passwordLama) {
     $password = $passwordLama;
   } else {
     $password = password_hash($password, PASSWORD_DEFAULT);
@@ -180,5 +181,29 @@ function edit($edit, $idUser)
   return mysqli_affected_rows($conn);
 }
 // akhir fungsi edit
+
+// fungsi tambah kategori
+function tambahkategori($data)
+{
+  global $conn;
+
+  $namaKategori = strtolower(stripslashes($data["namaKategori"]));
+
+
+  $result = mysqli_query($conn, "SELECT * FROM kategori WHERE namaKategori = '$namaKategori'");
+
+  if (mysqli_fetch_assoc($result)) {
+    echo "<script>
+    alert('Kategori Telah Ada');
+    </script>";
+    return false;
+  }
+
+  // tambah password ke database
+  mysqli_query($conn, "INSERT INTO kategori VALUES('','$namaKategori', current_timestamp()	)");
+
+  return mysqli_affected_rows($conn);
+}
+// akhir fungsi tambah kategori
 
 ?>
