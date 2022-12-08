@@ -1,21 +1,26 @@
 <?php
 session_start();
-if (!isset($_SESSION["login"])) {
+if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
   header("Location: ../login");
 }
 require '../koneksi.php';
+// kategori
 $kategori = query("SELECT * FROM kategori");
+// user
 $idUser = $_SESSION["id"];
 $users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
 $user = mysqli_fetch_assoc($users);
-
+// berita
+$berita = query("SELECT * FROM berita");
+// berita pada carousel
+$beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title></title>
+  <title>ToSee News</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bootstrap.css" />
@@ -41,29 +46,31 @@ $user = mysqli_fetch_assoc($users);
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img style="object-fit: cover;" width="1900" height="755" src="img/1.jpg" class="d-block w-100" alt="...">
+        <img style="object-fit: cover;" width="1900px" height="755px"
+          src="img/img-berita/<?php echo $beritaBaru[0]['gambar']; ?>" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
-          <a href="./" class="btn btn-primary">Read More</a>
+          <h3>
+            <?php echo $beritaBaru[0]['judul']; ?>
+          </h3>
+          <a href="../HalamanDetail/index.php?id=<?php echo $beritaBaru['0']['id']; ?>" class="btn btn-primary">Baca
+            Lebih
+            Lanjut</a>
         </div>
       </div>
-      <div class="carousel-item ">
-        <img style="object-fit: cover;" width="1900" height="755" src="img/2.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-          <a href="./" class="btn btn-primary">Read More</a>
-        </div>
-      </div>
+      <?php for ($i = 1; $i <= 2; $i++): ?>
       <div class="carousel-item">
-        <img style="object-fit: cover;" width="1900" height="755" src="img/3.jpg" class="d-block w-100" alt="...">
+        <img style="object-fit: cover;" width="1900" height="755"
+          src="img/img-berita/<?php echo $beritaBaru[$i]['gambar']; ?>" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-          <a href="./" class="btn btn-primary">Read More</a>
+          <h3>
+            <?php echo $beritaBaru[$i]['judul']; ?>
+          </h3>
+          <a href="../HalamanDetail/index.php?id=<?php echo $beritaBaru[$i]['id']; ?>" class="btn btn-primary">Baca
+            Lebih
+            Lanjut</a>
         </div>
       </div>
+      <?php endfor; ?>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -101,42 +108,38 @@ $user = mysqli_fetch_assoc($users);
   </div>
   <!-- akhir profile -->
 
-  <!-- bagian utama -->
-  <!-- Kategori Berita -->
+  <!-- Header Berita -->
   <div class="container m-auto text-center mt-3">
     <h1 class="fw-bolder">Berita Terbaru</h1>
     <hr style="height: 3px;" class="bg-primary w-25 m-auto mb-3">
   </div>
-  <!-- akhir kategori -->
+  <!-- akhir Header Berita -->
   <!-- Bagian Utama -->
   <div class="m-auto container row">
     <!-- Berita -->
     <div class="col-12 col-lg-8">
       <!-- Berita 1 -->
+      <?php foreach ($berita as $b): ?>
       <div class="card mb-3">
-        <img src="img/1.jpg" height="300px" class="card-img-top" style="object-fit: cover;" alt="...">
+        <img src="img/img-berita/<?php echo $b['gambar']; ?>" height="300px" class="card-img-top"
+          style="object-fit: cover;" alt="...">
         <div class="card-body">
-          <h5 class="card-title fw-bolder fs-2">Card title</h5>
-          <p class="card-text fw-lighter">This is a wider card with supporting text below as a natural lead-in to
-            additional
-            content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <h5 class="card-title fw-bolder fs-2">
+            <?php echo $b['judul']; ?>
+          </h5>
+          <div class="card-text fw-lighter" style="height: 50px;overflow: hidden;">
+            <?php echo $b['berita']; ?>
+          </div>
+          <p class="card-text mt-3"><small class="text-muted">Dipublis pada
+              <strong>
+                <?php echo $b['tanggal']; ?>
+              </strong>
+            </small></p>
+          <a href="../HalamanDetail/index.php?id=<?php echo $b['id']; ?>" class="btn btn-primary">Baca Lebih Lanjut</a>
         </div>
       </div>
+      <?php endforeach; ?>
       <!-- akhir berita 1 -->
-      <!-- berita 2 -->
-      <div class="card mb-3">
-        <img src="img/2.jpg" height="300px" class="card-img-top" style="object-fit: cover;" alt="...">
-        <div class="card-body">
-          <h5 class="card-title fw-bolder fs-2">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-      <!-- akhir berita 2 -->
     </div>
     <!-- Akhir Berita -->
     <!-- side bar -->
@@ -163,15 +166,13 @@ $user = mysqli_fetch_assoc($users);
           Berita Terbaru
         </div>
         <ul class="list-group list-group-flush">
+          <?php foreach ($beritaBaru as $baru): ?>
           <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light fw-bolder">An item</li>
+            <li class="list-group-item btn btn-light fw-bolder">
+              <?php echo $baru['judul'] ?>
+            </li>
           </a>
-          <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light">An item</li>
-          </a>
-          <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light">An item</li>
-          </a>
+          <?php endforeach; ?>
         </ul>
       </div>
       <!-- akhir side bar berita terbaru -->

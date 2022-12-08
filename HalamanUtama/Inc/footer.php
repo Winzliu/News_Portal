@@ -6,7 +6,7 @@
       <hr />
       <div class="list-group">
         <?php foreach ($kategori as $row): ?>
-        <a href="kategori.php?kategori=<?php echo $row["namaKategori"]; ?>"
+        <a href="../HalamanUtama/kategori.php?kategori=<?php echo $row["namaKategori"]; ?>"
           class="border-start-0 border-end-0 rounded-0 border-light bg-dark text-white list-group-item list-group-item-action">
           <?php echo $row["namaKategori"]; ?>
         </a>

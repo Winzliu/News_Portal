@@ -134,9 +134,9 @@ function cekGambar($gambar)
   }
 
   // besar file
-  if ($ukuranFile > 1000000) {
+  if ($ukuranFile > 1024 * 1024 * 3) {
     echo "<script>
-    alert('Ukuran File Yang di Upload Terlalu Besar');
+    alert('Ukuran File Yang di Upload Terlalu Besar (<3MB)');
     </script>";
     return $gambarLama;
   }
@@ -150,8 +150,53 @@ function cekGambar($gambar)
 }
 // akhir fungsi cek gambar
 
+// fungsi post gambar
+function postGambar()
+{
+  $namaFile = $_FILES["gambar-berita"]["name"];
+  $ukuranFile = $_FILES["gambar-berita"]["size"];
+  $error = $_FILES["gambar-berita"]["error"];
+  $tmpName = $_FILES["gambar-berita"]["tmp_name"];
 
-// fungsi edit
+  /* user tidak memasukkan gamabar */
+  if ($error === 4) {
+    echo "<script>
+    alert('Upload Gambar Terlebih Dahulu');
+    </script>";
+    return false;
+  }
+
+  // user menupload file bukan gambar
+  $extValid = ['jpg', 'jpeg', 'png'];
+  $extName = explode('.', $namaFile);
+  $extName = strtolower(end($extName));
+
+  if (!in_array($extName, $extValid)) {
+    echo "<script>
+    alert('Extensi file yang di upload salah');
+    </script>";
+    return false;
+  }
+
+  // besar file
+  if ($ukuranFile > (1024 * 1024) || $error == 1) {
+    echo "<script>
+    alert('Ukuran File Yang di Upload Terlalu Besar Harus (<1MB)');
+    </script>";
+    return false;
+  }
+
+  // jika ada nama yang sama tetapi gambar beda generate nama gambar baru
+  $namaFileBaru = uniqid() . "." . $extName;
+
+  // jika valid
+  move_uploaded_file($tmpName, '../../HalamanUtama/img/img-berita/' . $namaFileBaru);
+  return $namaFileBaru;
+}
+// akhir fungsi post gambar
+
+
+// fungsi edit user
 function edit($edit, $idUser)
 {
   global $conn;
@@ -180,7 +225,7 @@ function edit($edit, $idUser)
 
   return mysqli_affected_rows($conn);
 }
-// akhir fungsi edit
+// akhir fungsi edit user
 
 // fungsi tambah kategori
 function tambahkategori($data)
@@ -205,5 +250,37 @@ function tambahkategori($data)
   return mysqli_affected_rows($conn);
 }
 // akhir fungsi tambah kategori
+
+// fungsi tambah berita
+function tambahberita($data)
+{
+  global $conn;
+  $id = $_SESSION['idAdmin'];
+  $admins = mysqli_query($conn, "SELECT * FROM admin WHERE id = '$id'");
+  $admin = mysqli_fetch_assoc($admins)['username'];
+  $judul = strtolower(stripslashes($data["judul"]));
+  $kategori = strtolower(stripslashes($data["kategori"]));
+  $isiBerita = $data["editordata"];
+  $gambar = postGambar();
+
+  if ($gambar == false) {
+    return false;
+  }
+
+  $result = mysqli_query($conn, "SELECT * FROM berita WHERE judul = '$judul'");
+
+  if (mysqli_fetch_assoc($result)) {
+    echo "<script>
+    alert('Judul Telah Ada');
+    </script>";
+    return false;
+  }
+
+  // tambah password ke database
+  mysqli_query($conn, "INSERT INTO berita VALUES('','$judul', '$kategori', '$isiBerita', current_timestamp(), '$gambar', '$admin')");
+
+  return mysqli_affected_rows($conn);
+}
+// akhir fungsi tambah berita
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION["loginAdmin"])) {
+if (!isset($_SESSION["loginAdmin"]) || !isset($_SESSION['idAdmin'])) {
   header("Location: ../login");
 }
 $id = $_GET["id"];

@@ -2,8 +2,8 @@
   <!-- navbar -->
   <nav class="navbar bg-light">
     <div class="container">
-      <a class="navbar-brand fs-3" href="../Dashboard" style="font-family: 'Merienda One', cursive;"><img width="50px"
-          src="../../img/Logo.png" alt=""> ToSee News</a>
+      <a class="navbar-brand" href="../Dashboard" style="font-family: 'Merienda One', cursive;"><img width="50px"
+          style="margin-top: -17px;" src="../../img/Logo.png" alt=""> <span class="fs-2 p-2">ToSee News</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
         aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
         <div class="offcanvas-header">
           <h5 class="offcanvas-title fw-bolder fs-4" id="offcanvasNavbarLabel"
             style="font-family: 'Merienda One', cursive;">
-            <img width="50px" src="../../img/Logo.png" alt=""> ToSee
+            <img style="margin-top: -12px;" width="50px" src="../../img/Logo.png" alt=""> ToSee
             News
           </h5>
 

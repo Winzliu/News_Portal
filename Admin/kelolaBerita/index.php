@@ -11,7 +11,7 @@ $nama = mysqli_fetch_assoc($namas);
 
 // pagination
 $JumlahDataPerHal = 5;
-$JumlahData = count(query("SELECT * FROM user"));
+$JumlahData = count(query("SELECT * FROM berita"));
 $JumlahHalaman = ceil($JumlahData / $JumlahDataPerHal);
 
 $HalSekarang = (isset($_GET["page"])) ? $_GET["page"] : 1;
@@ -20,7 +20,7 @@ $HalSekarang = (isset($_GET["page"])) ? $_GET["page"] : 1;
 $IndeksData = ($HalSekarang * $JumlahDataPerHal) - $JumlahDataPerHal;
 
 
-$user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
+$berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelola User</title>
+  <title>Kelola Berita</title>
   <link rel="stylesheet" href="../bootstrap.css">
   <!-- fontstyle -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,19 +42,19 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
   <?php include("../Inc/header.php") ?>
   <nav class="navbar navbar-expand-sm navbar-light">
     <div class="container">
-      <span class="navbar-text fs-4">Kelola User</span>
+      <span class="navbar-text fs-4">Kelola Berita</span>
 
       <ul class="breadcrumb fs-5 d-none d-md-flex">
         <li class="breadcrumb-item"><a href="../Dashboard">Dashboard</a></li>
-        <li class="breadcrumb-item active">Kelola User</li>
+        <li class="breadcrumb-item active">Kelola Berita</li>
       </ul>
     </div>
   </nav>
 
   <div class="container mt-5 fs-5">
-    <div class="row">
+    <div class="row mb-5">
       <div class="col">
-        <a href="tambahUser.php" type="button" class="btn btn-success mb-3 fs-5">Add +</a>
+        <a href="tambahBerita.php" type="button" class="btn btn-success mb-3 fs-5">Add +</a>
       </div>
       <div class="col">
         <input type="search" class="form-control fs-5" id="search" placeholder="search" name="search">
@@ -63,23 +63,19 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
         <thead>
           <tr>
             <th class="text-center">#</th>
-            <th>Username</th>
-            <th class="d-none d-md-table-cell">Email</th>
+            <th>Judul</th>
             <th colspan="2" class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
           <?php $i = 1 ?>
-          <?php foreach ($user as $u): ?>
+          <?php foreach ($berita as $u): ?>
           <tr>
             <th scope="row" class="text-center">
               <?php echo $i + ($HalSekarang - 1) * $JumlahDataPerHal; ?>
             </th>
-            <td>
-              <?php echo $u["username"]; ?>
-            </td>
-            <td class="d-none d-md-table-cell">
-              <?php echo $u["email"]; ?>
+            <td style=" max-width: calc(100vw - 500px);">
+              <?php echo $u["judul"]; ?>
             </td>
             <td class="text-center">
               <a class="btn btn-success py-1 ps-2 pe-1 opacity-75">
@@ -87,7 +83,7 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
               </a>
             </td>
             <td class="text-center">
-              <a href="hapusUser.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
+              <a href="hapusBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
                 <ion-icon name="trash" class="fs-5"></ion-icon>
               </a>
             </td>

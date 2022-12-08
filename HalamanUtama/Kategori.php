@@ -1,11 +1,14 @@
 <?php
 session_start();
-if (!isset($_SESSION["login"])) {
+if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
   header("Location: ../login");
 }
 require '../koneksi.php';
+// kategori
 $kategoriHal = $_GET["kategori"];
 $kategori = query("SELECT * FROM kategori");
+// berita
+$berita = query("SELECT * FROM berita WHERE kategori = '$kategoriHal'");
 ?>
 
 <!DOCTYPE html>
@@ -40,29 +43,27 @@ $kategori = query("SELECT * FROM kategori");
     <!-- Berita -->
     <div class="col-12 col-lg-8">
       <!-- Berita 1 -->
+      <?php foreach ($berita as $b): ?>
       <div class="card mb-3">
-        <img src="img/1.jpg" height="300px" class="card-img-top" style="object-fit: cover;" alt="...">
+        <img src="img/img-berita/<?php echo $b['gambar']; ?>" height="300px" class="card-img-top"
+          style="object-fit: cover;" alt="...">
         <div class="card-body">
-          <h5 class="card-title fw-bolder fs-2">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <h5 class="card-title fw-bolder fs-2">
+            <?php echo $b['judul']; ?>
+          </h5>
+          <div class="card-text fw-lighter" style="height: 50px;overflow: hidden;">
+            <?php echo $b['berita']; ?>
+          </div>
+          <p class="card-text mt-3"><small class="text-muted">Dipublis pada
+              <strong>
+                <?php echo $b['tanggal']; ?>
+              </strong>
+            </small></p>
+          <a href="../HalamanDetail/index.php?id=<?php echo $b['id']; ?>" class="btn btn-primary">Baca Lebih Lanjut</a>
         </div>
       </div>
+      <?php endforeach; ?>
       <!-- akhir berita 1 -->
-      <!-- berita 2 -->
-      <div class="card mb-3">
-        <img src="img/2.jpg" height="300px" class="card-img-top" style="object-fit: cover;" alt="...">
-        <div class="card-body">
-          <h5 class="card-title fw-bolder fs-2">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-      <!-- akhir berita 2 -->
     </div>
     <!-- Akhir Berita -->
     <!-- side bar -->

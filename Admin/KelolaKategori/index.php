@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION["loginAdmin"])) {
+if (!isset($_SESSION["loginAdmin"]) || !isset($_SESSION['idAdmin'])) {
   header("Location: ../login");
 }
 require '../../koneksi.php';
@@ -73,7 +73,7 @@ $kategori = query("SELECT * FROM kategori LIMIT $IndeksData,$JumlahDataPerHal");
           <?php foreach ($kategori as $k): ?>
           <tr>
             <th scope="row" class="text-center">
-              <?php echo $i + ($HalSekarang - 1) * 5; ?>
+              <?php echo $i + ($HalSekarang - 1) * $JumlahDataPerHal; ?>
             </th>
             <td>
               <?php echo $k["namaKategori"]; ?>
@@ -99,7 +99,7 @@ $kategori = query("SELECT * FROM kategori LIMIT $IndeksData,$JumlahDataPerHal");
       <ul class="pagination pagination-sm justify-content-end">
         <?php if ($HalSekarang > 1): ?>
         <li class="page-item">
-          <a class="page-link" href="?page=<?= $HalSekarang - 1; ?>">Previous</a>
+          <a class="page-link" href="?page=<?= $HalSekarang - 1; ?>">Sebelumnya</a>
         </li>
         <?php endif; ?>
 
@@ -117,7 +117,7 @@ $kategori = query("SELECT * FROM kategori LIMIT $IndeksData,$JumlahDataPerHal");
 
         <?php if ($HalSekarang < $JumlahHalaman): ?>
         <li class="page-item">
-          <a class="page-link" href="?page=<?= $HalSekarang + 1; ?>">Next</a>
+          <a class="page-link" href="?page=<?= $HalSekarang + 1; ?>">Selanjutnya</a>
         </li>
         <?php endif; ?>
       </ul>

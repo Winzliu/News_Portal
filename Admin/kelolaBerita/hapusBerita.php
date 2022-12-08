@@ -7,7 +7,7 @@ $id = $_GET["id"];
 
 require "../../koneksi.php";
 
-$hapus = mysqli_query($conn, "DELETE FROM kategori WHERE id = $id");
+$hapus = mysqli_query($conn, "DELETE FROM berita WHERE id = $id");
 
 if (mysqli_affected_rows($conn) > 0) {
   $_SESSION["hapus"] = true;
@@ -33,7 +33,7 @@ if (mysqli_affected_rows($conn) > 0) {
     di dalam session sukses  -->
   <?php if (isset($_SESSION['hapus'])): ?>
   <script>
-    swal("Kategori Berhasil Dihapus", "", "success");
+    swal("Berita Berhasil Dihapus", "", "success");
     setTimeout(function () {
       document.location = "index.php";
     }, 2500)
@@ -42,7 +42,7 @@ if (mysqli_affected_rows($conn) > 0) {
   <?php unset($_SESSION['hapus']); ?>
   <?php else: ?>
   <script>
-    swal("Kategori Gagal Dihapus", "", "error");
+    swal("Berita Gagal Dihapus", "", "error");
     setTimeout(function () {
       document.location = "index.php";
     }, 2500)
