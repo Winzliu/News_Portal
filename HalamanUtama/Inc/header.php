@@ -1,4 +1,4 @@
-<header class="fw-bolder fs-4">
+<header class="fw-bolder fs-4 mt-0">
   <!-- navbar -->
   <nav style="transition: .5s;" class="fixed-top navbar navbar-expand-lg bg-opacity-50 bg-light pb-3">
     <div class="container">

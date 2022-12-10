@@ -14,6 +14,8 @@ $user = mysqli_fetch_assoc($users);
 $idBerita = $_GET['id'];
 $berita = mysqli_query($conn, "SELECT * FROM berita WHERE id = '$idBerita'");
 $b = mysqli_fetch_assoc($berita);
+// berita pada carousel
+$beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
 ?>
 
 <!DOCTYPE html>
@@ -143,15 +145,13 @@ $b = mysqli_fetch_assoc($berita);
           Berita Terbaru
         </div>
         <ul class="list-group list-group-flush">
-          <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light fw-bolder">An item</li>
+          <?php foreach ($beritaBaru as $baru): ?>
+          <a href="../HalamanDetail/index.php?id=<?= $baru['id'] ?>" style="text-decoration: none;">
+            <li class="list-group-item btn btn-light fw-bolder fs-5">
+              <?php echo $baru['judul'] ?>
+            </li>
           </a>
-          <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light">An item</li>
-          </a>
-          <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light">An item</li>
-          </a>
+          <?php endforeach; ?>
         </ul>
       </div>
       <!-- akhir side bar berita terbaru -->

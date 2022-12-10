@@ -7,8 +7,20 @@ require '../koneksi.php';
 // kategori
 $kategoriHal = $_GET["kategori"];
 $kategori = query("SELECT * FROM kategori");
-// berita
-$berita = query("SELECT * FROM berita WHERE kategori = '$kategoriHal'");
+// pagination berita
+$JumlahDataPerHal = 5;
+$JumlahData = count(query("SELECT * FROM berita WHERE kategori='$kategoriHal'"));
+$JumlahHalaman = ceil($JumlahData / $JumlahDataPerHal);
+
+$HalSekarang = (isset($_GET["page"])) ? $_GET["page"] : 1;
+
+
+$IndeksData = ($HalSekarang * $JumlahDataPerHal) - $JumlahDataPerHal;
+
+
+$berita = query("SELECT * FROM berita WHERE kategori='$kategoriHal' LIMIT $IndeksData,$JumlahDataPerHal");
+// berita pada carousel
+$beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +76,33 @@ $berita = query("SELECT * FROM berita WHERE kategori = '$kategoriHal'");
       </div>
       <?php endforeach; ?>
       <!-- akhir berita 1 -->
+      <!-- pagination -->
+      <ul class="pagination pagination-sm justify-content-center my-4">
+        <?php if ($HalSekarang > 1): ?>
+        <li class="page-item">
+          <a class="page-link" href="?page=<?= $HalSekarang - 1; ?>&kategori=<?php echo $kategoriHal ?>">Sebelumnya</a>
+        </li>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $JumlahHalaman; $i++): ?>
+        <?php if ($i == $HalSekarang): ?>
+        <li class="page-item active"><a class="page-link" href="?page=<?= $i ?>&kategori=<?php echo $kategoriHal ?>">
+            <?php echo $i; ?>
+          </a></li>
+        <?php else: ?>
+        <li class="page-item"><a class="page-link" href="?page=<?= $i ?>&kategori=<?php echo $kategoriHal ?>">
+            <?php echo $i; ?>
+          </a></li>
+        <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php if ($HalSekarang < $JumlahHalaman): ?>
+        <li class="page-item">
+          <a class="page-link" href="?page=<?= $HalSekarang + 1; ?>&kategori=<?php echo $kategoriHal ?>">Selanjutnya</a>
+        </li>
+        <?php endif; ?>
+      </ul>
+      <!-- akhir pagination -->
     </div>
     <!-- Akhir Berita -->
     <!-- side bar -->
@@ -90,15 +129,13 @@ $berita = query("SELECT * FROM berita WHERE kategori = '$kategoriHal'");
           Berita Terbaru
         </div>
         <ul class="list-group list-group-flush">
-          <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light fw-bolder">An item</li>
+          <?php foreach ($beritaBaru as $baru): ?>
+          <a href="../HalamanDetail/index.php?id=<?= $baru['id'] ?>" style="text-decoration: none;">
+            <li class="list-group-item btn btn-light fw-bolder fs-5">
+              <?php echo $baru['judul'] ?>
+            </li>
           </a>
-          <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light">An item</li>
-          </a>
-          <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light">An item</li>
-          </a>
+          <?php endforeach; ?>
         </ul>
       </div>
       <!-- akhir side bar berita terbaru -->

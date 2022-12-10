@@ -227,6 +227,32 @@ function edit($edit, $idUser)
 }
 // akhir fungsi edit user
 
+// fungsi hapus gambar
+function hapusGambar($edit, $idUser)
+{
+  global $conn;
+  $user = query("SELECT * FROM user WHERE id = $idUser");
+  $passwordLama = $user[0]["password"];
+  $email = htmlspecialchars($edit["email"]);
+  $username = htmlspecialchars($edit["username"]);
+  $password = htmlspecialchars($edit["password"]);
+
+  if ($password == $passwordLama) {
+    $password = $passwordLama;
+  } else {
+    $password = password_hash($password, PASSWORD_DEFAULT);
+  }
+
+  $gambar = 'Logo-User.png';
+
+  $id = $idUser;
+
+  mysqli_query($conn, "UPDATE user SET  username = '$username', email = '$email', password = '$password',gambar = '$gambar' WHERE id = $id");
+
+  return mysqli_affected_rows($conn);
+}
+// akhir fungsi hapus gambar
+
 // fungsi tambah kategori
 function tambahkategori($data)
 {

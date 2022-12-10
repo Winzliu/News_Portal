@@ -10,8 +10,18 @@ $kategori = query("SELECT * FROM kategori");
 $idUser = $_SESSION["id"];
 $users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
 $user = mysqli_fetch_assoc($users);
-// berita
-$berita = query("SELECT * FROM berita");
+// pagination berita
+$JumlahDataPerHal = 5;
+$JumlahData = count(query("SELECT * FROM berita"));
+$JumlahHalaman = ceil($JumlahData / $JumlahDataPerHal);
+
+$HalSekarang = (isset($_GET["page"])) ? $_GET["page"] : 1;
+
+
+$IndeksData = ($HalSekarang * $JumlahDataPerHal) - $JumlahDataPerHal;
+
+
+$berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
 // berita pada carousel
 $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
 ?>
@@ -85,28 +95,34 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
   <!-- cocokan dengan navbar(phone) -->
   <div class="d-md-none d-block" style="height: 80px;width: 40px;"></div>
   <!-- akhri cocokan dengan navbar(phone) -->
-  <!-- profile -->
-  <div class="dropdown text-end container mt-4">
-    <img src="img/img-user/<?php echo $user["gambar"]; ?>" width="80px" height="80px"
-      class=" rounded-circle dropdown-toggle shadow-lg" style="object-fit: cover;" type="button"
-      data-bs-toggle="dropdown" aria-expanded="false">
-    </img>
-    <ul class="dropdown-menu">
-      <li>
-        <h5 class="dropdown-item active bg-light text-black">Halo,<span class="fw-bold">
-            <?= $user["username"]; ?>
-          </span> !
-        </h5>
-      </li>
-      <li><a class="dropdown-item fs-5" href="../User/">
-          <ion-icon name="settings-outline" class="fs-6"></ion-icon> Edit Profile
-        </a></li>
-      <li><a class="dropdown-item fs-5" href="../logout.php">
-          <ion-icon name="power" class="fs-6"></ion-icon> Logout
-        </a></li>
-    </ul>
+  <!-- profile & jam -->
+  <div class="row container m-auto">
+    <div class="test-start col-8 mt-5">
+      <h2 class="my-auto fs-4 fw-bolder " id="tanggal"></h2>
+      <h2 class="my-auto fs-4 fw-bolder " id="jam"></h2>
+    </div>
+    <div class="dropdown text-end mt-4 pe-5 col-4">
+      <img src="img/img-user/<?php echo $user["gambar"]; ?>" width="80px" height="80px"
+        class=" rounded-circle dropdown-toggle shadow-lg" style="object-fit: cover;" type="button"
+        data-bs-toggle="dropdown" aria-expanded="false">
+      </img>
+      <ul class="dropdown-menu">
+        <li>
+          <h5 class="dropdown-item active bg-light text-black">Halo,<span class="fw-bold">
+              <?= $user["username"]; ?>
+            </span> !
+          </h5>
+        </li>
+        <li><a class="dropdown-item fs-5" href="../User/">
+            <ion-icon name="settings-outline" class="fs-6"></ion-icon> Edit Profile
+          </a></li>
+        <li><a class="dropdown-item fs-5" href="../logout.php">
+            <ion-icon name="power" class="fs-6"></ion-icon> Logout
+          </a></li>
+      </ul>
+    </div>
   </div>
-  <!-- akhir profile -->
+  <!-- akhir profile & jam -->
 
   <!-- Header Berita -->
   <div class="container m-auto text-center mt-3">
@@ -118,7 +134,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
   <div class="m-auto container row">
     <!-- Berita -->
     <div class="col-12 col-lg-8">
-      <!-- Berita 1 -->
+      <!-- Berita  -->
       <?php foreach ($berita as $b): ?>
       <div class="card mb-3">
         <img src="img/img-berita/<?php echo $b['gambar']; ?>" height="300px" class="card-img-top"
@@ -139,7 +155,34 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         </div>
       </div>
       <?php endforeach; ?>
-      <!-- akhir berita 1 -->
+      <!-- akhir berita  -->
+      <!-- pagination -->
+      <ul class="pagination pagination-sm justify-content-center my-4">
+        <?php if ($HalSekarang > 1): ?>
+        <li class="page-item">
+          <a class="page-link" href="?page=<?= $HalSekarang - 1; ?>">Sebelumnya</a>
+        </li>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $JumlahHalaman; $i++): ?>
+        <?php if ($i == $HalSekarang): ?>
+        <li class="page-item active"><a class="page-link" href="?page=<?= $i ?>">
+            <?php echo $i; ?>
+          </a></li>
+        <?php else: ?>
+        <li class="page-item"><a class="page-link" href="?page=<?= $i ?>">
+            <?php echo $i; ?>
+          </a></li>
+        <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php if ($HalSekarang < $JumlahHalaman): ?>
+        <li class="page-item">
+          <a class="page-link" href="?page=<?= $HalSekarang + 1; ?>">Selanjutnya</a>
+        </li>
+        <?php endif; ?>
+      </ul>
+      <!-- akhir pagination -->
     </div>
     <!-- Akhir Berita -->
     <!-- side bar -->
@@ -168,7 +211,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         <ul class="list-group list-group-flush">
           <?php foreach ($beritaBaru as $baru): ?>
           <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light fw-bolder">
+            <li class="list-group-item btn btn-light fw-bolder fs-5">
               <?php echo $baru['judul'] ?>
             </li>
           </a>
@@ -194,6 +237,22 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
 
   <!-- my js -->
   <script src="header.js"></script>
+
+  <!-- jam -->
+  <script>
+    let date = new Date();
+    setInterval(() => {
+      let tanggal = date.getDate();
+      let bulan = date.toLocaleString('default', { month: 'short' });
+      let tahun = date.getFullYear();
+
+      let jam = new Date().getHours();
+      let menit = new Date().getMinutes();
+      let detik = new Date().getSeconds();
+      document.getElementById('tanggal').innerHTML = tanggal + '-' + bulan + '-' + tahun;
+      document.getElementById('jam').innerHTML = jam + ' : ' + menit + ' : ' + detik;
+    }, 100);
+  </script>
 </body>
 
 </html>

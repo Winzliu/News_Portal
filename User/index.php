@@ -24,6 +24,13 @@ if (isset($_POST["submit"])) {
   }
 }
 
+if (isset($_POST["hapusGambar"])) {
+  // cek apakah data berhasil di edit atau tidak
+  if (hapusGambar($_POST, $id) > 0) {
+    $_SESSION['hapusGambar'] = true;
+  }
+}
+
 ?>
 
 
@@ -49,8 +56,13 @@ if (isset($_POST["submit"])) {
       <!-- gambar lama -->
       <input type="hidden" name="gambarLama" id="gambarLama" value="<?php echo $user[0]["gambar"] ?>">
       <!-- akhir gambar lama -->
+      <!-- gambar -->
       <img class="rounded-4 border border-5 border-light shadow-lg" width="200px" height="200px"
         style="object-fit: cover;" src="../HalamanUtama/img/img-user/<?php echo $gambar; ?>" alt="">
+      <!-- akhir gambar -->
+      <!-- hapus gambar -->
+      <button type="submit" name="hapusGambar" class="btn btn-primary d-block m-auto mb-3 mt-5">Hapus Gambar</button>
+      <!-- akhir hapus gambar -->
       <!-- file gambar -->
       <h4 class="text-start fs-5 fw-bolder m-auto" style="max-width: 600px;">Ubah Gambar :</h4>
       <div class="input-group my-4">
@@ -75,8 +87,10 @@ if (isset($_POST["submit"])) {
       <h4 class="text-start fs-5 fw-bolder m-auto" style="max-width: 600px;">Ubah Password :</h4>
       <div class="input-group my-4">
         <input minlength="8" style="max-width: 600px;" name="password" type="password" class="form-control m-auto"
-          required value="<?php echo $password; ?>">
+          id="password" required value="<?php echo $password; ?>">
       </div>
+      <input onclick="showPassword()" class="mb-4" type="checkbox" name="showPass" id="showPass">
+      <label for="showPass">Lihat Password</label>
       <p class="fst-italic text-danger ">Password Panjang Dikarenakan Password Tersimpan Secara Enkripsi</p>
       <!-- akhir file password -->
       <!-- submit -->
@@ -120,6 +134,41 @@ if (isset($_POST["submit"])) {
   </script>
   <?php endif; ?>
   <?php endif; ?>
+
+  <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
+    di dalam session sukses  -->
+  <?php if (isset($_POST['hapusGambar'])): ?>
+  <?php if (isset($_SESSION['hapusGambar'])): ?>
+  <script>
+      swal("Berhasil Menghapus Gambar", "", "success");
+    setTimeout(function () {
+      document.location = "../HalamanUtama/";
+    }, 2500)
+  </script>
+  <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_SESSION['hapusGambar']); ?>
+  <?php else: ?>
+  <script>
+    swal("Gagal Menghapus Gambar", "", "error");
+    setTimeout(function () {
+      document.location = "./HalamanUtama/";
+    }, 2500)
+      <?php unset($_SESSION[' edit ']); ?>
+  </script>
+  <?php endif; ?>
+  <?php endif; ?>
+
+  <!-- show password -->
+  <script>
+      function showPassword() {
+        let password = document.getElementById('password');
+        if (password.getAttribute("type") === 'password') {
+          password.setAttribute("type", "text")
+        } else {
+          password.setAttribute("type", "password")
+        }
+      }
+  </script>
 </body>
 
 </html>
