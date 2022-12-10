@@ -24,12 +24,7 @@ if (isset($_POST["submit"])) {
   }
 }
 
-if (isset($_POST["hapusGambar"])) {
-  // cek apakah data berhasil di edit atau tidak
-  if (hapusGambar($_POST, $id) > 0) {
-    $_SESSION['hapusGambar'] = true;
-  }
-}
+
 
 ?>
 
@@ -54,14 +49,15 @@ if (isset($_POST["hapusGambar"])) {
   <div class="container my-5 m-auto text-center">
     <form action="" method="post" enctype="multipart/form-data">
       <!-- gambar lama -->
-      <input type="hidden" name="gambarLama" id="gambarLama" value="<?php echo $user[0]["gambar"] ?>">
+      <input type="hidden" name="gambarLama" id="gambarLama" value="<?php echo $gambar ?>">
       <!-- akhir gambar lama -->
       <!-- gambar -->
       <img class="rounded-4 border border-5 border-light shadow-lg" width="200px" height="200px"
         style="object-fit: cover;" src="../HalamanUtama/img/img-user/<?php echo $gambar; ?>" alt="">
       <!-- akhir gambar -->
       <!-- hapus gambar -->
-      <button type="submit" name="hapusGambar" class="btn btn-primary d-block m-auto mb-3 mt-5">Hapus Gambar</button>
+      <a style="width: 200px;" href="confirmGambar.php?id=<?= $id ?>"
+        class="btn btn-danger d-block m-auto mb-5 mt-5">Hapus Gambar</a>
       <!-- akhir hapus gambar -->
       <!-- file gambar -->
       <h4 class="text-start fs-5 fw-bolder m-auto" style="max-width: 600px;">Ubah Gambar :</h4>
@@ -85,15 +81,17 @@ if (isset($_POST["hapusGambar"])) {
       <!-- akhir file username -->
       <!-- file password -->
       <h4 class="text-start fs-5 fw-bolder m-auto" style="max-width: 600px;">Ubah Password :</h4>
-      <div class="input-group my-4">
-        <input minlength="8" style="max-width: 600px;" name="password" type="password" class="form-control m-auto"
-          id="password" required value="<?php echo $password; ?>">
+      <div class="input-group my-4 position-relative m-auto" style="max-width: 600px;">
+        <input minlength="8" style="max-width: 600px;" name="password" type="password"
+          class="form-control m-auto rounded-end" id="password" required value="<?php echo $password; ?>">
+        <button onclick="showPassword()" type="button"
+          class="btn bg-white border border-start-0 position-absolute end-0"><ion-icon name="eye-outline"
+            id="icon"></ion-icon></button>
       </div>
-      <input onclick="showPassword()" class="mb-4" type="checkbox" name="showPass" id="showPass">
-      <label for="showPass">Lihat Password</label>
       <p class="fst-italic text-danger ">Password Panjang Dikarenakan Password Tersimpan Secara Enkripsi</p>
       <!-- akhir file password -->
       <!-- submit -->
+      <a href="../HalamanUtama/" class="btn btn-secondary fs-5 me-5">Batal</a>
       <button type="submit" name="submit" class="btn btn-primary fs-5">Ubah</button>
     </form>
   </div>
@@ -108,6 +106,7 @@ if (isset($_POST["hapusGambar"])) {
 
   <!-- my js -->
   <script src="../HalamanUtama/header.js"></script>
+  <script src="search/script.js"></script>
 
   <!-- sweetalert -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -135,37 +134,18 @@ if (isset($_POST["hapusGambar"])) {
   <?php endif; ?>
   <?php endif; ?>
 
-  <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
-    di dalam session sukses  -->
-  <?php if (isset($_POST['hapusGambar'])): ?>
-  <?php if (isset($_SESSION['hapusGambar'])): ?>
-  <script>
-      swal("Berhasil Menghapus Gambar", "", "success");
-    setTimeout(function () {
-      document.location = "../HalamanUtama/";
-    }, 2500)
-  </script>
-  <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
-  <?php unset($_SESSION['hapusGambar']); ?>
-  <?php else: ?>
-  <script>
-    swal("Gagal Menghapus Gambar", "", "error");
-    setTimeout(function () {
-      document.location = "./HalamanUtama/";
-    }, 2500)
-      <?php unset($_SESSION[' edit ']); ?>
-  </script>
-  <?php endif; ?>
-  <?php endif; ?>
 
-  <!-- show password -->
+  <!-- showpassword -->
   <script>
       function showPassword() {
+        let icon = document.getElementById('icon');
         let password = document.getElementById('password');
         if (password.getAttribute("type") === 'password') {
           password.setAttribute("type", "text")
+          icon.setAttribute("name", "eye-off-outline")
         } else {
           password.setAttribute("type", "password")
+          icon.setAttribute("name", "eye-outline")
         }
       }
   </script>

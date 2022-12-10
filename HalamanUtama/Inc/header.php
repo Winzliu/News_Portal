@@ -29,10 +29,15 @@
             </ul>
           </li>
         </ul>
-        <form class="d-flex me-3 me-xl-5" role="search">
-          <input class="form-control me-2  border-dark" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-dark " type="submit">Search</button>
-        </form>
+        <div class="d-flex me-3 me-xl-5 position-relative">
+          <input autocomplete="off" class="form-control me-2 border-dark" type="input" placeholder="Search"
+            aria-label="Search" name="search" id="search" />
+          <div class="position-absolute top-100 w-100 mt-1 rounded" id="container">
+            <ul class="list-group fs-6">
+
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </nav>

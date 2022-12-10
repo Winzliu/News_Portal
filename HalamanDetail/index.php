@@ -147,7 +147,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         <ul class="list-group list-group-flush">
           <?php foreach ($beritaBaru as $baru): ?>
           <a href="../HalamanDetail/index.php?id=<?= $baru['id'] ?>" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light fw-bolder fs-5">
+            <li style="height: 45px;" class="list-group-item btn btn-light fw-bolder fs-5">
               <?php echo $baru['judul'] ?>
             </li>
           </a>
@@ -170,6 +170,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <!-- jquery -->
   <script src="../HalamanUtama/jquery-3.6.0.min.js"></script>
+  <script src="search/script.js"></script>
 
   <!-- my js -->
   <script src="../HalamanUtama/header.js"></script>

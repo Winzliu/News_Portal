@@ -57,7 +57,8 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
         <a href="tambahUser.php" type="button" class="btn btn-success mb-3 fs-5">Add +</a>
       </div>
       <div class="col">
-        <input type="search" class="form-control fs-5" id="search" placeholder="search" name="search">
+        <input autocomplete="off" type="search" class="form-control fs-5" id="search" placeholder="search"
+          name="search">
       </div>
       <table id="container" class="table table-striped table-bordered">
         <thead>
@@ -65,7 +66,7 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
             <th class="text-center">#</th>
             <th>Username</th>
             <th class="d-none d-md-table-cell">Email</th>
-            <th colspan="2" class="text-center">Action</th>
+            <th colspan="2" class="text-center">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -87,7 +88,7 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
               </a>
             </td>
             <td class="text-center">
-              <a href="hapusUser.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
+              <a href="confirmUser.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
                 <ion-icon name="trash" class="fs-5"></ion-icon>
               </a>
             </td>

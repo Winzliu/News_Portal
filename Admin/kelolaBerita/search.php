@@ -1,7 +1,7 @@
 <?php
 require '../../koneksi.php';
 
-$keyword = $_GET["keyword"];
+$keyword = mysqli_real_escape_string($conn, $_GET["keyword"]);
 
 // pagination
 $JumlahDataPerHal = 5;

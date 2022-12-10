@@ -57,7 +57,8 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
         <a href="tambahBerita.php" type="button" class="btn btn-success mb-3 fs-5">Add +</a>
       </div>
       <div class="col">
-        <input type="search" class="form-control fs-5" id="search" placeholder="search" name="search">
+        <input autocomplete="off" type="search" class="form-control fs-5" id="search" placeholder="search"
+          name="search">
       </div>
       <table id="container" class="table table-striped table-bordered">
         <thead>
@@ -83,7 +84,7 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
               </a>
             </td>
             <td class="text-center">
-              <a href="hapusBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
+              <a href="confirmBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
                 <ion-icon name="trash" class="fs-5"></ion-icon>
               </a>
             </td>
@@ -119,13 +120,14 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
       </ul>
     </div>
 
+
     <script src="../bootstrap.bundle.js"></script>
     <!-- script-ion-icons -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <!-- jquery -->
     <script src="../jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 
 </html>

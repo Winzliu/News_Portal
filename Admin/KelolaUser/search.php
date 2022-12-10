@@ -1,7 +1,7 @@
 <?php
 require '../../koneksi.php';
 
-$keyword = $_GET["keyword"];
+$keyword = mysqli_real_escape_string($conn, $_GET["keyword"]);
 
 // pagination
 $JumlahDataPerHal = 5;
@@ -24,7 +24,7 @@ $user = query("SELECT * FROM user WHERE username LIKE '%$keyword%' LIMIT $Indeks
       <th class="text-center">#</th>
       <th>Username</th>
       <th class="d-none d-md-table-cell">Email</th>
-      <th colspan="2" class="text-center">Action</th>
+      <th colspan="2" class="text-center">Aksi</th>
     </tr>
   </thead>
   <tbody>

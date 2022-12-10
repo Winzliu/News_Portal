@@ -59,13 +59,23 @@ if (isset($_POST["tambahuser"])) {
           </div>
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="password" class="form-label">Password</label>
-            <input name="password" autocomplete="off" min="8" type="password" class="form-control fs-6" id="password"
-              required>
+            <div class=" position-relative m-auto" style="max-width: 800px;">
+              <input minlength="8" style="max-width: 800px;" name="password" type="password"
+                class="form-control m-auto rounded-end" id="password" required>
+              <button onclick="showPassword()" type="button"
+                class="btn bg-white border border-start-0 position-absolute top-0 rounded-0 rounded-end end-0"><ion-icon
+                  name="eye-outline" id="icon"></ion-icon></button>
+            </div>
           </div>
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="password2" class="form-label">Konfirmasi Password</label>
-            <input name="password2" autocomplete="off" min="8" type="password" class="form-control fs-6" id="password2"
-              required>
+            <div class=" position-relative m-auto" style="max-width: 800px;">
+              <input minlength="8" style="max-width: 800px;" name="password2" type="password"
+                class="form-control m-auto rounded-end" id="password2" required>
+              <button onclick="showPassword2()" type="button"
+                class="btn bg-white border border-start-0 position-absolute top-0 rounded-0 rounded-end end-0"><ion-icon
+                  name="eye-outline" id="icon2"></ion-icon></button>
+            </div>
           </div>
           <button name="tambahuser" class="btn btn-primary ms-5 my-4" type="submit">Tambah</button>
         </li>
@@ -77,6 +87,39 @@ if (isset($_POST["tambahuser"])) {
 
   <!-- sweetalert -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <!-- script-ion-icons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- showpassword -->
+  <script>
+    function showPassword() {
+      let icon = document.getElementById('icon');
+      let password = document.getElementById('password');
+      if (password.getAttribute("type") === 'password') {
+        password.setAttribute("type", "text")
+        icon.setAttribute("name", "eye-off-outline")
+      } else {
+        password.setAttribute("type", "password")
+        icon.setAttribute("name", "eye-outline")
+      }
+    }
+  </script>
+  <!-- show konfirmasi password -->
+  <script>
+    function showPassword2() {
+      let icon = document.getElementById('icon2');
+      let password = document.getElementById('password2');
+      if (password.getAttribute("type") === 'password') {
+        password.setAttribute("type", "text")
+        icon.setAttribute("name", "eye-off-outline")
+      } else {
+        password.setAttribute("type", "password")
+        icon.setAttribute("name", "eye-outline")
+      }
+    }
+  </script>
 
   <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
   di dalam session sukses  -->

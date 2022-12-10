@@ -20,7 +20,7 @@ $HalSekarang = (isset($_GET["page"])) ? $_GET["page"] : 1;
 
 $IndeksData = ($HalSekarang * $JumlahDataPerHal) - $JumlahDataPerHal;
 
-
+$beritaFull = query("SELECT * FROM berita");
 $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
 // berita pada carousel
 $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
@@ -116,10 +116,31 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         <li><a class="dropdown-item fs-5" href="../User/">
             <ion-icon name="settings-outline" class="fs-6"></ion-icon> Edit Profile
           </a></li>
-        <li><a class="dropdown-item fs-5" href="../logout.php">
-            <ion-icon name="power" class="fs-6"></ion-icon> Logout
-          </a></li>
+
+        <!-- Button trigger modal -->
+        <a href="../logout.php" class="dropdown-item fs-5 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <ion-icon name="power" class="fs-6"></ion-icon> Logout
+        </a>
       </ul>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start">
+              Yakin Ingin Melakukan Logout?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+              <a href="../logout.php" type="button" class="btn btn-danger">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- akhir profile & jam -->
@@ -211,7 +232,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         <ul class="list-group list-group-flush">
           <?php foreach ($beritaBaru as $baru): ?>
           <a href="" style="text-decoration: none;">
-            <li class="list-group-item btn btn-light fw-bolder fs-5">
+            <li style="height: 45px;" class="list-group-item btn btn-light fw-bolder fs-5">
               <?php echo $baru['judul'] ?>
             </li>
           </a>
@@ -234,6 +255,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <!-- jquery -->
   <script src="jquery-3.6.0.min.js"></script>
+  <script src="search/script.js"></script>
 
   <!-- my js -->
   <script src="header.js"></script>

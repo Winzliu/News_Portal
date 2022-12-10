@@ -1,7 +1,7 @@
 $(document).ready(function(){
   // event ketika di tulis
   $('#search').on('input',function(){
-    $('#container').load('search.php?keyword=' + $('#search').val());
+    $('#container').load('search.php?keyword=' + encodeURIComponent($('#search').val()));
   })
   $('#search').on('blur',function(){
     setTimeout(() => {

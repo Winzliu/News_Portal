@@ -87,7 +87,7 @@ $kategori = query("SELECT * FROM kategori LIMIT $IndeksData,$JumlahDataPerHal");
               </a>
             </td>
             <td class="text-center">
-              <a href="hapusKategori.php?id=<?php echo $k["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
+              <a href="confirmKategori.php?id=<?php echo $k["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
                 <ion-icon name="trash" class="fs-5"></ion-icon>
               </a>
             </td>

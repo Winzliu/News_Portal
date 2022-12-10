@@ -19,8 +19,8 @@ function registrasi($data)
 {
   global $conn;
 
-  $email = strtolower(stripslashes($data["email"]));
-  $username = strtolower(stripslashes($data["username"]));
+  $email = mysqli_real_escape_string($conn, strtolower($data["email"]));
+  $username = mysqli_real_escape_string($conn, strtolower(htmlspecialchars($data["username"])));
   $password = mysqli_real_escape_string($conn, $data["password"]);
   $konfirmasiPass = mysqli_real_escape_string($conn, $data["password2"]);
   $gambar = "Logo-User.png";
@@ -57,7 +57,7 @@ function registrasi($data)
 function login($dataUser)
 {
   global $conn;
-  $username = strtolower($dataUser["username"]);
+  $username = htmlspecialchars(strtolower($dataUser["username"]));
   $password = $dataUser["password"];
   $user = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
 
@@ -83,8 +83,8 @@ function login($dataUser)
 function loginAdmin($dataUser)
 {
   global $conn;
-  $username = strtolower($dataUser["username"]);
-  $password = $dataUser["password"];
+  $username = mysqli_real_escape_string($conn, strtolower($dataUser["username"]));
+  $password = mysqli_real_escape_string($conn, $dataUser["password"]);
   $user = mysqli_query($conn, "SELECT * FROM admin WHERE username = '$username'");
 
   // ada gk username yang sama
@@ -202,9 +202,9 @@ function edit($edit, $idUser)
   global $conn;
   $user = query("SELECT * FROM user WHERE id = $idUser");
   $passwordLama = $user[0]["password"];
-  $email = htmlspecialchars($edit["email"]);
-  $username = htmlspecialchars($edit["username"]);
-  $password = htmlspecialchars($edit["password"]);
+  $email = mysqli_real_escape_string($conn, $edit["email"]);
+  $username = mysqli_real_escape_string($conn, htmlspecialchars($edit["username"]));
+  $password = mysqli_real_escape_string($conn, $edit["password"]);
   $gambarLama = $edit["gambarLama"];
 
   if ($password == $passwordLama) {
@@ -233,9 +233,9 @@ function hapusGambar($edit, $idUser)
   global $conn;
   $user = query("SELECT * FROM user WHERE id = $idUser");
   $passwordLama = $user[0]["password"];
-  $email = htmlspecialchars($edit["email"]);
-  $username = htmlspecialchars($edit["username"]);
-  $password = htmlspecialchars($edit["password"]);
+  $email = mysqli_real_escape_string($conn, $edit["email"]);
+  $username = mysqli_real_escape_string($conn, htmlspecialchars($edit["username"]));
+  $password = mysqli_real_escape_string($conn, $edit["password"]);
 
   if ($password == $passwordLama) {
     $password = $passwordLama;
@@ -258,7 +258,7 @@ function tambahkategori($data)
 {
   global $conn;
 
-  $namaKategori = strtolower(stripslashes($data["namaKategori"]));
+  $namaKategori = mysqli_real_escape_string($conn, $data["namaKategori"]);
 
 
   $result = mysqli_query($conn, "SELECT * FROM kategori WHERE namaKategori = '$namaKategori'");
@@ -284,10 +284,10 @@ function tambahberita($data)
   $id = $_SESSION['idAdmin'];
   $admins = mysqli_query($conn, "SELECT * FROM admin WHERE id = '$id'");
   $admin = mysqli_fetch_assoc($admins)['username'];
-  $judul = strtolower(stripslashes($data["judul"]));
-  $kategori = strtolower(stripslashes($data["kategori"]));
-  $isiBerita = $data["editordata"];
-  $gambar = postGambar();
+  $judul = mysqli_real_escape_string($conn, strtolower(htmlspecialchars($data["judul"])));
+  $kategori = mysqli_real_escape_string($conn, strtolower($data["kategori"]));
+  $isiBerita = mysqli_real_escape_string($conn, htmlspecialchars($data["editordata"]));
+  $gambar = mysqli_real_escape_string($conn, htmlspecialchars(postGambar()));
 
   if ($gambar == false) {
     return false;
