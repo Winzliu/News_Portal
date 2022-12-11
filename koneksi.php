@@ -201,11 +201,20 @@ function edit($edit, $idUser)
 {
   global $conn;
   $user = query("SELECT * FROM user WHERE id = $idUser");
+  $usernameLama = $user[0]['username'];
   $passwordLama = $user[0]["password"];
   $email = mysqli_real_escape_string($conn, $edit["email"]);
   $username = mysqli_real_escape_string($conn, htmlspecialchars($edit["username"]));
   $password = mysqli_real_escape_string($conn, $edit["password"]);
   $gambarLama = $edit["gambarLama"];
+  $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+
+  if (mysqli_fetch_assoc($result) && $username != $usernameLama) {
+    echo "<script>
+    alert('username telah dipakai');
+    </script>";
+    return false;
+  }
 
   if ($password == $passwordLama) {
     $password = $passwordLama;
@@ -308,5 +317,41 @@ function tambahberita($data)
   return mysqli_affected_rows($conn);
 }
 // akhir fungsi tambah berita
+
+// fungsi lupapassword
+function lupaPassword($dataUser)
+{
+  global $conn;
+  $username = htmlspecialchars($dataUser["username"]);
+  $password = mysqli_real_escape_string($conn, $dataUser["passwordBaru"]);
+  $konfirmasiPass = mysqli_real_escape_string($conn, $dataUser["kpasswordBaru"]);
+  $Users = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+
+
+  // ada gk username yang sama
+  if (mysqli_num_rows($Users) === 0) {
+    echo "<script>
+  alert('konfirmasi Username salah');
+  </script>";
+    return 0;
+  }
+  // konfirmasi password
+  if ($password !== $konfirmasiPass) {
+    echo "<script>
+  alert('konfirmasi password salah');
+  </script>";
+    return false;
+  }
+
+  // enkripsi password hash
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  // tambah password ke database
+  mysqli_query($conn, "UPDATE user SET password ='$password' WHERE 
+  username ='$username'");
+
+  return mysqli_affected_rows($conn);
+}
+// akhir fungsi lupa password
 
 ?>

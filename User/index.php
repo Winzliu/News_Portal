@@ -126,9 +126,6 @@ if (isset($_POST["submit"])) {
   <?php else: ?>
   <script>
     swal("Gagal Mengubah Data", "", "error");
-    setTimeout(function () {
-      document.location = "../HalamanUtama/";
-    }, 2500)
       <?php unset($_SESSION[' edit ']); ?>
   </script>
   <?php endif; ?>

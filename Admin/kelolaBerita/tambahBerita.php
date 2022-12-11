@@ -113,9 +113,6 @@ $kategori = query("SELECT * FROM kategori");
   <?php else: ?>
   <script>
     swal("Gagal Menambahkan Berita", "", "error");
-    setTimeout(function () {
-      document.location = "./";
-    }, 2500)
   </script>
   <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
   <?php unset($_SESSION['tambahberita']); ?>

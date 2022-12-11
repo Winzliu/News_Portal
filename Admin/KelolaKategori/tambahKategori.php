@@ -80,9 +80,6 @@ if (isset($_POST["tambahkategori"])) {
   <?php else: ?>
   <script>
     swal("Gagal Menambahkan Kategori", "", "error");
-    setTimeout(function () {
-      document.location = "./";
-    }, 2500)
   </script>
   <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
   <?php unset($_SESSION['tambahkategori']); ?>
