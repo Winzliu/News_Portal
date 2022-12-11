@@ -293,9 +293,9 @@ function tambahberita($data)
   $id = $_SESSION['idAdmin'];
   $admins = mysqli_query($conn, "SELECT * FROM admin WHERE id = '$id'");
   $admin = mysqli_fetch_assoc($admins)['username'];
-  $judul = mysqli_real_escape_string($conn, strtolower(htmlspecialchars($data["judul"])));
+  $judul = mysqli_real_escape_string($conn, htmlspecialchars($data["judul"]));
   $kategori = mysqli_real_escape_string($conn, strtolower($data["kategori"]));
-  $isiBerita = mysqli_real_escape_string($conn, htmlspecialchars($data["editordata"]));
+  $isiBerita = $data["editordata"];
   $gambar = mysqli_real_escape_string($conn, htmlspecialchars(postGambar()));
 
   if ($gambar == false) {

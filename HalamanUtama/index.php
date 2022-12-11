@@ -21,7 +21,7 @@ $HalSekarang = (isset($_GET["page"])) ? $_GET["page"] : 1;
 $IndeksData = ($HalSekarang * $JumlahDataPerHal) - $JumlahDataPerHal;
 
 $beritaFull = query("SELECT * FROM berita");
-$berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
+$berita = query("SELECT * FROM berita ORDER BY id DESC LIMIT $IndeksData,$JumlahDataPerHal");
 // berita pada carousel
 $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
 ?>

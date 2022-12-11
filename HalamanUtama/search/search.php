@@ -14,7 +14,7 @@ $HalSekarang = (isset($_GET["page"])) ? $_GET["page"] : 1;
 $IndeksData = ($HalSekarang * $JumlahDataPerHal) - $JumlahDataPerHal;
 
 
-$beritaFull = query("SELECT * FROM berita WHERE judul LIKE '%$keyword%'");
+$beritaFull = query("SELECT * FROM berita WHERE judul LIKE '%$keyword%' ORDER BY id DESC LIMIT 6");
 
 ?>
 

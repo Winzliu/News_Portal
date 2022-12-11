@@ -110,12 +110,15 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
       </div>
       <!-- akhir rekaman komentar -->
       <!-- komentar -->
-      <p class="mt-4 ms-2">Isi Komentar : </p>
-      <div class="form-floating mb-3">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-          style="height: 200px"></textarea>
-        <label for="floatingTextarea2">Masukkan Komentar Anda : </label>
-      </div>
+      <p class="mt-4 ms-2 fs-5 fw-bolder ms-3">Isi Komentar : </p>
+      <form action="">
+        <div class="form-floating mb-3">
+          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+            style="height: 200px"></textarea>
+          <label for="floatingTextarea2">Masukkan Komentar Anda : </label>
+          <button class="btn btn-primary mt-3 mb-4 px-5 py-2 ms-3">Kirim</button>
+        </div>
+      </form>
       <!-- akhir komentar -->
     </div>
     <!-- akhir card berita -->
