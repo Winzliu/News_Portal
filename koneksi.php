@@ -354,4 +354,138 @@ function lupaPassword($dataUser)
 }
 // akhir fungsi lupa password
 
+// fungsi edit kategori
+function editKategori($edit, $idUser)
+{
+  global $conn;
+  $kategori = query("SELECT * FROM kategori WHERE id = $idUser");
+  $namaKategoriLama = $kategori[0]['namaKategori'];
+  $namaKategori = mysqli_real_escape_string($conn, $edit["namaKategori"]);
+  $result = mysqli_query($conn, "SELECT namaKategori FROM kategori WHERE namaKategori = '$namaKategori'");
+
+  if (mysqli_fetch_assoc($result) && $namaKategori != $namaKategoriLama) {
+    echo "<script>
+    alert('kategori telah ada');
+    </script>";
+    return false;
+  }
+
+  $id = $idUser;
+
+  mysqli_query($conn, "UPDATE kategori SET  namaKategori = '$namaKategori', tanggalPosting = current_timestamp() WHERE id = $id");
+
+  return mysqli_affected_rows($conn);
+}
+// akhir fungsi edit kategori
+
+// fungsi edit user from admin
+function editUser($edit, $idUser)
+{
+  global $conn;
+  $user = query("SELECT * FROM user WHERE id = $idUser");
+  $usernameLama = $user[0]['username'];
+  $password = $user[0]['password'];
+  $gambar = $user[0]['gambar'];
+  $username = mysqli_real_escape_string($conn, $edit["username"]);
+  $email = mysqli_real_escape_string($conn, $edit["email"]);
+  $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+
+  if (mysqli_fetch_assoc($result) && $username != $usernameLama) {
+    echo "<script>
+    alert('username telah dipakai');
+    </script>";
+    return false;
+  }
+
+  $id = $idUser;
+
+  mysqli_query($conn, "UPDATE user SET  username = '$username', email = '$email', password = '$password', gambar = '$gambar' WHERE id = $id");
+
+  return mysqli_affected_rows($conn);
+}
+// akhir fungsi edit user from admin
+
+// fungsi edit berita
+function editBerita($edit, $idUser)
+{
+  global $conn;
+  $berita = query("SELECT * FROM berita WHERE id = $idUser");
+  $judulLama = $berita[0]['judul'];
+  $isiBerita = $berita[0]['berita'];
+  $idAdmin = $_SESSION['idAdmin'];
+  $namas = mysqli_query($conn, "SELECT * FROM admin WHERE id = '$idAdmin'");
+  $admin = mysqli_fetch_assoc($namas)['username'];
+  $judul = mysqli_real_escape_string($conn, $edit["judul"]);
+  $kategori = mysqli_real_escape_string($conn, htmlspecialchars($edit["kategori"]));
+  $gambarLama = $edit["gambarLama"];
+  $result = mysqli_query($conn, "SELECT judul FROM berita WHERE judul = '$judul'");
+
+  if (mysqli_fetch_assoc($result) && $judul != $judulLama) {
+    echo "<script>
+    alert('judul telah dipakai');
+    </script>";
+    return false;
+  }
+
+
+  if ($_FILES["gambar"]['error'] === 4) {
+    $gambar = $gambarLama;
+  } else {
+    $gambar = cekGambarBerita($gambarLama);
+  }
+
+  $id = $idUser;
+
+  mysqli_query($conn, "UPDATE berita SET  judul = '$judul', kategori = '$kategori', berita = '$isiBerita',tanggal = current_timestamp(), oleh = '$admin' ,gambar = '$gambar' WHERE id = $id");
+
+  return mysqli_affected_rows($conn);
+}
+// akhir fungsi edit berita
+
+// fungsi cek gambar berita
+function cekGambarBerita($gambar)
+{
+  $gambarLama = $gambar;
+  $namaFile = $_FILES["gambar"]["name"];
+  $ukuranFile = $_FILES["gambar"]["size"];
+  $error = $_FILES["gambar"]["error"];
+  $tmpName = $_FILES["gambar"]["tmp_name"];
+
+  /* user tidak memasukkan gamabar */
+  if ($error === 4) {
+    echo "<script>
+    alert('Upload Gambar Terlebih Dahulu');
+    </script>";
+    return $gambarLama;
+  }
+
+  // user menupload file bukan gambar
+  $extValid = ['jpg', 'jpeg', 'png'];
+  $extName = explode('.', $namaFile);
+  $extName = strtolower(end($extName));
+
+  if (!in_array($extName, $extValid)) {
+    echo "<script>
+    alert('Extensi file yang di upload salah');
+    </script>";
+    return $gambarLama;
+  }
+
+  // besar file
+  if ($ukuranFile > 1024 * 1024 * 3) {
+    echo "<script>
+    alert('Ukuran File Yang di Upload Terlalu Besar (<3MB)');
+    </script>";
+    return $gambarLama;
+  }
+
+  // jika ada nama yang sama tetapi gambar beda generate nama gambar baru
+  $namaFileBaru = uniqid() . "." . $extName;
+
+  // jika valid
+  move_uploaded_file($tmpName, '../../HalamanUtama/img/img-berita/' . $namaFileBaru);
+  return $namaFileBaru;
+}
+// akhir fungsi cek gambar berita
+
 ?>

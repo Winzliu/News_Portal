@@ -48,9 +48,12 @@ $kategori = query("SELECT * FROM kategori");
     <!-- akhir perkenalan ToSee -->
     <!-- card developer -->
     <div class=" d-flex justify-content-evenly flex-wrap" style="gap: 30px;">
+      <!-- alwin -->
       <div class="card shadow-sm" style="width: 23rem;">
-        <img style="object-fit: cover;" height="250px" src="img/img-developer/Alwin.jpeg" class="card-img-top"
-          alt="...">
+        <button id="imageZoom" class="btn p-0">
+          <img style="object-fit: cover;" src="img/img-developer/Alwin.jpeg" height="250px" class="card-img-top"
+            alt="...">
+        </button>
         <div class="card-body text-center">
           <a target="_blank" href="https://www.instagram.com/winz.liu/"
             class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Alwin Liufandy</a>
@@ -59,9 +62,39 @@ $kategori = query("SELECT * FROM kategori");
             class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
           <p class="fw-bolder fs-5">NIM : 221402037</p>
         </div>
+        <div id="imgDetail" style="z-index: 999999;"
+          class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
+          <img width="600px" class=" m-auto rounded" src="img/img-developer/Alwin.jpeg" alt="">
+          <button id="imgClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
+        </div>
       </div>
+      <!-- akhir alwin -->
+      <!-- najwa -->
       <div class="card shadow-sm" style="width: 23rem;">
-        <img src="img/img-developer/1.jpg" height="250px" class="card-img-top" alt="...">
+        <button id="imageZoom" class="btn p-0">
+          <img style="object-fit: cover;" src="img/img-developer/najwa.jpg" height="250px" class="card-img-top"
+            alt="...">
+        </button>
+        <div class="card-body text-center">
+          <a target="_blank" href="https://www.instagram.com/najwaamnda/"
+            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Najwa Amanda</a>
+          <br>
+          <a target="_blank" href="https://www.instagram.com/c.ommandprompt/"
+            class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
+          <p class="fw-bolder fs-5">NIM : 221402068</p>
+        </div>
+        <div id="imgDetail" style="z-index: 999999;"
+          class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
+          <img width="600px" class=" m-auto rounded" src="img/img-developer/najwa.jpg" alt="">
+          <button id="imgClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
+        </div>
+      </div>
+      <!-- akhri najwa -->
+      <!-- naufal -->
+      <div class="card shadow-sm" style="width: 23rem;">
+        <button id="imageZoom" class="btn p-0">
+          <img style="object-fit: cover;" src="img/img-developer/1.jpg" height="250px" class="card-img-top" alt="...">
+        </button>
         <div class="card-body text-center">
           <a target="_blank" href="https://www.instagram.com/winz.liu/"
             class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Alwin Liufandy</a>
@@ -70,9 +103,38 @@ $kategori = query("SELECT * FROM kategori");
             class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
           <p class="fw-bolder fs-5">NIM : 221402037</p>
         </div>
+        <div id="imageDetail" style="z-index: 999999;"
+          class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
+          <img width="800px" class=" m-auto rounded" src="img/img-developer/1.jpg" alt="">
+          <button id="imageClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
+        </div>
       </div>
+      <!-- akhir naufal -->
+      <!-- wahyu -->
       <div class="card shadow-sm" style="width: 23rem;">
-        <img src="img/img-developer/1.jpg" height="250px" class="card-img-top" alt="...">
+        <button id="imageZoom" class="btn p-0">
+          <img style="object-fit: cover;" src="img/img-developer/1.jpg" height="250px" class="card-img-top" alt="...">
+        </button>
+        <div class="card-body text-center">
+          <a target="_blank" href="https://www.instagram.com/winz.liu/"
+            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Alwin</a>
+          <br>
+          <a target="_blank" href="https://www.instagram.com/c.ommandprompt/"
+            class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
+          <p class="fw-bolder fs-5">NIM : 221402037</p>
+        </div>
+        <div id="imgDetail" style="z-index: 999999;"
+          class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
+          <img width="800px" class=" m-auto rounded" src="img/img-developer/1.jpg" alt="">
+          <button id="imgClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
+        </div>
+      </div>
+      <!-- akhir wahyu -->
+      <!-- fenaya -->
+      <div class="card shadow-sm" style="width: 23rem;">
+        <button id="imageZoom" class="btn p-0">
+          <img style="object-fit: cover;" src="img/img-developer/2.jpg" height="250px" class="card-img-top" alt="...">
+        </button>
         <div class="card-body text-center">
           <a target="_blank" href="https://www.instagram.com/winz.liu/"
             class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Alwin Liufandy</a>
@@ -81,29 +143,13 @@ $kategori = query("SELECT * FROM kategori");
             class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
           <p class="fw-bolder fs-5">NIM : 221402037</p>
         </div>
-      </div>
-      <div class="card shadow-sm" style="width: 23rem;">
-        <img src="img/img-developer/1.jpg" height="250px" class="card-img-top" alt="...">
-        <div class="card-body text-center">
-          <a target="_blank" href="https://www.instagram.com/winz.liu/"
-            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Alwin Liufandy</a>
-          <br>
-          <a target="_blank" href="https://www.instagram.com/c.ommandprompt/"
-            class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
-          <p class="fw-bolder fs-5">NIM : 221402037</p>
+        <div id="imageDetail" style="z-index: 999999;"
+          class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
+          <img width="800px" class=" m-auto rounded" src="img/img-developer/2.jpg" alt="">
+          <button id="imageClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
         </div>
       </div>
-      <div class="card shadow-sm" style="width: 23rem;">
-        <img src="img/img-developer/1.jpg" height="250px" class="card-img-top" alt="...">
-        <div class="card-body text-center">
-          <a target="_blank" href="https://www.instagram.com/winz.liu/"
-            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Alwin Liufandy</a>
-          <br>
-          <a target="_blank" href="https://www.instagram.com/c.ommandprompt/"
-            class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
-          <p class="fw-bolder fs-5">NIM : 221402037</p>
-        </div>
-      </div>
+      <!-- akhir fenaya -->
     </div>
   </div>
   <!-- akhir card developer -->
@@ -120,6 +166,23 @@ $kategori = query("SELECT * FROM kategori");
   <script src="search/script.js"></script>
   <!-- my js -->
   <script src="header.js"></script>
+  <script>
+    let zoom = document.querySelectorAll('#imageZoom');
+    zoom.forEach(el => {
+      el.addEventListener('click', function (e) {
+        e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.classList.add('d-flex')
+        e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.classList.remove('d-none')
+        e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.children.item('#imageClose').nextSibling.nextSibling.addEventListener('click', function (e) {
+          e.target.parentElement.classList.remove('d-flex')
+          e.target.parentElement.classList.add('d-none')
+        })
+        e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.addEventListener('click', function (e) {
+          e.target.classList.remove('d-flex')
+          e.target.classList.add('d-none')
+        })
+      })
+    });
+  </script>
 </body>
 
 </html>

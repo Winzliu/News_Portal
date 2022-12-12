@@ -79,7 +79,7 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
               <?php echo $u["judul"]; ?>
             </td>
             <td class="text-center">
-              <a class="btn btn-success py-1 ps-2 pe-1 opacity-75">
+              <a href="editBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-success py-1 ps-2 pe-1 opacity-75">
                 <ion-icon name="create" class="fs-5"></ion-icon>
               </a>
             </td>
