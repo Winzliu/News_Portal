@@ -25,7 +25,7 @@ $namaKategori = query("SELECT * FROM kategori WHERE id = $id")[0];
 <body style="font-family: 'Noto serif', serif">
   <!-- Modal -->
   <div class="d-flex bg-dark bg-opacity-50 position-absolute top-0 bottom-0 start-0 end-0">
-    <div class="card m-auto" style="width: 32rem;height: 18rem;">
+    <div class="card m-auto" style="width: 32rem;">
       <div class="card-body">
         <h2 class="card-title text-center">Hapus Kategori</h2>
         <hr>

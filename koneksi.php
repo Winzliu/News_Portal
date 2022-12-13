@@ -232,6 +232,8 @@ function edit($edit, $idUser)
 
   mysqli_query($conn, "UPDATE user SET  username = '$username', email = '$email', password = '$password',gambar = '$gambar' WHERE id = $id");
 
+  mysqli_query($conn, "UPDATE komentar SET  gambar = '$gambar' WHERE idUser = '$idUser'");
+
   return mysqli_affected_rows($conn);
 }
 // akhir fungsi edit user
@@ -497,9 +499,10 @@ function komentar($data)
   $gambar = mysqli_real_escape_string($conn, htmlspecialchars($data["gambar"]));
   $idBerita = mysqli_real_escape_string($conn, $data["idBerita"]);
   $komentar = mysqli_real_escape_string($conn, $data["komentar"]);
+  $idUser = $data["idUser"];
 
   // tambah password ke database
-  mysqli_query($conn, "INSERT INTO komentar VALUES('','$idBerita','$username','$gambar','$komentar', current_timestamp(), 0 )");
+  mysqli_query($conn, "INSERT INTO komentar VALUES('','$idBerita','$idUser','$username','$gambar','$komentar', current_timestamp(), 0 )");
 
   return mysqli_affected_rows($conn);
 }

@@ -105,7 +105,7 @@ $kategori = query("SELECT * FROM kategori");
         </div>
         <div id="imageDetail" style="z-index: 999999;"
           class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
-          <img width="800px" class=" m-auto rounded" src="img/img-developer/1.jpg" alt="">
+          <img width="600px" class=" m-auto rounded" src="img/img-developer/1.jpg" alt="">
           <button id="imageClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
         </div>
       </div>
@@ -113,19 +113,21 @@ $kategori = query("SELECT * FROM kategori");
       <!-- wahyu -->
       <div class="card shadow-sm" style="width: 23rem;">
         <button id="imageZoom" class="btn p-0">
-          <img style="object-fit: cover;" src="img/img-developer/1.jpg" height="250px" class="card-img-top" alt="...">
+          <img style="object-fit: cover;" src="img/img-developer/Wahyu.jpg" height="250px" class="card-img-top"
+            alt="...">
         </button>
         <div class="card-body text-center">
-          <a target="_blank" href="https://www.instagram.com/winz.liu/"
-            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Alwin</a>
+          <a target="_blank" href="https://www.instagram.com/wahyujrs_19/"
+            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Wahyu Jhon Riadi
+            Sianipar</a>
           <br>
           <a target="_blank" href="https://www.instagram.com/c.ommandprompt/"
             class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
-          <p class="fw-bolder fs-5">NIM : 221402037</p>
+          <p class="fw-bolder fs-5">NIM : 221402135</p>
         </div>
         <div id="imgDetail" style="z-index: 999999;"
           class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
-          <img width="800px" class=" m-auto rounded" src="img/img-developer/1.jpg" alt="">
+          <img width="600px" class=" m-auto rounded" src="img/img-developer/Wahyu.jpg" alt="">
           <button id="imgClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
         </div>
       </div>
@@ -145,7 +147,7 @@ $kategori = query("SELECT * FROM kategori");
         </div>
         <div id="imageDetail" style="z-index: 999999;"
           class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
-          <img width="800px" class=" m-auto rounded" src="img/img-developer/2.jpg" alt="">
+          <img width="600px" class=" m-auto rounded" src="img/img-developer/2.jpg" alt="">
           <button id="imageClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
         </div>
       </div>

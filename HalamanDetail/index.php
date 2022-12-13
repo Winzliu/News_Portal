@@ -127,6 +127,7 @@ if (isset($_POST['submitKomentar'])) {
       <p class="mt-4 ms-2 fs-5 fw-bolder ms-3">Isi Komentar : </p>
       <form action="" method="post">
         <input type="hidden" name="username" id="username" value="<?= $user['username'] ?>">
+        <input type="hidden" name="idUser" id="idUser" value="<?= $idUser ?>">
         <input type="hidden" name="gambar" id="gambar" value="<?= $user['gambar'] ?>">
         <input type="hidden" name="idBerita" id="idBerita" value="<?= $idBerita ?>">
         <div class="form-floating mb-3">
@@ -151,7 +152,7 @@ if (isset($_POST['submitKomentar'])) {
           <?php foreach ($kategori as $row): ?>
           <a href="../HalamanUtama/kategori.php?kategori=<?php echo $row["namaKategori"]; ?>"
             style="text-decoration: none;">
-            <li class="list-group-item btn btn-light fs-5 fw-bolder">
+            <li style="height: 45px; overflow: hidden;" class="list-group-item btn btn-light fs-5 fw-bolder">
               <?php echo $row["namaKategori"]; ?>
             </li>
           </a>
@@ -167,7 +168,7 @@ if (isset($_POST['submitKomentar'])) {
         <ul class="list-group list-group-flush">
           <?php foreach ($beritaBaru as $baru): ?>
           <a href="../HalamanDetail/index.php?id=<?= $baru['id'] ?>" style="text-decoration: none;">
-            <li style="height: 45px;" class="list-group-item btn btn-light fw-bolder fs-5">
+            <li style="height: 45px; overflow: hidden;" class="list-group-item btn btn-light fw-bolder fs-5">
               <?php echo $baru['judul'] ?>
             </li>
           </a>
