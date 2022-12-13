@@ -16,6 +16,14 @@ $berita = mysqli_query($conn, "SELECT * FROM berita WHERE id = '$idBerita'");
 $b = mysqli_fetch_assoc($berita);
 // berita pada carousel
 $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
+// komentar
+$komens = mysqli_query($conn, "SELECT * FROM komentar WHERE idBerita = '$idBerita'");
+
+if (isset($_POST['submitKomentar'])) {
+  if (komentar($_POST) > 0) {
+    $_SESSION['submitKomentar'] = true;
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,27 +91,33 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="row">
+              <?php foreach ($komens as $komen): ?>
+              <?php if ($komen['status'] == 1): ?>
               <div class="col-12 col-lg-1">
                 <!-- gambar -->
-                <img height="50px" height="50px" style="object-fit: cover;" src="../img/Logo.png" alt="">
+                <img height="50px" width="50px" style="object-fit: cover;" class="rounded-circle"
+                  src="../HalamanUtama/img/img-user/<?php echo $komen['gambar'] ?>" alt="">
               </div>
               <div class="col-12 col-lg-10 ms-0 ms-lg-2">
                 <!-- username -->
-                <h5 class="fw-bolder">Alwin</h5>
+                <h5 class="fw-bolder">
+                  <?php echo $komen['username']; ?>
+                </h5>
                 <!-- tanggal -->
                 <strong>
-                  <p>12-10-2022 | 12:00:39</p>
+                  <p>
+                    <?= $komen['tanggalPost'] ?>
+                  </p>
                 </strong>
                 <!-- komentar -->
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, cum. Aperiam, maxime? Exercitationem
-                  minus doloremque quia nostrum eaque rerum numquam eos iste dolores ex corrupti culpa ipsa praesentium
-                  dignissimos illo, assumenda possimus expedita molestiae cum tempora perspiciatis? Ipsam nam unde, odit
-                  rem repellat tempore quisquam id nobis soluta consectetur illum exercitationem distinctio porro
-                  nesciunt? Quod, molestiae voluptates. Nulla, velit soluta. Tenetur molestias mollitia inventore
-                  obcaecati voluptates suscipit, reiciendis quia quam odit odio in distinctio! Iusto aliquid
-                  necessitatibus, aut modi rem temporibus doloribus dolorum repellendus quae ratione at hic, vel ipsum
-                  omnis deleniti facere, in exercitationem nostrum sapiente. Molestiae, dignissimos cum?</p>
+                <p>
+                  <?php echo $komen['komentar']; ?>
+                </p>
               </div>
+              <?php else: ?>
+              <div></div>
+              <?php endif; ?>
+              <?php endforeach; ?>
             </div>
           </li>
         </ul>
@@ -111,12 +125,15 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
       <!-- akhir rekaman komentar -->
       <!-- komentar -->
       <p class="mt-4 ms-2 fs-5 fw-bolder ms-3">Isi Komentar : </p>
-      <form action="">
+      <form action="" method="post">
+        <input type="hidden" name="username" id="username" value="<?= $user['username'] ?>">
+        <input type="hidden" name="gambar" id="gambar" value="<?= $user['gambar'] ?>">
+        <input type="hidden" name="idBerita" id="idBerita" value="<?= $idBerita ?>">
         <div class="form-floating mb-3">
-          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+          <textarea name="komentar" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
             style="height: 200px"></textarea>
           <label for="floatingTextarea2">Masukkan Komentar Anda : </label>
-          <button class="btn btn-primary mt-3 mb-4 px-5 py-2 ms-3">Kirim</button>
+          <button type="submit" name="submitKomentar" class="btn btn-primary mt-3 mb-4 px-5 py-2 ms-3">Kirim</button>
         </div>
       </form>
       <!-- akhir komentar -->
@@ -177,6 +194,26 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
 
   <!-- my js -->
   <script src="../HalamanUtama/header.js"></script>
+
+  <!-- sweetalert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
+    di dalam session sukses  -->
+  <?php if (isset($_SESSION['submitKomentar'])): ?>
+  <?php if ($_SESSION['submitKomentar'] == true): ?>
+  <script>
+    swal("Komentar Berhasil Ditambahkan", "Silahkan Menunggu Admin Menyetujui", "success");
+  </script>
+  <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_SESSION['submitKomentar']); ?>
+  <?php else: ?>
+  <script>
+    swal("Komentar Gagal Ditambahkan", "", "error");
+  </script>
+  <?php unset($_SESSION['submitKomentar']); ?>
+  <?php endif; ?>
+  <?php endif; ?>
 </body>
 
 </html>

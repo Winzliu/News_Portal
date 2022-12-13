@@ -488,4 +488,21 @@ function cekGambarBerita($gambar)
 }
 // akhir fungsi cek gambar berita
 
+// fungsi komentar
+function komentar($data)
+{
+  global $conn;
+
+  $username = mysqli_real_escape_string($conn, $data["username"]);
+  $gambar = mysqli_real_escape_string($conn, htmlspecialchars($data["gambar"]));
+  $idBerita = mysqli_real_escape_string($conn, $data["idBerita"]);
+  $komentar = mysqli_real_escape_string($conn, $data["komentar"]);
+
+  // tambah password ke database
+  mysqli_query($conn, "INSERT INTO komentar VALUES('','$idBerita','$username','$gambar','$komentar', current_timestamp(), 0 )");
+
+  return mysqli_affected_rows($conn);
+}
+// akhir fungsi komentar
+
 ?>
