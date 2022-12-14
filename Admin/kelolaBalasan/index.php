@@ -11,7 +11,7 @@ $nama = mysqli_fetch_assoc($namas);
 
 // pagination
 $JumlahDataPerHal = 5;
-$JumlahData = count(query("SELECT * FROM berita"));
+$JumlahData = count(query("SELECT * FROM balasan"));
 $JumlahHalaman = ceil($JumlahData / $JumlahDataPerHal);
 
 $HalSekarang = (isset($_GET["page"])) ? $_GET["page"] : 1;
@@ -20,7 +20,10 @@ $HalSekarang = (isset($_GET["page"])) ? $_GET["page"] : 1;
 $IndeksData = ($HalSekarang * $JumlahDataPerHal) - $JumlahDataPerHal;
 
 
-$berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
+$balasan = query("SELECT * FROM balasan LIMIT $IndeksData,$JumlahDataPerHal");
+foreach ($balasan as $b) {
+  $idBerita = $b['idBerita'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +33,7 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelola Berita</title>
+  <title>Kelola Balasan</title>
   <link rel="stylesheet" href="../bootstrap.css">
   <!-- fontstyle -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,56 +45,87 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
   <?php include("../Inc/header.php") ?>
   <nav class="navbar navbar-expand-sm navbar-light">
     <div class="container">
-      <span class="navbar-text fs-4">Kelola Berita</span>
+      <span class="navbar-text fs-4">Kelola Balasan</span>
 
       <ul class="breadcrumb fs-5 d-none d-md-flex">
         <li class="breadcrumb-item"><a href="../Dashboard">Beranda</a></li>
-        <li class="breadcrumb-item active">Kelola Berita</li>
+        <li class="breadcrumb-item"><a href="../kelolaKomentar">Kelola Komentar</a></li>
+        <li class="breadcrumb-item active">Kelola Balasan</li>
       </ul>
     </div>
   </nav>
 
   <div class="container mt-5 fs-5">
-    <div class="row mb-5">
+    <div class="row">
       <div class="col">
-        <a href="tambahBerita.php" type="button" class="btn btn-success mb-3 fs-5">Tambah +</a>
       </div>
       <div class="col">
-        <input autocomplete="off" type="search" class="form-control fs-5" id="search" placeholder="search"
+        <input autocomplete="off" type="search" class="form-control fs-5 mb-3" id="search" placeholder="search"
           name="search">
       </div>
       <table id="container" class="table table-striped table-bordered">
         <thead>
           <tr class="text-center">
             <th class="text-center">#</th>
-            <th>Judul</th>
-            <th class="d-none d-md-table-cell">Kategori</th>
-            <th colspan="2" class="text-center">Action</th>
+            <th class="d-none d-md-table-cell">Username</th>
+            <th class="d-none d-md-table-cell">Komentar</th>
+            <th>Balasan</th>
+            <th class="d-none d-md-table-cell">Tanggal</th>
+            <th>status</th>
+            <th>Hapus</th>
           </tr>
         </thead>
         <tbody>
           <?php $i = 1 ?>
-          <?php foreach ($berita as $u): ?>
-          <tr>
+          <?php foreach ($balasan as $b): ?>
+          <tr class="fs-6">
             <th scope="row" class="text-center">
               <?php echo $i + ($HalSekarang - 1) * $JumlahDataPerHal; ?>
             </th>
-            <td style=" max-width: calc(100vw - 500px);">
-              <?php echo $u["judul"]; ?>
-            </td>
+            <!-- username -->
             <td class="d-none d-md-table-cell">
-              <?php echo $u["kategori"]; ?>
+              <?php echo $b["username"]; ?>
             </td>
+            <!-- kahir username -->
+            <!-- komentar -->
+            <td class="text-center d-none d-md-table-cell">
+              <?php $idKomentar = $b['idKomentar']; ?>
+              <?php $judulKomentar = query("SELECT komentar FROM komentar WHERE id = '$idKomentar'"); ?>
+              <?php echo $judulKomentar[0]['komentar']; ?>
+            </td>
+            <!-- akhir komentar -->
+            <!-- balasan -->
+            <td>
+              <?php echo $b["balasan"]; ?>
+            </td>
+            <!-- akhir balasan -->
+            <!-- tanggal post -->
+            <td class="d-none d-md-table-cell">
+              <?php echo $b["tanggal"]; ?>
+            </td>
+            <!-- akhir tanggal post -->
+            <!-- status -->
+            <?php if ($b['status'] == 1): ?>
             <td class="text-center">
-              <a href="editBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-success py-1 ps-2 pe-1 opacity-75">
-                <ion-icon name="create" class="fs-5"></ion-icon>
+              <a href="tidakSetuju.php?id=<?php echo $b["id"]; ?>" class="btn btn-success py-1 ps-2 pe-2 opacity-75">
+                <ion-icon name="checkmark-circle" class="fs-5"></ion-icon>
               </a>
             </td>
+            <?php else: ?>
             <td class="text-center">
-              <a href="confirmBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
+              <a href="setuju.php?id=<?php echo $b["id"]; ?>" class="btn btn-danger py-1 ps-2 pe-2 opacity-75">
+                <ion-icon name="close-circle" class="fs-5"></ion-icon>
+              </a>
+            </td>
+            <?php endif; ?>
+            <!-- akhir status -->
+            <!-- hapus balasan -->
+            <td class="text-center">
+              <a href="confirmBalasan.php?id=<?php echo $b["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
                 <ion-icon name="trash" class="fs-5"></ion-icon>
               </a>
             </td>
+            <!-- akhir hapus balasan -->
           </tr>
           <?php $i++ ?>
           <?php endforeach; ?>
@@ -124,14 +158,13 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
       </ul>
     </div>
 
-
     <script src="../bootstrap.bundle.js"></script>
     <!-- script-ion-icons -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <!-- jquery -->
     <script src="../jquery-3.6.0.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

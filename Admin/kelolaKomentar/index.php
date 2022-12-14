@@ -57,6 +57,7 @@ foreach ($komentar as $k) {
   <div class="container mt-5 fs-5">
     <div class="row">
       <div class="col">
+        <a href="../KelolaBalasan" class="btn btn-primary">Kelola Balasan</a>
       </div>
       <div class="col">
         <input autocomplete="off" type="search" class="form-control fs-5 mb-3" id="search" placeholder="search"
@@ -64,7 +65,7 @@ foreach ($komentar as $k) {
       </div>
       <table id="container" class="table table-striped table-bordered">
         <thead>
-          <tr>
+          <tr class="text-center">
             <th class="text-center">#</th>
             <th class="d-none d-md-table-cell">Username</th>
             <th>Komentar</th>

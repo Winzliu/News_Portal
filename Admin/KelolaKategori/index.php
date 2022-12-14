@@ -61,7 +61,7 @@ $kategori = query("SELECT * FROM kategori LIMIT $IndeksData,$JumlahDataPerHal");
       </div>
       <table id="container" class="table table-striped table-bordered">
         <thead>
-          <tr>
+          <tr class="text-center">
             <th class="text-center">#</th>
             <th>Kategori</th>
             <th class="d-none d-md-table-cell">Tanggal Pembuatan</th>

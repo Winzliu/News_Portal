@@ -18,12 +18,21 @@ $b = mysqli_fetch_assoc($berita);
 $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
 // komentar
 $komens = mysqli_query($conn, "SELECT * FROM komentar WHERE idBerita = '$idBerita'");
+// reply
+$reply = mysqli_query($conn, "SELECT * FROM balasan WHERE idBerita = '$idBerita'");
 
 if (isset($_POST['submitKomentar'])) {
   if (komentar($_POST) > 0) {
     $_SESSION['submitKomentar'] = true;
   }
 }
+
+if (isset($_POST['balasan'])) {
+  if (balasan($_POST) > 0) {
+    $_SESSION['balasan'] = true;
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +107,7 @@ if (isset($_POST['submitKomentar'])) {
                 <img height="50px" width="50px" style="object-fit: cover;" class="rounded-circle"
                   src="../HalamanUtama/img/img-user/<?php echo $komen['gambar'] ?>" alt="">
               </div>
-              <div class="col-12 col-lg-10 ms-0 ms-lg-2">
+              <div class="col-12 col-lg-10 ms-0 ms-lg-2 mb-3">
                 <!-- username -->
                 <h5 class="fw-bolder">
                   <?php echo $komen['username']; ?>
@@ -113,6 +122,51 @@ if (isset($_POST['submitKomentar'])) {
                 <p>
                   <?php echo $komen['komentar']; ?>
                 </p>
+                <!-- reply -->
+                <?php foreach ($reply as $r): ?>
+                <?php if ($r['idKomentar'] == $komen['id']): ?>
+                <?php if ($r['status'] == 1): ?>
+                <div class="ms-5">
+                  <!-- username reply -->
+                  <h6 class="fw-bolder">
+                    <?php echo $r['username']; ?>
+                  </h6>
+                  <!-- tanggal reply -->
+                  <strong>
+                    <p style="font-size: 15px;">
+                      <?= $r['tanggal'] ?>
+                    </p>
+                  </strong>
+                  <!-- komentar reply -->
+                  <p style="font-size: 15px;">
+                    <?php echo $r['balasan']; ?>
+                  </p>
+                </div>
+                <?php endif; ?>
+                <?php endif; ?>
+                <?php endforeach; ?>
+                <!-- akhir reply -->
+                <!-- button balasan -->
+                <div class="w-100 text-end mb-3">
+                  <button class="btn btn-success" id="balasan">Balas</button>
+                </div>
+                <!-- akhir button balasan -->
+                <!-- form reply -->
+                <form action="" method="post" id="form-balasan" class="d-none">
+                  <!-- id komentar -->
+                  <input type="hidden" name="idKomentar" id="idKomentar" value="<?= $komen['id'] ?>">
+                  <!-- idberita -->
+                  <input type="hidden" name="idBerita" id="idBerita" value="<?= $idBerita ?>">
+                  <!-- idUser -->
+                  <input type="hidden" name="idUser" id="idUser" value="<?= $idUser ?>">
+                  <!-- username -->
+                  <input type="hidden" name="username" id="username" value="<?= $user['username'] ?>">
+                  <!-- balasan -->
+                  <input maxlength="100" autocomplete="off" class="form-control mb-3" type="text" name="isiBalasan"
+                    id="isiBalasan">
+                  <button name="balasan" type="submit" class="btn btn-primary">Kirim</button>
+                </form>
+                <!-- akhir form reply -->
               </div>
               <?php else: ?>
               <div></div>
@@ -215,6 +269,41 @@ if (isset($_POST['submitKomentar'])) {
   <?php unset($_SESSION['submitKomentar']); ?>
   <?php endif; ?>
   <?php endif; ?>
+
+  <!-- reply -->
+  <script>
+    let formBalasan = document.querySelectorAll('#form-balasan');
+    let button = document.querySelectorAll('#balasan');
+
+    button.forEach(el => {
+      el.addEventListener('click', function (e) {
+        e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.toggle('d-none')
+        if (e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.classList.contains('d-none')) {
+          e.target.innerHTML = "Balas";
+        } else {
+          e.target.innerHTML = "Tutup";
+        }
+      })
+    });
+  </script>
+
+  <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
+    di dalam session sukses  -->
+  <?php if (isset($_SESSION['balasan'])): ?>
+  <?php if ($_SESSION['balasan'] == true): ?>
+  <script>
+    swal("Balasan Berhasil Ditambahkan", "Silahkan Menunggu Admin Menyetujui", "success");
+  </script>
+  <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_SESSION['balasan']); ?>
+  <?php else: ?>
+  <script>
+    swal("Balasan Gagal Ditambahkan", "", "error");
+  </script>
+  <?php unset($_SESSION['balasan']); ?>
+  <?php endif; ?>
+  <?php endif; ?>
+
 </body>
 
 </html>

@@ -511,4 +511,22 @@ function komentar($data)
 }
 // akhir fungsi komentar
 
+// fungsi balasan
+function balasan($data)
+{
+  global $conn;
+
+  $username = mysqli_real_escape_string($conn, $data["username"]);
+  $idKomentar = mysqli_real_escape_string($conn, htmlspecialchars($data["idKomentar"]));
+  $idBerita = mysqli_real_escape_string($conn, $data["idBerita"]);
+  $balasan = mysqli_real_escape_string($conn, $data["isiBalasan"]);
+  $idUser = $data["idUser"];
+
+  // tambah password ke database
+  mysqli_query($conn, "INSERT INTO balasan VALUES('','$idBerita','$idKomentar','$idUser','$username','$balasan', current_timestamp(), 0 )");
+
+  return mysqli_affected_rows($conn);
+}
+// akhir fungsi balasan
+
 ?>
