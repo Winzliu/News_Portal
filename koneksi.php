@@ -186,7 +186,11 @@ function edit($edit, $idUser)
 
   $id = $idUser;
 
+  // singkronisasi dengan komentar
   mysqli_query($conn, "UPDATE komentar SET username = '$username', gambar = '$gambar' WHERE idUser = '$id'");
+
+  // singkronisasi dengan balasan
+  mysqli_query($conn, "UPDATE balasan SET username = '$username' WHERE idUser = '$id'");
 
   mysqli_query($conn, "UPDATE user SET  username = '$username', email = '$email', password = '$password',gambar = '$gambar' WHERE id = $id");
 
