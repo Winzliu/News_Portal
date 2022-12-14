@@ -45,7 +45,7 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
       <span class="navbar-text fs-4">Kelola User</span>
 
       <ul class="breadcrumb fs-5 d-none d-md-flex">
-        <li class="breadcrumb-item"><a href="../Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="../Dashboard">Beranda</a></li>
         <li class="breadcrumb-item active">Kelola User</li>
       </ul>
     </div>
@@ -54,7 +54,7 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
   <div class="container mt-5 fs-5">
     <div class="row">
       <div class="col">
-        <a href="tambahUser.php" type="button" class="btn btn-success mb-3 fs-5">Add +</a>
+        <a href="tambahUser.php" type="button" class="btn btn-success mb-3 fs-5">Tambah +</a>
       </div>
       <div class="col">
         <input autocomplete="off" type="search" class="form-control fs-5" id="search" placeholder="search"

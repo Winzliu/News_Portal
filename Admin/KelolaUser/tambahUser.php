@@ -37,7 +37,7 @@ if (isset($_POST["tambahuser"])) {
       <span class="navbar-text fs-4">Tambah User</span>
 
       <ul class="breadcrumb fs-5 d-none d-md-flex">
-        <li class="breadcrumb-item"><a href="../Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="../Dashboard">Beranda</a></li>
         <li class="breadcrumb-item"><a href="../KelolaUser">Kelola User</a></li>
         <li class="breadcrumb-item active">Tambah User</li>
       </ul>

@@ -132,7 +132,7 @@ if (isset($_POST['submitKomentar'])) {
         <input type="hidden" name="idBerita" id="idBerita" value="<?= $idBerita ?>">
         <div class="form-floating mb-3">
           <textarea name="komentar" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-            style="height: 200px"></textarea>
+            style="height: 200px" required></textarea>
           <label for="floatingTextarea2">Masukkan Komentar Anda : </label>
           <button type="submit" name="submitKomentar" class="btn btn-primary mt-3 mb-4 px-5 py-2 ms-3">Kirim</button>
         </div>

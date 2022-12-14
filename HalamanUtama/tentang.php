@@ -62,9 +62,10 @@ $kategori = query("SELECT * FROM kategori");
             class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
           <p class="fw-bolder fs-5">NIM : 221402037</p>
         </div>
-        <div id="imgDetail" style="z-index: 999999;"
+        <div id="imageDetail" style="z-index: 999999;"
           class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
-          <img width="600px" class=" m-auto rounded" src="img/img-developer/Alwin.jpeg" alt="">
+          <img onclick="window.event.cancelBubble = true" width="600px" class=" m-auto rounded"
+            src="img/img-developer/Alwin.jpeg" alt="">
           <button id="imgClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
         </div>
       </div>
@@ -83,9 +84,10 @@ $kategori = query("SELECT * FROM kategori");
             class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
           <p class="fw-bolder fs-5">NIM : 221402068</p>
         </div>
-        <div id="imgDetail" style="z-index: 999999;"
+        <div id="imageDetail" style="z-index: 999999;"
           class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
-          <img width="600px" class=" m-auto rounded" src="img/img-developer/najwa.jpg" alt="">
+          <img onclick="window.event.cancelBubble = true" width="600px" class=" m-auto rounded"
+            src="img/img-developer/najwa.jpg" alt="">
           <button id="imgClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
         </div>
       </div>
@@ -93,19 +95,22 @@ $kategori = query("SELECT * FROM kategori");
       <!-- naufal -->
       <div class="card shadow-sm" style="width: 23rem;">
         <button id="imageZoom" class="btn p-0">
-          <img style="object-fit: cover;" src="img/img-developer/1.jpg" height="250px" class="card-img-top" alt="...">
+          <img style="object-fit: cover;" src="img/img-developer/Naufal.jpg" height="250px" class="card-img-top"
+            alt="...">
         </button>
         <div class="card-body text-center">
-          <a target="_blank" href="https://www.instagram.com/winz.liu/"
-            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Alwin Liufandy</a>
+          <a target="_blank" href="https://www.instagram.com/naufalfauzanst/"
+            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Naufal Fauzan
+            Nasution</a>
           <br>
           <a target="_blank" href="https://www.instagram.com/c.ommandprompt/"
             class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
-          <p class="fw-bolder fs-5">NIM : 221402037</p>
+          <p class="fw-bolder fs-5">NIM : 221402121</p>
         </div>
         <div id="imageDetail" style="z-index: 999999;"
           class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
-          <img width="600px" class=" m-auto rounded" src="img/img-developer/1.jpg" alt="">
+          <img onclick="window.event.cancelBubble = true" width="600px" class=" m-auto rounded"
+            src="img/img-developer/Naufal.jpg" alt="">
           <button id="imageClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
         </div>
       </div>
@@ -125,9 +130,10 @@ $kategori = query("SELECT * FROM kategori");
             class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
           <p class="fw-bolder fs-5">NIM : 221402135</p>
         </div>
-        <div id="imgDetail" style="z-index: 999999;"
+        <div id="imageDetail" style="z-index: 999999;"
           class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
-          <img width="600px" class=" m-auto rounded" src="img/img-developer/Wahyu.jpg" alt="">
+          <img onclick="window.event.cancelBubble = true" width="600px" class=" m-auto rounded"
+            src="img/img-developer/Wahyu.jpg" alt="">
           <button id="imgClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
         </div>
       </div>
@@ -135,19 +141,23 @@ $kategori = query("SELECT * FROM kategori");
       <!-- fenaya -->
       <div class="card shadow-sm" style="width: 23rem;">
         <button id="imageZoom" class="btn p-0">
-          <img style="object-fit: cover;" src="img/img-developer/2.jpg" height="250px" class="card-img-top" alt="...">
+          <img style="object-fit: cover;" src="img/img-developer/Fenaya.jpg" height="250px" class="card-img-top"
+            alt="...">
         </button>
         <div class="card-body text-center">
-          <a target="_blank" href="https://www.instagram.com/winz.liu/"
-            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Alwin Liufandy</a>
+          <a target="_blank" href="https://www.instagram.com/fenayacecilly/"
+            class="btn btn-light rounded-3 text-black text-decoration-none card-text fw-bolder fs-5">Fenaya Cecilly
+            Nababan
+          </a>
           <br>
           <a target="_blank" href="https://www.instagram.com/c.ommandprompt/"
             class="text-black text-decoration-none card-text fw-bolder fs-5">COM : C</a>
-          <p class="fw-bolder fs-5">NIM : 221402037</p>
+          <p class="fw-bolder fs-5">NIM : 221402100</p>
         </div>
         <div id="imageDetail" style="z-index: 999999;"
           class="bg-dark bg-opacity-75 position-fixed top-0 bottom-0 start-0 end-0 d-none">
-          <img width="600px" class=" m-auto rounded" src="img/img-developer/2.jpg" alt="">
+          <img onclick="window.event.cancelBubble = true" width="600px" class=" m-auto rounded"
+            src="img/img-developer/Fenaya.jpg" alt="">
           <button id="imageClose" type="button" class="btn-close fs-4 m-4 btn-close-white" aria-label="Close"></button>
         </div>
       </div>
@@ -170,6 +180,7 @@ $kategori = query("SELECT * FROM kategori");
   <script src="header.js"></script>
   <script>
     let zoom = document.querySelectorAll('#imageZoom');
+    let background = document.querySelectorAll('#imageDetail')
     zoom.forEach(el => {
       el.addEventListener('click', function (e) {
         e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.classList.add('d-flex')
@@ -178,12 +189,24 @@ $kategori = query("SELECT * FROM kategori");
           e.target.parentElement.classList.remove('d-flex')
           e.target.parentElement.classList.add('d-none')
         })
-        e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.addEventListener('click', function (e) {
-          e.target.classList.remove('d-flex')
-          e.target.classList.add('d-none')
-        })
+        // e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.addEventListener('click', function (e) {
+        //   // e.target.classList.remove('d-flex')
+        //   // e.target.classList.add('d-none')
+        //   console.log(e.target)
+        // })
       })
     });
+    background.forEach(el => {
+      el.addEventListener('click', function (e) {
+        e.target.classList.remove('d-flex')
+        e.target.classList.add('d-none')
+      })
+      // e.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.addEventListener('click', function (e) {
+      //   // e.target.classList.remove('d-flex')
+      //   // e.target.classList.add('d-none')
+      //   console.log(e.target)
+      // })
+    })
   </script>
 </body>
 

@@ -45,7 +45,7 @@ $kategori = query("SELECT * FROM kategori");
       <span class="navbar-text fs-4">Tambah Berita</span>
 
       <ul class="breadcrumb fs-5 d-none d-md-flex">
-        <li class="breadcrumb-item"><a href="../Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="../Dashboard">Beranda</a></li>
         <li class="breadcrumb-item"><a href="../KelolaBerita">Kelola Berita</a></li>
         <li class="breadcrumb-item active">Tambah Berita</li>
       </ul>
@@ -76,7 +76,7 @@ $kategori = query("SELECT * FROM kategori");
           </div>
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="isiBerita" class="form-label">Isi Berita</label>
-            <textarea id="summernote" name="editordata" required></textarea>
+            <textarea placeholder="Isi Berita Disini" id="tiny" name="isiBerita"></textarea>
           </div>
           <div class="my-4 ms-4" style="max-width: 800px;">
             <label for="gambar-berita" class="form-label">gambar <span class="fst-italic">(Saran Resolusi : 1900px x
@@ -118,20 +118,19 @@ $kategori = query("SELECT * FROM kategori");
   <?php unset($_SESSION['tambahberita']); ?>
   <?php endif; ?>
   <?php endif; ?>
-  <!-- summernote -->
+  <!-- tinyMCE -->
+  <script src="https://cdn.tiny.cloud/1/fkny8lakkibesvbv59ae3w2w8d3d9vn18j36acymyng6i795/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
   <script>
-    $('#summernote').summernote({
-      placeholder: 'Isi Berita Disini',
-      tabsize: 2,
-      height: 120,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
       ]
     });
   </script>

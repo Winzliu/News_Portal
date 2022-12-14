@@ -132,11 +132,10 @@ function cekGambar($gambar)
     </script>";
     return $gambarLama;
   }
-
   // besar file
-  if ($ukuranFile > 1024 * 1024 * 3) {
+  if ($ukuranFile > 1024 * 1024 * 2 || $error == 1) {
     echo "<script>
-    alert('Ukuran File Yang di Upload Terlalu Besar (<3MB)');
+    alert('Ukuran File Yang di Upload Terlalu Besar (<2MB)');
     </script>";
     return $gambarLama;
   }
@@ -150,50 +149,7 @@ function cekGambar($gambar)
 }
 // akhir fungsi cek gambar
 
-// fungsi post gambar
-function postGambar()
-{
-  $namaFile = $_FILES["gambar-berita"]["name"];
-  $ukuranFile = $_FILES["gambar-berita"]["size"];
-  $error = $_FILES["gambar-berita"]["error"];
-  $tmpName = $_FILES["gambar-berita"]["tmp_name"];
 
-  /* user tidak memasukkan gamabar */
-  if ($error === 4) {
-    echo "<script>
-    alert('Upload Gambar Terlebih Dahulu');
-    </script>";
-    return false;
-  }
-
-  // user menupload file bukan gambar
-  $extValid = ['jpg', 'jpeg', 'png'];
-  $extName = explode('.', $namaFile);
-  $extName = strtolower(end($extName));
-
-  if (!in_array($extName, $extValid)) {
-    echo "<script>
-    alert('Extensi file yang di upload salah');
-    </script>";
-    return false;
-  }
-
-  // besar file
-  if ($ukuranFile > (1024 * 1024) || $error == 1) {
-    echo "<script>
-    alert('Ukuran File Yang di Upload Terlalu Besar Harus (<1MB)');
-    </script>";
-    return false;
-  }
-
-  // jika ada nama yang sama tetapi gambar beda generate nama gambar baru
-  $namaFileBaru = uniqid() . "." . $extName;
-
-  // jika valid
-  move_uploaded_file($tmpName, '../../HalamanUtama/img/img-berita/' . $namaFileBaru);
-  return $namaFileBaru;
-}
-// akhir fungsi post gambar
 
 
 // fungsi edit user
@@ -230,9 +186,10 @@ function edit($edit, $idUser)
 
   $id = $idUser;
 
+  mysqli_query($conn, "UPDATE komentar SET username = '$username', gambar = '$gambar' WHERE idUser = '$id'");
+
   mysqli_query($conn, "UPDATE user SET  username = '$username', email = '$email', password = '$password',gambar = '$gambar' WHERE id = $id");
 
-  mysqli_query($conn, "UPDATE komentar SET  gambar = '$gambar' WHERE idUser = '$idUser'");
 
   return mysqli_affected_rows($conn);
 }
@@ -297,7 +254,7 @@ function tambahberita($data)
   $admin = mysqli_fetch_assoc($admins)['username'];
   $judul = mysqli_real_escape_string($conn, htmlspecialchars($data["judul"]));
   $kategori = mysqli_real_escape_string($conn, strtolower($data["kategori"]));
-  $isiBerita = $data["editordata"];
+  $isiBerita = mysqli_real_escape_string($conn, $data["isiBerita"]);
   $gambar = mysqli_real_escape_string($conn, htmlspecialchars(postGambar()));
 
   if ($gambar == false) {
@@ -319,6 +276,52 @@ function tambahberita($data)
   return mysqli_affected_rows($conn);
 }
 // akhir fungsi tambah berita
+
+// // fungsi post gambar
+function postGambar()
+{
+  $namaFile = $_FILES["gambar-berita"]["name"];
+  $ukuranFile = $_FILES["gambar-berita"]["size"];
+  $error = $_FILES["gambar-berita"]["error"];
+  $tmpName = $_FILES["gambar-berita"]["tmp_name"];
+
+  /* user tidak memasukkan gamabar */
+  if ($error === 4) {
+    echo "<script>
+    alert('Upload Gambar Terlebih Dahulu');
+    </script>";
+    return false;
+  }
+
+  // user menupload file bukan gambar
+  $extValid = ['jpg', 'jpeg', 'png'];
+  $extName = explode('.', $namaFile);
+  $extName = strtolower(end($extName));
+
+  if (!in_array($extName, $extValid)) {
+    echo "<script>
+    alert('Extensi file yang di upload salah');
+    </script>";
+    return false;
+  }
+
+
+  // besar file
+  if ($ukuranFile > 1024 * 1024 * 2 || $error == 1) {
+    echo "<script>
+    alert('Ukuran File Yang di Upload Terlalu Besar Harus (<2MB)');
+    </script>";
+    return false;
+  }
+
+  // jika ada nama yang sama tetapi gambar beda generate nama gambar baru
+  $namaFileBaru = uniqid() . "." . $extName;
+
+  // jika valid
+  move_uploaded_file($tmpName, '../../HalamanUtama/img/img-berita/' . $namaFileBaru);
+  return $namaFileBaru;
+}
+// // akhir fungsi post gambar
 
 // fungsi lupapassword
 function lupaPassword($dataUser)
@@ -413,7 +416,6 @@ function editBerita($edit, $idUser)
   global $conn;
   $berita = query("SELECT * FROM berita WHERE id = $idUser");
   $judulLama = $berita[0]['judul'];
-  $isiBerita = $berita[0]['berita'];
   $idAdmin = $_SESSION['idAdmin'];
   $namas = mysqli_query($conn, "SELECT * FROM admin WHERE id = '$idAdmin'");
   $admin = mysqli_fetch_assoc($namas)['username'];
@@ -430,7 +432,7 @@ function editBerita($edit, $idUser)
   }
 
 
-  if ($_FILES["gambar"]['error'] === 4) {
+  if ($_FILES["gambar-edit-berita"]['error'] === 4) {
     $gambar = $gambarLama;
   } else {
     $gambar = cekGambarBerita($gambarLama);
@@ -438,7 +440,7 @@ function editBerita($edit, $idUser)
 
   $id = $idUser;
 
-  mysqli_query($conn, "UPDATE berita SET  judul = '$judul', kategori = '$kategori', berita = '$isiBerita',tanggal = current_timestamp(), oleh = '$admin' ,gambar = '$gambar' WHERE id = $id");
+  mysqli_query($conn, "UPDATE berita SET  judul = '$judul', kategori = '$kategori',gambar = '$gambar',oleh = '$admin' WHERE id = $id");
 
   return mysqli_affected_rows($conn);
 }
@@ -448,10 +450,10 @@ function editBerita($edit, $idUser)
 function cekGambarBerita($gambar)
 {
   $gambarLama = $gambar;
-  $namaFile = $_FILES["gambar"]["name"];
-  $ukuranFile = $_FILES["gambar"]["size"];
-  $error = $_FILES["gambar"]["error"];
-  $tmpName = $_FILES["gambar"]["tmp_name"];
+  $namaFile = $_FILES["gambar-edit-berita"]["name"];
+  $ukuranFile = $_FILES["gambar-edit-berita"]["size"];
+  $error = $_FILES["gambar-edit-berita"]["error"];
+  $tmpName = $_FILES["gambar-edit-berita"]["tmp_name"];
 
   /* user tidak memasukkan gamabar */
   if ($error === 4) {
@@ -473,10 +475,11 @@ function cekGambarBerita($gambar)
     return $gambarLama;
   }
 
+
   // besar file
-  if ($ukuranFile > 1024 * 1024 * 3) {
+  if ($ukuranFile > 1024 * 1024 * 2 || $error == 1) {
     echo "<script>
-    alert('Ukuran File Yang di Upload Terlalu Besar (<3MB)');
+    alert('Ukuran File Yang di Upload Terlalu Besar (<2MB)');
     </script>";
     return $gambarLama;
   }

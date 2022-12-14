@@ -82,7 +82,7 @@ if (isset($_POST["submit"])) {
               <label for="gambar" class="form-label">gambar <span class="fst-italic">(Saran Resolusi : 1900px x
                   755px)</span></label>
               <div class="input-group" style="max-width: 800px;">
-                <input type="file" name="gambar" id="gambar" class="form-control">
+                <input type="file" name="gambar-edit-berita" id="gambar" class="form-control">
               </div>
             </div>
             <input type="hidden" name="gambarLama" id="gambarLama" value="<?php echo $gambar; ?>">

@@ -131,7 +131,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         <ul class="list-group list-group-flush">
           <?php foreach ($beritaBaru as $baru): ?>
           <a href="../HalamanDetail/index.php?id=<?= $baru['id'] ?>" style="text-decoration: none;">
-            <li style="height: 45px;" class="list-group-item btn btn-light fw-bolder fs-5">
+            <li style="height: 45px; overflow: hidden;" class="list-group-item btn btn-light fw-bolder fs-5">
               <?php echo $baru['judul'] ?>
             </li>
           </a>

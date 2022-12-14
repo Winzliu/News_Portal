@@ -45,7 +45,7 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
       <span class="navbar-text fs-4">Kelola Berita</span>
 
       <ul class="breadcrumb fs-5 d-none d-md-flex">
-        <li class="breadcrumb-item"><a href="../Dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="../Dashboard">Beranda</a></li>
         <li class="breadcrumb-item active">Kelola Berita</li>
       </ul>
     </div>
@@ -54,7 +54,7 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
   <div class="container mt-5 fs-5">
     <div class="row mb-5">
       <div class="col">
-        <a href="tambahBerita.php" type="button" class="btn btn-success mb-3 fs-5">Add +</a>
+        <a href="tambahBerita.php" type="button" class="btn btn-success mb-3 fs-5">Tambah +</a>
       </div>
       <div class="col">
         <input autocomplete="off" type="search" class="form-control fs-5" id="search" placeholder="search"
@@ -65,6 +65,7 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
           <tr>
             <th class="text-center">#</th>
             <th>Judul</th>
+            <th class="d-none d-md-table-cell">Kategori</th>
             <th colspan="2" class="text-center">Action</th>
           </tr>
         </thead>
@@ -77,6 +78,9 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
             </th>
             <td style=" max-width: calc(100vw - 500px);">
               <?php echo $u["judul"]; ?>
+            </td>
+            <td class="d-none d-md-table-cell">
+              <?php echo $u["kategori"]; ?>
             </td>
             <td class="text-center">
               <a href="editBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-success py-1 ps-2 pe-1 opacity-75">
