@@ -65,14 +65,14 @@ foreach ($komentar as $k) {
       </div>
       <table id="container" class="table table-striped table-bordered">
         <thead>
-          <tr class="text-center">
+          <tr>
             <th class="text-center">#</th>
-            <th class="d-none d-md-table-cell">Username</th>
-            <th>Komentar</th>
-            <th>Judul</th>
-            <th class="d-none d-md-table-cell">Tanggal</th>
-            <th>status</th>
-            <th>Hapus</th>
+            <th class="d-none d-md-table-cell text-center">Username</th>
+            <th class="text-center">Komentar</th>
+            <th class="text-center">Judul</th>
+            <th class="d-none d-md-table-cell text-center">Tanggal</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Hapus</th>
           </tr>
         </thead>
         <tbody>

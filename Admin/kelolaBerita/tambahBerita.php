@@ -59,11 +59,13 @@ $kategori = query("SELECT * FROM kategori");
         <li class="list-group-item">
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="judul" class="form-label">Judul</label>
-            <input name="judul" autocomplete="off" type="text" class="form-control fs-6" id="judul" required>
+            <input name="judul" autocomplete="off" type="text" class="form-control fs-6" id="Judul" required
+              oninvalid="kosong(judul)">
+            <p class="text-danger fst-italic fs-6 my-1"></p>
           </div>
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="kategori" class="form-label">Kategori</label>
-            <select name="kategori" id="kategori" class="form-select" aria-label="Default select example" required>
+            <select name="kategori" id="kategori" class="form-select" aria-label="Default select example">
               <option selected>
                 << Pilih Kategori>>
               </option>
@@ -76,13 +78,15 @@ $kategori = query("SELECT * FROM kategori");
           </div>
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="isiBerita" class="form-label">Isi Berita</label>
-            <textarea placeholder="Isi Berita Disini" id="tiny" name="isiBerita"></textarea>
+            <textarea placeholder="Isi Berita Disini" id="Berita" name="isiBerita"></textarea>
           </div>
           <div class="my-4 ms-4" style="max-width: 800px;">
             <label for="gambar-berita" class="form-label">gambar <span class="fst-italic">(Saran Resolusi : 1900px x
                 755px)</span></label>
             <div class="input-group" style="max-width: 800px;">
-              <input type="file" name="gambar-berita" id="gambar-berita" class="form-control" required>
+              <input type="file" name="gambar-berita" id="Gambar" class="form-control w-100" required
+                oninvalid="kosong(Gambar)">
+              <p class="text-danger fst-italic fs-6 my-1"></p>
             </div>
           </div>
           <button name="tambahberita" class="btn btn-primary ms-5 my-4" type="submit">Tambah</button>
@@ -92,6 +96,19 @@ $kategori = query("SELECT * FROM kategori");
   </form>
   <!-- bootstrap -->
   <script src="../bootstrap.bundle.js"></script>
+
+  <!-- form validation -->
+  <script>
+    let Judul = document.getElementById('Judul');
+    let Gambar = document.getElementById('Gambar')
+    function kosong(e) {
+      e.nextSibling.nextSibling.innerHTML = e.getAttribute('id') + ' Tidak Boleh Kosong';
+      e.addEventListener('input', function () {
+        e.nextSibling.nextSibling.innerHTML = ' ';
+      })
+    }
+  </script>
+  <!-- akhir foem validation -->
 
 
 
@@ -123,7 +140,7 @@ $kategori = query("SELECT * FROM kategori");
     referrerpolicy="origin"></script>
   <script>
     tinymce.init({
-      selector: 'textarea',
+      selector: '#Berita',
       plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
       toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
       tinycomments_mode: 'embedded',

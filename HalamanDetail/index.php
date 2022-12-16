@@ -163,7 +163,8 @@ if (isset($_POST['balasan'])) {
                   <input type="hidden" name="username" id="username" value="<?= $user['username'] ?>">
                   <!-- balasan -->
                   <input maxlength="100" autocomplete="off" class="form-control mb-3" type="text" name="isiBalasan"
-                    id="isiBalasan">
+                    id="isiBalasan" required oninvalid="this.setCustomValidity('Balasan Tidak Boleh Kosong')"
+                    oninput="this.setCustomValidity('')">
                   <button name="balasan" type="submit" class="btn btn-primary">Kirim</button>
                 </form>
                 <!-- akhir form reply -->
@@ -186,7 +187,8 @@ if (isset($_POST['balasan'])) {
         <input type="hidden" name="idBerita" id="idBerita" value="<?= $idBerita ?>">
         <div class="form-floating mb-3">
           <textarea name="komentar" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-            style="height: 200px" required></textarea>
+            style="height: 200px" required oninvalid="this.setCustomValidity('Komentar Tidak Boleh Kosong')"
+            oninput="this.setCustomValidity('')"></textarea>
           <label for="floatingTextarea2">Masukkan Komentar Anda : </label>
           <button type="submit" name="submitKomentar" class="btn btn-primary mt-3 mb-4 px-5 py-2 ms-3">Kirim</button>
         </div>

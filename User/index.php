@@ -69,6 +69,7 @@ if (isset($_POST["submit"])) {
       <h4 class="text-start fs-5 fw-bolder m-auto" style="max-width: 600px;">Ubah Email :</h4>
       <div class="input-group my-4">
         <input style="max-width: 600px;" name="email" type="email" class="form-control m-auto" required
+          oninvalid="this.setCustomValidity('Email Tidak Boleh Kosong & Email Harus Diisi Sesuai Kriteria &#34; email@email.com &#34;')"
           value="<?php echo $email; ?>">
       </div>
       <!-- akhir file email -->
@@ -76,14 +77,16 @@ if (isset($_POST["submit"])) {
       <h4 class=" text-start fs-5 fw-bolder m-auto" style="max-width: 600px;">Ubah Username :</h4>
       <div class="input-group my-4">
         <input style="max-width: 600px;" name="username" type="text" class="form-control m-auto" required
-          value="<?php echo $username; ?>">
+          value="<?php echo $username; ?>" oninvalid="this.setCustomValidity('Nama Tidak Boleh Kosong')">
       </div>
       <!-- akhir file username -->
       <!-- file password -->
       <h4 class="text-start fs-5 fw-bolder m-auto" style="max-width: 600px;">Ubah Password :</h4>
       <div class="input-group my-4 position-relative m-auto" style="max-width: 600px;">
         <input minlength="8" style="max-width: 600px;" name="password" type="password"
-          class="form-control m-auto rounded-end" id="password" required value="<?php echo $password; ?>">
+          class="form-control m-auto rounded-end" id="password" required value="<?php echo $password; ?>"
+          oninvalid="this.setCustomValidity('Password Harus Berisi Minimal 8 Karakter')"
+          oninput="this.setCustomValidity('')">
         <button onclick="showPassword()" type="button"
           class="btn bg-white border border-start-0 position-absolute end-0"><ion-icon name="eye-outline"
             id="icon"></ion-icon></button>

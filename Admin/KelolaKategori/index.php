@@ -57,14 +57,15 @@ $kategori = query("SELECT * FROM kategori LIMIT $IndeksData,$JumlahDataPerHal");
         <a href="tambahKategori.php" type="button" class="btn btn-success mb-3 fs-5">Tambah +</a>
       </div>
       <div class="col">
-        <input type="search" class="form-control fs-5" id="search" placeholder="search" name="search">
+        <input type="search" class="form-control fs-5" id="search" placeholder="search" name="search"
+          autocomplete="off">
       </div>
       <table id="container" class="table table-striped table-bordered">
         <thead>
           <tr class="text-center">
             <th class="text-center">#</th>
             <th>Kategori</th>
-            <th class="d-none d-md-table-cell">Tanggal Pembuatan</th>
+            <th class="d-none d-md-table-cell text-center">Tanggal Pembuatan</th>
             <th colspan="2" class="text-center">Aksi</th>
           </tr>
         </thead>

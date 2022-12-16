@@ -21,8 +21,8 @@ $kategori = query("SELECT * FROM kategori LIMIT $IndeksData,$JumlahDataPerHal");
     <tr>
       <th class="text-center">#</th>
       <th>Kategori</th>
-      <th class="d-none d-md-table-cell">Tanggal Pembuatan</th>
-      <th colspan="2" class="test-center">Aksi</th>
+      <th class="d-none d-md-table-cell text-center">Tanggal Pembuatan</th>
+      <th colspan="2" class="text-center">Aksi</th>
     </tr>
   </thead>
   <tbody>

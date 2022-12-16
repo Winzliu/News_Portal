@@ -50,7 +50,8 @@ if (isset($_POST["submit"])) {
       <h4 class="text-start fs-5 fw-bolder m-auto" style="max-width: 600px;">Ubah Nama Kategori :</h4>
       <div class="input-group my-4">
         <input style="max-width: 600px;" name="namaKategori" type="text" class="form-control m-auto" required
-          value="<?php echo $namaKategori; ?>">
+          value="<?php echo $namaKategori; ?>" oninvalid="this.setCustomValidity('Kategori Tidak Boleh Kosong')"
+          oninput="this.setCustomValidity(' ')">
       </div>
       <!-- akhir file namna kategori -->
       <!-- submit -->

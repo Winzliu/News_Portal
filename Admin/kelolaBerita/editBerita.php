@@ -63,7 +63,8 @@ if (isset($_POST["submit"])) {
             <div class="my-3 ms-4" style="max-width: 800px;">
               <label for="judul" class="form-label">Judul</label>
               <input value="<?php echo $judul; ?>" name=" judul" autocomplete="off" type="text"
-                class="form-control fs-6" id="judul" required>
+                class="form-control fs-6" id="Judul" required oninvalid="kosong(Judul)">
+              <p class="text-danger fst-italic fs-6 my-1"></p>
             </div>
             <div class="my-3 ms-4" style="max-width: 800px;">
               <label for="kategori" class="form-label">Kategori</label>
@@ -99,6 +100,18 @@ if (isset($_POST["submit"])) {
   <!-- script-ion-icons -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- form validation -->
+  <script>
+    let Judul = document.getElementById('Judul');
+    function kosong(e) {
+      e.nextSibling.nextSibling.innerHTML = e.getAttribute('id') + ' Tidak Boleh Kosong';
+      e.addEventListener('input', function () {
+        e.nextSibling.nextSibling.innerHTML = ' ';
+      })
+    }
+  </script>
+  <!-- akhir foem validation -->
 
 
   <!-- sweetalert -->

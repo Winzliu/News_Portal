@@ -51,8 +51,9 @@ if (isset($_POST["tambahkategori"])) {
         <li class="list-group-item">
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="namaKategori" class="form-label">Nama Kategori</label>
-            <input name="namaKategori" autocomplete="off" type="text" class="form-control fs-6" id="namaKategori"
-              required>
+            <input name="namaKategori" autocomplete="off" type="text" class="form-control fs-6" id="Kategori" required
+              oninvalid="kosong(Kategori)">
+            <p class="text-danger fst-italic fs-6 my-1"></p>
           </div>
           <button name="tambahkategori" class="btn btn-primary ms-5 my-4" type="submit">Tambah</button>
         </li>
@@ -61,6 +62,18 @@ if (isset($_POST["tambahkategori"])) {
   </form>
   <!-- bootstrap -->
   <script src="../bootstrap.bundle.js"></script>
+
+  <!-- form validation -->
+  <script>
+    let Kategori = document.getElementById('Kategori')
+    function kosong(e) {
+      e.nextSibling.nextSibling.innerHTML = e.getAttribute('id') + ' Tidak Boleh Kosong';
+      e.addEventListener('input', function () {
+        e.nextSibling.nextSibling.innerHTML = ' ';
+      })
+    }
+  </script>
+  <!-- akhir foem validation -->
 
   <!-- sweetalert -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

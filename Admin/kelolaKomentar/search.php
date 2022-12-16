@@ -22,11 +22,12 @@ $komentar = query("SELECT * FROM komentar WHERE komentar LIKE '%$keyword%' or us
   <thead>
     <tr>
       <th class="text-center">#</th>
-      <th class="d-none d-md-table-cell">Username</th>
-      <th>Komentar</th>
-      <th class="d-none d-md-table-cell">Tanggal</th>
-      <th>status</th>
-      <th>Hapus</th>
+      <th class="d-none d-md-table-cell text-center">Username</th>
+      <th class="text-center">Komentar</th>
+      <th class="text-center">Judul</th>
+      <th class="d-none d-md-table-cell text-center">Tanggal</th>
+      <th class="text-center">Status</th>
+      <th class="text-center">Hapus</th>
     </tr>
   </thead>
   <tbody>
@@ -41,6 +42,11 @@ $komentar = query("SELECT * FROM komentar WHERE komentar LIKE '%$keyword%' or us
       </td>
       <td>
         <?php echo $k["komentar"]; ?>
+      </td>
+      <td class="text-center">
+        <?php $idBerita = $k['idBerita']; ?>
+        <?php $judulBerita = query("SELECT judul FROM berita WHERE id = '$idBerita'"); ?>
+        <?php echo $judulBerita[0]['judul']; ?>
       </td>
       <td class="d-none d-md-table-cell">
         <?php echo $k["tanggalPost"]; ?>

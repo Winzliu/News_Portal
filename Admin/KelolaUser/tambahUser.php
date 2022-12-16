@@ -51,17 +51,23 @@ if (isset($_POST["tambahuser"])) {
         <li class="list-group-item">
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="email" class="form-label">Email</label>
-            <input name="email" autocomplete="off" type="email" class="form-control fs-6" id="email" required>
+            <input name="email" autocomplete="off" type="email" class="form-control fs-6" id="Email" required
+              oninvalid="kosong(Email)">
+            <p class="text-danger fst-italic fs-6 my-1"></p>
           </div>
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="username" class="form-label">Username</label>
-            <input name="username" autocomplete="off" type="text" class="form-control fs-6" id="username" required>
+            <input name="username" autocomplete="off" type="text" class="form-control fs-6" id="Username" required
+              oninvalid="kosong(Username)">
+            <p class="text-danger fst-italic fs-6 my-1"></p>
           </div>
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="password" class="form-label">Password</label>
             <div class=" position-relative m-auto" style="max-width: 800px;">
               <input minlength="8" style="max-width: 800px;" name="password" type="password"
-                class="form-control m-auto rounded-end" id="password" required>
+                class="form-control m-auto rounded-end" id="password" required
+                oninvalid="this.setCustomValidity('Password Harus Berisi Minimal 8 Karakter')"
+                oninput="this.setCustomValidity('')">
               <button onclick="showPassword()" type="button"
                 class="btn bg-white border border-start-0 position-absolute top-0 rounded-0 rounded-end end-0"><ion-icon
                   name="eye-outline" id="icon"></ion-icon></button>
@@ -71,7 +77,9 @@ if (isset($_POST["tambahuser"])) {
             <label for="password2" class="form-label">Konfirmasi Password</label>
             <div class=" position-relative m-auto" style="max-width: 800px;">
               <input minlength="8" style="max-width: 800px;" name="password2" type="password"
-                class="form-control m-auto rounded-end" id="password2" required>
+                class="form-control m-auto rounded-end" id="password2" required
+                oninvalid="this.setCustomValidity('Konfirmasi Password Harus Berisi Minimal 8 Karakter')"
+                oninput="this.setCustomValidity('')">
               <button onclick="showPassword2()" type="button"
                 class="btn bg-white border border-start-0 position-absolute top-0 rounded-0 rounded-end end-0"><ion-icon
                   name="eye-outline" id="icon2"></ion-icon></button>
@@ -84,6 +92,23 @@ if (isset($_POST["tambahuser"])) {
   </form>
   <!-- bootstrap -->
   <script src="../bootstrap.bundle.js"></script>
+
+  <!-- form validation -->
+  <script>
+    let Username = document.getElementById('Username');
+    let Email = document.getElementById('Email')
+    function kosong(e) {
+      if (e == Email) {
+        e.nextSibling.nextSibling.innerHTML = e.getAttribute('id') + ' Tidak Boleh Kosong & Email Harus Diisi Sesuai Kriteria &#34 email@email.com &#34';
+      } else {
+        e.nextSibling.nextSibling.innerHTML = e.getAttribute('id') + ' Tidak Boleh Kosong';
+      }
+      e.addEventListener('input', function () {
+        e.nextSibling.nextSibling.innerHTML = ' ';
+      })
+    }
+  </script>
+  <!-- akhir foem validation -->
 
   <!-- sweetalert -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

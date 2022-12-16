@@ -64,8 +64,8 @@ $berita = query("SELECT * FROM berita LIMIT $IndeksData,$JumlahDataPerHal");
         <thead>
           <tr class="text-center">
             <th class="text-center">#</th>
-            <th>Judul</th>
-            <th class="d-none d-md-table-cell">Kategori</th>
+            <th class="text-center">Judul</th>
+            <th class="d-none d-md-table-cell text-center">Kategori</th>
             <th colspan="2" class="text-center">Action</th>
           </tr>
         </thead>
