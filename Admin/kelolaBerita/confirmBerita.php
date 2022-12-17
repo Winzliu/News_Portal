@@ -29,7 +29,7 @@ $namaBerita = query("SELECT * FROM berita WHERE id = $id")[0];
       <div class="card-body">
         <h2 class="card-title text-center">Hapus Berita</h2>
         <hr>
-        <h4 class="card-subtitle my-5 text-center">Yakin Ingin Menghapus Berita <?= $namaBerita['judul'] ?> ?
+        <h4 class="card-subtitle my-5 text-center">Yakin Ingin Menghapus Berita "<?= $namaBerita['judul'] ?>" ?
         </h4>
         <div class="text-center">
           <a href="index.php" class="btn btn-secondary me-5 fs-4">Batal</a>

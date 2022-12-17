@@ -1,10 +1,14 @@
 <?php
 session_start();
-if (!isset($_SESSION["login"])) {
-  header("Location: ../login");
-}
 // koneksi ke database
 include '../koneksi.php';
+// user
+$idUser = $_SESSION["id"];
+$users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
+$user = mysqli_fetch_assoc($users);
+if (!isset($_SESSION["login"]) || !isset($user["id"])) {
+  header("Location: ../login");
+}
 $kategori = query("SELECT * FROM kategori");
 
 $id = $_SESSION["id"];
@@ -88,8 +92,8 @@ if (isset($_POST["submit"])) {
           oninvalid="this.setCustomValidity('Password Harus Berisi Minimal 8 Karakter')"
           oninput="this.setCustomValidity('')">
         <button onclick="showPassword()" type="button"
-          class="btn bg-white border border-start-0 position-absolute end-0"><ion-icon name="eye-outline"
-            id="icon"></ion-icon></button>
+          class="btn bg-white border border-start-0 position-absolute end-0" style="z-index: 99;"><ion-icon
+            name="eye-outline" id="icon"></ion-icon></button>
       </div>
       <p class="fst-italic text-danger ">Password Panjang Dikarenakan Password Tersimpan Secara Enkripsi</p>
       <!-- akhir file password -->

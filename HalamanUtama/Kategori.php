@@ -1,9 +1,13 @@
 <?php
 session_start();
-if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
+require '../koneksi.php';
+// user
+$idUser = $_SESSION["id"];
+$users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
+$user = mysqli_fetch_assoc($users);
+if (!isset($_SESSION["login"]) || !isset($user["id"])) {
   header("Location: ../login");
 }
-require '../koneksi.php';
 // kategori
 $kategoriHal = $_GET["kategori"];
 $kategori = query("SELECT * FROM kategori");

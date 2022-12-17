@@ -51,7 +51,7 @@ if (isset($_POST["submit"])) {
       <div class="input-group my-4">
         <input style="max-width: 600px;" name="namaKategori" type="text" class="form-control m-auto" required
           value="<?php echo $namaKategori; ?>" oninvalid="this.setCustomValidity('Kategori Tidak Boleh Kosong')"
-          oninput="this.setCustomValidity(' ')">
+          oninput="this.setCustomValidity('')">
       </div>
       <!-- akhir file namna kategori -->
       <!-- submit -->

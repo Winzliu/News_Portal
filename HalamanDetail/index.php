@@ -1,15 +1,15 @@
 <?php
 session_start();
-if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
-  header("Location: ../login");
-}
 require '../koneksi.php';
-// kategori
-$kategori = query("SELECT * FROM kategori");
 // user
 $idUser = $_SESSION["id"];
 $users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
 $user = mysqli_fetch_assoc($users);
+if (!isset($_SESSION["login"]) || !isset($user["id"])) {
+  header("Location: ../login");
+}
+// kategori
+$kategori = query("SELECT * FROM kategori");
 // berita
 $idBerita = $_GET['id'];
 $berita = mysqli_query($conn, "SELECT * FROM berita WHERE id = '$idBerita'");
