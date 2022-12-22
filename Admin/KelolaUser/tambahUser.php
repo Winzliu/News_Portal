@@ -49,18 +49,23 @@ if (isset($_POST["tambahuser"])) {
       <ul class="list-group container">
         <li class="list-group-item bg-light fw-bolder fs-3 text-center" aria-current="true">Tambah User</li>
         <li class="list-group-item">
+          <!-- email -->
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="email" class="form-label">Email</label>
             <input name="email" autocomplete="off" type="email" class="form-control fs-6" id="Email" required
               oninvalid="kosong(Email)">
             <p class="text-danger fst-italic fs-6 my-1"></p>
           </div>
+          <!-- akhir email -->
+          <!-- username -->
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="username" class="form-label">Username</label>
             <input name="username" autocomplete="off" type="text" class="form-control fs-6" id="Username" required
               oninvalid="kosong(Username)">
             <p class="text-danger fst-italic fs-6 my-1"></p>
           </div>
+          <!-- akhir Username -->
+          <!-- password -->
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="password" class="form-label">Password</label>
             <div class=" position-relative m-auto" style="max-width: 800px;">
@@ -73,6 +78,8 @@ if (isset($_POST["tambahuser"])) {
                   name="eye-outline" id="icon"></ion-icon></button>
             </div>
           </div>
+          <!-- akhir password -->
+          <!-- konfirmasi password -->
           <div class="my-3 ms-4" style="max-width: 800px;">
             <label for="password2" class="form-label">Konfirmasi Password</label>
             <div class=" position-relative m-auto" style="max-width: 800px;">
@@ -85,6 +92,7 @@ if (isset($_POST["tambahuser"])) {
                   name="eye-outline" id="icon2"></ion-icon></button>
             </div>
           </div>
+          <!-- akhir konfirmasi passwoord -->
           <button name="tambahuser" class="btn btn-primary ms-5 my-4" type="submit">Tambah</button>
         </li>
       </ul>

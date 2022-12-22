@@ -27,6 +27,7 @@ function registrasi($data)
 
   $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
 
+  // fungsi untuk menentukan apakah username sudah ada atau belum
   if (mysqli_fetch_assoc($result)) {
     echo "<script>
     alert('username telah dipakai');
@@ -113,7 +114,7 @@ function cekGambar($gambar)
   $error = $_FILES["gambar"]["error"];
   $tmpName = $_FILES["gambar"]["tmp_name"];
 
-  /* user tidak memasukkan gamabar */
+  /* user tidak memasukkan gambar */
   if ($error === 4) {
     echo "<script>
     alert('Upload Gambar Terlebih Dahulu');
@@ -121,6 +122,7 @@ function cekGambar($gambar)
     return $gambarLama;
   }
 
+  // alwin.png
   // user menupload file bukan gambar
   $extValid = ['jpg', 'jpeg', 'png'];
   $extName = explode('.', $namaFile);
@@ -192,6 +194,7 @@ function edit($edit, $idUser)
   // singkronisasi dengan balasan
   mysqli_query($conn, "UPDATE balasan SET username = '$username' WHERE idUser = '$id'");
 
+  // upload ke database
   mysqli_query($conn, "UPDATE user SET  username = '$username', email = '$email', password = '$password',gambar = '$gambar' WHERE id = $id");
 
 
@@ -274,7 +277,7 @@ function tambahberita($data)
     return false;
   }
 
-  // tambah password ke database
+  // tambah berita ke database
   mysqli_query($conn, "INSERT INTO berita VALUES('','$judul', '$kategori', '$isiBerita', current_timestamp(), '$gambar', '$admin')");
 
   return mysqli_affected_rows($conn);

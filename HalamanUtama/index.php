@@ -62,7 +62,8 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
           <h3>
             <?php echo $beritaBaru[0]['judul']; ?>
           </h3>
-          <a href="../HalamanDetail/index.php?id=<?php echo $beritaBaru['0']['id']; ?>" class="btn btn-primary">Baca
+          <a href="../HalamanDetail/Berita/index.php?id=<?php echo $beritaBaru['0']['id']; ?>"
+            class="btn btn-primary">Baca
             Lebih
             Lanjut</a>
         </div>
@@ -75,7 +76,8 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
           <h3>
             <?php echo $beritaBaru[$i]['judul']; ?>
           </h3>
-          <a href="../HalamanDetail/index.php?id=<?php echo $beritaBaru[$i]['id']; ?>" class="btn btn-primary">Baca
+          <a href="../HalamanDetail/Berita/index.php?id=<?php echo $beritaBaru[$i]['id']; ?>"
+            class="btn btn-primary">Baca
             Lebih
             Lanjut</a>
         </div>
@@ -164,7 +166,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
           <h5 class="card-title fw-bolder fs-2">
             <?php echo $b['judul']; ?>
           </h5>
-          <div class="card-text fw-lighter" style="height: 50px;overflow: hidden;">
+          <div class="card-text fw-lighter" style="height: 55px;overflow: hidden;">
             <?php echo $b['berita']; ?>
           </div>
           <p class="card-text mt-3"><small class="text-muted">Dipublis pada
@@ -172,7 +174,8 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
                 <?php echo $b['tanggal']; ?>
               </strong>
             </small></p>
-          <a href="../HalamanDetail/index.php?id=<?php echo $b['id']; ?>" class="btn btn-primary">Baca Lebih Lanjut</a>
+          <a href="../HalamanDetail/Berita/index.php?id=<?php echo $b['id']; ?>" class="btn btn-primary">Baca Lebih
+            Lanjut</a>
         </div>
       </div>
       <?php endforeach; ?>
@@ -231,7 +234,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         </div>
         <ul class="list-group list-group-flush">
           <?php foreach ($beritaBaru as $baru): ?>
-          <a href="../HalamanDetail/index.php?id=<?= $baru['id'] ?>" style="text-decoration: none;">
+          <a href="../HalamanDetail/Berita/index.php?id=<?= $baru['id'] ?>" style="text-decoration: none;">
             <li style="height: 45px;overflow: hidden;" class="list-group-item btn btn-light fw-bolder fs-5">
               <?php echo $baru['judul'] ?>
             </li>

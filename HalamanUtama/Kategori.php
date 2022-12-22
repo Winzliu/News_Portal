@@ -23,7 +23,7 @@ $IndeksData = ($HalSekarang * $JumlahDataPerHal) - $JumlahDataPerHal;
 
 
 $berita = query("SELECT * FROM berita WHERE kategori='$kategoriHal' LIMIT $IndeksData,$JumlahDataPerHal");
-// berita pada carousel
+// berita
 $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
 ?>
 
@@ -75,7 +75,8 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
                 <?php echo $b['tanggal']; ?>
               </strong>
             </small></p>
-          <a href="../HalamanDetail/index.php?id=<?php echo $b['id']; ?>" class="btn btn-primary">Baca Lebih Lanjut</a>
+          <a href="../HalamanDetail/Berita/index.php?id=<?php echo $b['id']; ?>" class="btn btn-primary">Baca Lebih
+            Lanjut</a>
         </div>
       </div>
       <?php endforeach; ?>
@@ -134,7 +135,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         </div>
         <ul class="list-group list-group-flush">
           <?php foreach ($beritaBaru as $baru): ?>
-          <a href="../HalamanDetail/index.php?id=<?= $baru['id'] ?>" style="text-decoration: none;">
+          <a href="../HalamanDetail/Berita/index.php?id=<?= $baru['id'] ?>" style="text-decoration: none;">
             <li style="height: 45px; overflow: hidden;" class="list-group-item btn btn-light fw-bolder fs-5">
               <?php echo $baru['judul'] ?>
             </li>
