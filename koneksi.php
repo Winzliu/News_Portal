@@ -20,7 +20,7 @@ function registrasi($data)
   global $conn;
 
   $email = mysqli_real_escape_string($conn, strtolower($data["email"]));
-  $username = mysqli_real_escape_string($conn, strtolower(htmlspecialchars($data["username"])));
+  $username = mysqli_real_escape_string($conn, htmlspecialchars($data["username"]));
   $password = mysqli_real_escape_string($conn, $data["password"]);
   $konfirmasiPass = mysqli_real_escape_string($conn, $data["password2"]);
   $gambar = "Logo-User.png";
@@ -58,7 +58,7 @@ function registrasi($data)
 function login($dataUser)
 {
   global $conn;
-  $username = htmlspecialchars(strtolower($dataUser["username"]));
+  $username = htmlspecialchars($dataUser["username"]);
   $password = $dataUser["password"];
   $user = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
 
@@ -167,7 +167,7 @@ function edit($edit, $idUser)
   $gambarLama = $edit["gambarLama"];
   $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
 
-  if (mysqli_fetch_assoc($result) && $username != $usernameLama) {
+  if (mysqli_fetch_assoc($result) && strtolower($username) != strtolower($usernameLama)) {
     echo "<script>
     alert('username telah dipakai');
     </script>";
@@ -402,7 +402,7 @@ function editUser($edit, $idUser)
   $email = mysqli_real_escape_string($conn, $edit["email"]);
   $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
 
-  if (mysqli_fetch_assoc($result) && $username != $usernameLama) {
+  if (mysqli_fetch_assoc($result) && strtolower($username) != strtolower($usernameLama)) {
     echo "<script>
     alert('username telah dipakai');
     </script>";

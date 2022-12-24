@@ -64,8 +64,8 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
         <thead>
           <tr class="text-center">
             <th class="text-center">#</th>
-            <th>Username</th>
-            <th class="d-none d-md-table-cell">Email</th>
+            <th class="text-center">Username</th>
+            <th class="d-none d-md-table-cell text-center">Email</th>
             <th colspan="2" class="text-center">Aksi</th>
           </tr>
         </thead>

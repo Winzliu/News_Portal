@@ -20,7 +20,7 @@ $berita = query("SELECT * FROM berita WHERE judul LIKE '%$keyword%' LIMIT $Indek
 
 <table id="container" class="table table-striped table-bordered">
   <thead>
-    <tr>
+    <tr class="text-center">
       <th class="text-center">#</th>
       <th class="text-center">Judul</th>
       <th class="d-none d-md-table-cell text-center">Kategori</th>
@@ -37,13 +37,16 @@ $berita = query("SELECT * FROM berita WHERE judul LIKE '%$keyword%' LIMIT $Indek
       <td style=" max-width: calc(100vw - 500px);">
         <?php echo $u["judul"]; ?>
       </td>
+      <td class="d-none d-md-table-cell">
+        <?php echo $u["kategori"]; ?>
+      </td>
       <td class="text-center">
-        <a class="btn btn-success py-1 ps-2 pe-1 opacity-75">
+        <a href="editBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-success py-1 ps-2 pe-1 opacity-75">
           <ion-icon name="create" class="fs-5"></ion-icon>
         </a>
       </td>
       <td class="text-center">
-        <a href="hapusBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
+        <a href="confirmBerita.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
           <ion-icon name="trash" class="fs-5"></ion-icon>
         </a>
       </td>

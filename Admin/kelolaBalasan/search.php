@@ -23,7 +23,7 @@ $balasan = query("SELECT * FROM balasan WHERE balasan LIKE '%$keyword%' or usern
     <tr class="text-center">
       <th class="text-center">#</th>
       <th class="d-none d-md-table-cell">Username</th>
-      <th>Komentar</th>
+      <th class="d-none d-md-table-cell">Komentar</th>
       <th>Balasan</th>
       <th class="d-none d-md-table-cell">Tanggal</th>
       <th>status</th>
@@ -43,7 +43,7 @@ $balasan = query("SELECT * FROM balasan WHERE balasan LIKE '%$keyword%' or usern
       </td>
       <!-- kahir username -->
       <!-- komentar -->
-      <td class="text-center">
+      <td class="text-center d-none d-md-table-cell">
         <?php $idKomentar = $b['idKomentar']; ?>
         <?php $judulKomentar = query("SELECT komentar FROM komentar WHERE id = '$idKomentar'"); ?>
         <?php echo $judulKomentar[0]['komentar']; ?>

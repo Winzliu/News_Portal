@@ -20,7 +20,7 @@ $kategori = query("SELECT * FROM kategori WHERE namaKategori LIKE '%$keyword%' L
 
 <table id="container" class="table table-striped table-bordered">
   <thead>
-    <tr>
+    <tr class="text-center">
       <th class="text-center">#</th>
       <th>Kategori</th>
       <th class="d-none d-md-table-cell text-center">Tanggal Pembuatan</th>
@@ -32,7 +32,7 @@ $kategori = query("SELECT * FROM kategori WHERE namaKategori LIKE '%$keyword%' L
     <?php foreach ($kategori as $k): ?>
     <tr>
       <th scope="row" class="text-center">
-        <?php echo $i + ($HalSekarang - 1) * 5; ?>
+        <?php echo $i + ($HalSekarang - 1) * $JumlahDataPerHal; ?>
       </th>
       <td>
         <?php echo $k["namaKategori"]; ?>
@@ -41,12 +41,12 @@ $kategori = query("SELECT * FROM kategori WHERE namaKategori LIKE '%$keyword%' L
         <?php echo $k["tanggalPosting"]; ?>
       </td>
       <td class="text-center">
-        <a class="btn btn-success py-1 ps-2 pe-1 opacity-75">
+        <a href="editKategori.php?id=<?php echo $k["id"]; ?>" class="btn btn-success py-1 ps-2 pe-1 opacity-75">
           <ion-icon name="create" class="fs-5"></ion-icon>
         </a>
       </td>
       <td class="text-center">
-        <a href="hapusKategori.php?id=<?php echo $k["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
+        <a href="confirmKategori.php?id=<?php echo $k["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
           <ion-icon name="trash" class="fs-5"></ion-icon>
         </a>
       </td>

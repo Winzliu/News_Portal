@@ -16,12 +16,12 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
 
 ?>
 
-<table class="table table-striped table-bordered">
+<table id="container" class="table table-striped table-bordered">
   <thead>
-    <tr>
+    <tr class="text-center">
       <th class="text-center">#</th>
-      <th>Username</th>
-      <th class="d-none d-md-table-cell">Email</th>
+      <th class="text-center">Username</th>
+      <th class="d-none d-md-table-cell text-center">Email</th>
       <th colspan="2" class="text-center">Aksi</th>
     </tr>
   </thead>
@@ -30,21 +30,21 @@ $user = query("SELECT * FROM user LIMIT $IndeksData,$JumlahDataPerHal");
     <?php foreach ($user as $u): ?>
     <tr>
       <th scope="row" class="text-center">
-        <?php echo $i + ($HalSekarang - 1) * 5; ?>
+        <?php echo $i + ($HalSekarang - 1) * $JumlahDataPerHal; ?>
       </th>
       <td>
         <?php echo $u["username"]; ?>
       </td>
-      <td>
+      <td class="d-none d-md-table-cell">
         <?php echo $u["email"]; ?>
       </td>
       <td class="text-center">
-        <a class="btn btn-success py-1 ps-2 pe-1 opacity-75">
+        <a href="editUser.php?id=<?php echo $u["id"]; ?>" class="btn btn-success py-1 ps-2 pe-1 opacity-75">
           <ion-icon name="create" class="fs-5"></ion-icon>
         </a>
       </td>
       <td class="text-center">
-        <a href="hapusUser.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
+        <a href="confirmUser.php?id=<?php echo $u["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
           <ion-icon name="trash" class="fs-5"></ion-icon>
         </a>
       </td>
