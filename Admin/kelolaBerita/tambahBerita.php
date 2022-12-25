@@ -135,8 +135,11 @@ $kategori = query("SELECT * FROM kategori");
   <?php unset($_SESSION['tambahberita']); ?>
   <?php endif; ?>
   <?php endif; ?>
+
+
   <!-- tinyMCE -->
-  <script src="https://cdn.tiny.cloud/1/fkny8lakkibesvbv59ae3w2w8d3d9vn18j36acymyng6i795/tinymce/6/tinymce.min.js"
+  <script script
+    src="https://cdn.tiny.cloud/1/fkny8lakkibesvbv59ae3w2w8d3d9vn18j36acymyng6i795/tinymce/6/tinymce.min.js"
     referrerpolicy="origin"></script>
   <script>
     const upload_image = (blobInfo, progress) => new Promise((resolve, reject) => {

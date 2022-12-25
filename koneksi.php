@@ -451,11 +451,12 @@ function editBerita($edit, $idUser)
   $namas = mysqli_query($conn, "SELECT * FROM admin WHERE id = '$idAdmin'");
   $admin = mysqli_fetch_assoc($namas)['username'];
   $judul = mysqli_real_escape_string($conn, $edit["judul"]);
+  $isiBerita = mysqli_real_escape_string($conn, $edit["berita"]);
   $kategori = mysqli_real_escape_string($conn, htmlspecialchars($edit["kategori"]));
   $gambarLama = $edit["gambarLama"];
   $result = mysqli_query($conn, "SELECT judul FROM berita WHERE judul = '$judul'");
 
-  if (mysqli_fetch_assoc($result) && $judul != $judulLama) {
+  if (mysqli_fetch_assoc($result) && strtolower($judul) != strtolower($judulLama)) {
     echo "<script>
     alert('judul telah dipakai');
     </script>";
@@ -471,7 +472,7 @@ function editBerita($edit, $idUser)
 
   $id = $idUser;
 
-  mysqli_query($conn, "UPDATE berita SET  judul = '$judul', kategori = '$kategori',gambar = '$gambar',oleh = '$admin' WHERE id = $id");
+  mysqli_query($conn, "UPDATE berita SET  judul = '$judul', kategori = '$kategori',berita = '$isiBerita' ,gambar = '$gambar',oleh = '$admin' WHERE id = $id");
 
   return mysqli_affected_rows($conn);
 }

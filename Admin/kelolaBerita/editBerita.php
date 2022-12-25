@@ -61,9 +61,9 @@ if (isset($_POST["submit"])) {
           <li class="list-group-item bg-light fw-bolder fs-3  text-center" aria-current="true">Edit Berita</li>
           <li class="list-group-item">
             <div class="my-3 ms-4" style="max-width: 800px;">
-              <label for="judul" class="form-label">Judul</label>
-              <input value="<?php echo $judul; ?>" name=" judul" autocomplete="off" type="text"
-                class="form-control fs-6" id="Judul" required oninvalid="kosong(Judul)">
+              <label for="Judul" class="form-label">Judul</label>
+              <input value="<?php echo $judul; ?>" name="judul" autocomplete="off" type="text" class="form-control fs-6"
+                id="Judul" required oninvalid="kosong(Judul)">
               <p class="text-danger fst-italic fs-6 my-1"></p>
             </div>
             <div class="my-3 ms-4" style="max-width: 800px;">
@@ -78,6 +78,11 @@ if (isset($_POST["submit"])) {
                 </option>
                 <?php endforeach; ?>
               </select>
+            </div>
+            <div class="my-3 ms-4" style="max-width: 800px;">
+              <label for="Berita" class="form-label">Berita</label>
+              <textarea name="berita" class="form-control fs-6" id="Beritas"><?php echo $isiBerita; ?></textarea>
+              <p class="text-danger fst-italic fs-6 my-1"></p>
             </div>
             <div class="my-4 ms-4" style="max-width: 800px;">
               <label for="gambar" class="form-label">gambar <span class="fst-italic">(Saran Resolusi : 1900px x
@@ -152,21 +157,61 @@ if (isset($_POST["submit"])) {
         }
       }
   </script>
-  <!-- summernote -->
+
+  <!-- tinyMCE -->
+  <script script
+    src="https://cdn.tiny.cloud/1/fkny8lakkibesvbv59ae3w2w8d3d9vn18j36acymyng6i795/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
   <script>
-    $('#summernote').summernote({
-      placeholder: 'Isi Berita Disini',
-      tabsize: 2,
-      height: 120,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ]
+    const upload_image = (blobInfo, progress) => new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.withCredentials = false;
+      xhr.open('POST', 'upload.php');
+
+      xhr.upload.onprogress = (e) => {
+        progress(e.loaded / e.total * 100);
+      };
+
+      xhr.onload = () => {
+        if (xhr.status === 403) {
+          reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
+          return;
+        }
+
+        if (xhr.status < 200 || xhr.status >= 300) {
+          reject('HTTP Error: ' + xhr.status);
+          return;
+        }
+
+        const json = JSON.parse(xhr.responseText);
+
+        if (!json || typeof json.location != 'string') {
+          reject('Invalid JSON: ' + xhr.responseText);
+          return;
+        }
+
+        resolve(json.location);
+      };
+
+      xhr.onerror = () => {
+        reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+      };
+
+      const formData = new FormData();
+      formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+      xhr.send(formData);
+    });
+
+
+    tinymce.init({
+      selector: 'textarea#Beritas',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect typography inlinecss',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | link | code | ',
+      /* enable title field in the Image dialog*/
+      image_title: true,
+      images_upload_url: 'upload.php',
+      images_upload_handler: upload_image
     });
   </script>
 </body>
