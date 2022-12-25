@@ -48,7 +48,7 @@ $balasan = query("SELECT * FROM balasan LIMIT $IndeksData,$JumlahDataPerHal");
       </td>
       <!-- akhir komentar -->
       <!-- balasan -->
-      <td>
+      <td class="text-center">
         <?php echo $b["balasan"]; ?>
       </td>
       <!-- akhir balasan -->

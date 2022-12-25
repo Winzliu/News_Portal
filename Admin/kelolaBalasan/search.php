@@ -50,7 +50,7 @@ $balasan = query("SELECT * FROM balasan WHERE balasan LIKE '%$keyword%' or usern
       </td>
       <!-- akhir komentar -->
       <!-- balasan -->
-      <td>
+      <td class="text-center">
         <?php echo $b["balasan"]; ?>
       </td>
       <!-- akhir balasan -->

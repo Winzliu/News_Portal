@@ -26,11 +26,19 @@ function registrasi($data)
   $gambar = "Logo-User.png";
 
   $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+  $resultEmail = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
 
   // fungsi untuk menentukan apakah username sudah ada atau belum
   if (mysqli_fetch_assoc($result)) {
     echo "<script>
     alert('username telah dipakai');
+    </script>";
+    return false;
+  }
+  // fungsi untuk menentukan apakah email sudah ada atau belum
+  if (mysqli_fetch_assoc($resultEmail)) {
+    echo "<script>
+    alert('email telah dipakai');
     </script>";
     return false;
   }
@@ -161,15 +169,23 @@ function edit($edit, $idUser)
   $user = query("SELECT * FROM user WHERE id = $idUser");
   $usernameLama = $user[0]['username'];
   $passwordLama = $user[0]["password"];
+  $emailLama = $user[0]["email"];
   $email = mysqli_real_escape_string($conn, $edit["email"]);
   $username = mysqli_real_escape_string($conn, htmlspecialchars($edit["username"]));
   $password = mysqli_real_escape_string($conn, $edit["password"]);
   $gambarLama = $edit["gambarLama"];
   $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+  $resultEmail = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
 
   if (mysqli_fetch_assoc($result) && strtolower($username) != strtolower($usernameLama)) {
     echo "<script>
     alert('username telah dipakai');
+    </script>";
+    return false;
+  }
+  if (mysqli_fetch_assoc($resultEmail) && strtolower($email) != strtolower($emailLama)) {
+    echo "<script>
+    alert('email telah dipakai');
     </script>";
     return false;
   }
@@ -334,16 +350,16 @@ function postGambar()
 function lupaPassword($dataUser)
 {
   global $conn;
-  $username = htmlspecialchars($dataUser["username"]);
+  $email = htmlspecialchars($dataUser["email"]);
   $password = mysqli_real_escape_string($conn, $dataUser["passwordBaru"]);
   $konfirmasiPass = mysqli_real_escape_string($conn, $dataUser["kpasswordBaru"]);
-  $Users = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+  $Users = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
 
 
-  // ada gk username yang sama
+  // ada gk email yang sama
   if (mysqli_num_rows($Users) === 0) {
     echo "<script>
-  alert('konfirmasi Username salah');
+  alert('konfirmasi Email salah');
   </script>";
     return 0;
   }
@@ -360,7 +376,7 @@ function lupaPassword($dataUser)
 
   // tambah password ke database
   mysqli_query($conn, "UPDATE user SET password ='$password' WHERE 
-  username ='$username'");
+  email ='$email'");
 
   return mysqli_affected_rows($conn);
 }
@@ -398,13 +414,21 @@ function editUser($edit, $idUser)
   $usernameLama = $user[0]['username'];
   $password = $user[0]['password'];
   $gambar = $user[0]['gambar'];
+  $emailLama = $user[0]['email'];
   $username = mysqli_real_escape_string($conn, $edit["username"]);
   $email = mysqli_real_escape_string($conn, $edit["email"]);
   $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+  $resultEmail = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
 
   if (mysqli_fetch_assoc($result) && strtolower($username) != strtolower($usernameLama)) {
     echo "<script>
     alert('username telah dipakai');
+    </script>";
+    return false;
+  }
+  if (mysqli_fetch_assoc($resultEmail) && strtolower($email) != strtolower($emailLama)) {
+    echo "<script>
+    alert('email telah dipakai');
     </script>";
     return false;
   }

@@ -7,6 +7,8 @@ $id = $_GET["id"];
 
 require "../../koneksi.php";
 
+mysqli_query($conn, "DELETE FROM balasan WHERE idKomentar = $id");
+
 $hapus = mysqli_query($conn, "DELETE FROM komentar WHERE id = $id");
 
 if (mysqli_affected_rows($conn) > 0) {
