@@ -1,0 +1,4 @@
+Username : winzliu
+Password : 12345678
+
+dalam pencopyan database, pastikan nama database sama dengan nama file sql nya("tubes_kelompok2c")

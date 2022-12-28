@@ -42,7 +42,7 @@ $balasan = mysqli_query($conn, "SELECT * FROM balasan");
   <hr class="w-50 m-auto bg-dark" style="height: 3px" />
   <div class="container d-flex flex-wrap mt-5">
     <!-- kategori -->
-    <button class="mt-5 rounded-5 border-0 m-auto bg-light shadow-lg" style="min-width: 250px; height: 150px">
+    <button class="mt-5 rounded-3 border-0 m-auto bg-light shadow-lg" style="min-width: 250px; height: 150px">
       <a href="../KelolaKategori/" class="row text-decoration-none text-dark">
         <div class="card-body col-7 m-auto">
           <h3 class="card-title fw-bolder mb-2">Kategori</h3>
@@ -59,7 +59,7 @@ $balasan = mysqli_query($conn, "SELECT * FROM balasan");
     </button>
     <!-- akhir kategori -->
     <!-- berita -->
-    <button class="mt-5 rounded-5 border-0 m-auto bg-light shadow-lg" style="min-width: 250px; height: 150px">
+    <button class="mt-5 rounded-3 border-0 m-auto bg-light shadow-lg" style="min-width: 250px; height: 150px">
       <a href="../kelolaBerita/" class="row text-decoration-none text-dark">
         <div class="card-body col-7 m-auto">
           <h3 class="card-title fw-bolder mb-2">Berita</h3>
@@ -76,7 +76,7 @@ $balasan = mysqli_query($conn, "SELECT * FROM balasan");
     </button>
     <!-- akhri berita -->
     <!-- komentar -->
-    <button class="mt-5 rounded-5 border-0 m-auto bg-light shadow-lg" style="min-width: 250px; height: 150px">
+    <button class="mt-5 rounded-3 border-0 m-auto bg-light shadow-lg" style="min-width: 250px; height: 150px">
       <a href="../kelolaKomentar/" class="row ms-1 text-decoration-none text-dark">
         <div class="card-body col-7 m-auto">
           <h3 class="card-title fw-bolder mb-2">Komentar</h3>
@@ -93,7 +93,7 @@ $balasan = mysqli_query($conn, "SELECT * FROM balasan");
     </button>
     <!-- akhir komentar -->
     <!-- user -->
-    <button class="my-5 rounded-5 border-0 m-auto bg-light shadow-lg" style="min-width: 250px; height: 150px">
+    <button class="my-5 rounded-3 border-0 m-auto bg-light shadow-lg" style="min-width: 250px; height: 150px">
       <a href="../KelolaUser/" class="row text-decoration-none text-dark">
         <div class="card-body col-7 m-auto">
           <h3 class="card-title fw-bolder mb-2">User</h3>
