@@ -6,6 +6,18 @@ if (!isset($_SESSION["loginAdmin"]) || !isset($_SESSION['idAdmin'])) {
 $id = $_GET["id"];
 
 require "../../koneksi.php";
+$kategoris = mysqli_query($conn, "SELECT namaKategori FROM kategori WHERE id = $id");
+$kategori = mysqli_fetch_assoc($kategoris);
+$beritas = mysqli_query($conn, "SELECT id FROM berita WHERE kategori = '$kategori[namaKategori]'");
+
+mysqli_query($conn, "DELETE FROM berita WHERE kategori = '$kategori[namaKategori]'");
+
+if ($beritas->num_rows > 0) {
+  $idBerita = mysqli_fetch_assoc($beritas);
+  mysqli_query($conn, "DELETE FROM komentar WHERE idBerita = '$idBerita[id]'");
+  mysqli_query($conn, "DELETE FROM balasan WHERE idBerita = '$idBerita[id]'");
+}
+
 
 $hapus = mysqli_query($conn, "DELETE FROM kategori WHERE id = $id");
 
@@ -32,23 +44,23 @@ if (mysqli_affected_rows($conn) > 0) {
   <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
     di dalam session sukses  -->
   <?php if (isset($_SESSION['hapus'])): ?>
-  <script>
-    swal("Kategori Berhasil Dihapus", "", "success");
-    setTimeout(function () {
-      document.location = "index.php";
-    }, 2500)
-  </script>
-  <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
-  <?php unset($_SESSION['hapus']); ?>
-  <?php else: ?>
-  <script>
-    swal("Kategori Gagal Dihapus", "", "error");
-    setTimeout(function () {
-      document.location = "index.php";
-    }, 2500)
-  </script>
-  <?php unset($_SESSION['hapus']); ?>
-  <?php endif; ?>
+    <script>
+      swal("Kategori Berhasil Dihapus", "", "success");
+      setTimeout(function () {
+        document.location = "index.php";
+      }, 2500)
+    </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+    <?php unset($_SESSION['hapus']); ?>
+    <?php else: ?>
+    <script>
+      swal("Kategori Gagal Dihapus", "", "error");
+      setTimeout(function () {
+        document.location = "index.php";
+      }, 2500)
+    </script>
+    <?php unset($_SESSION['hapus']); ?>
+    <?php endif; ?>
 </body>
 
 </html>

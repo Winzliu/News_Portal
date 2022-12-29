@@ -7,6 +7,8 @@ $id = $_GET["id"];
 
 require "../../koneksi.php";
 
+mysqli_query($conn, "DELETE FROM komentar WHERE idBerita = $id");
+mysqli_query($conn, "DELETE FROM balasan WHERE idBerita = $id");
 $hapus = mysqli_query($conn, "DELETE FROM berita WHERE id = $id");
 
 if (mysqli_affected_rows($conn) > 0) {
@@ -32,23 +34,23 @@ if (mysqli_affected_rows($conn) > 0) {
   <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
     di dalam session sukses  -->
   <?php if (isset($_SESSION['hapus'])): ?>
-  <script>
-    swal("Berita Berhasil Dihapus", "", "success");
-    setTimeout(function () {
-      document.location = "index.php";
-    }, 2500)
-  </script>
-  <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
-  <?php unset($_SESSION['hapus']); ?>
-  <?php else: ?>
-  <script>
-    swal("Berita Gagal Dihapus", "", "error");
-    setTimeout(function () {
-      document.location = "index.php";
-    }, 2500)
-  </script>
-  <?php unset($_SESSION['hapus']); ?>
-  <?php endif; ?>
+    <script>
+      swal("Berita Berhasil Dihapus", "", "success");
+      setTimeout(function () {
+        document.location = "index.php";
+      }, 2500)
+    </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+    <?php unset($_SESSION['hapus']); ?>
+    <?php else: ?>
+    <script>
+      swal("Berita Gagal Dihapus", "", "error");
+      setTimeout(function () {
+        document.location = "index.php";
+      }, 2500)
+    </script>
+    <?php unset($_SESSION['hapus']); ?>
+    <?php endif; ?>
 </body>
 
 </html>
