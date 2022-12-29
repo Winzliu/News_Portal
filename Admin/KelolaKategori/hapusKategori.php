@@ -7,18 +7,19 @@ $id = $_GET["id"];
 
 require "../../koneksi.php";
 $kategoris = mysqli_query($conn, "SELECT namaKategori FROM kategori WHERE id = $id");
-$kategori = mysqli_fetch_assoc($kategoris);
-$beritas = mysqli_query($conn, "SELECT id FROM berita WHERE kategori = '$kategori[namaKategori]'");
+$kategori = mysqli_fetch_assoc($kategoris)['namaKategori'];
 
-mysqli_query($conn, "DELETE FROM berita WHERE kategori = '$kategori[namaKategori]'");
+$beritas = query("SELECT * FROM berita WHERE kategori = '$kategori'");
 
-if ($beritas->num_rows > 0) {
-  $idBerita = mysqli_fetch_assoc($beritas);
-  mysqli_query($conn, "DELETE FROM komentar WHERE idBerita = '$idBerita[id]'");
-  mysqli_query($conn, "DELETE FROM balasan WHERE idBerita = '$idBerita[id]'");
+if (!empty($beritas)) {
+  foreach ($beritas as $berita) {
+    mysqli_query($conn, "DELETE FROM balasan WHERE idBerita = $berita[id]");
+    mysqli_query($conn, "DELETE FROM komentar WHERE idBerita = $berita[id]");
+  }
+
 }
 
-
+mysqli_query($conn, "DELETE FROM berita WHERE kategori = '$kategori'");
 $hapus = mysqli_query($conn, "DELETE FROM kategori WHERE id = $id");
 
 if (mysqli_affected_rows($conn) > 0) {
