@@ -73,10 +73,10 @@ if (isset($_POST["submit"])) {
                   <?php echo $kategoriLama; ?>
                 </option>
                 <?php foreach ($kategori as $k): ?>
-                <option value="<?php echo $k['namaKategori']; ?>">
-                  <?php echo $k['namaKategori']; ?>
-                </option>
-                <?php endforeach; ?>
+                  <option value="<?php echo $k['namaKategori']; ?>">
+                    <?php echo $k['namaKategori']; ?>
+                  </option>
+                  <?php endforeach; ?>
               </select>
             </div>
             <div class="my-3 ms-4" style="max-width: 800px;">
@@ -125,22 +125,22 @@ if (isset($_POST["submit"])) {
   <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
     di dalam session sukses  -->
   <?php if (isset($_POST['submit'])): ?>
-  <?php if (isset($_SESSION['edit'])): ?>
-  <script>
-    swal("Berhasil Mengubah Berita", "", "success");
-    setTimeout(function () {
-      document.location = "index.php";
-    }, 2500)
-  </script>
-  <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
-  <?php unset($_SESSION['edit']); ?>
-  <?php else: ?>
-  <script>
-    swal("Gagal Mengubah Berita", "", "error");
-      <?php unset($_SESSION[' edit ']); ?>
-  </script>
-  <?php endif; ?>
-  <?php endif; ?>
+    <?php if (isset($_SESSION['edit'])): ?>
+      <script>
+        swal("Berhasil Mengubah Berita", "", "success");
+        setTimeout(function () {
+          document.location = "index.php";
+        }, 2500)
+      </script>
+      <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+      <?php unset($_SESSION['edit']); ?>
+      <?php else: ?>
+      <script>
+        swal("Gagal Mengubah Berita", "", "error");
+          <?php unset($_SESSION[' edit ']); ?>
+      </script>
+      <?php endif; ?>
+    <?php endif; ?>
 
 
   <!-- showpassword -->
@@ -206,7 +206,7 @@ if (isset($_POST["submit"])) {
 
     tinymce.init({
       selector: 'textarea#Beritas',
-      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect typography inlinecss',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
       toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | link | code | ',
       /* enable title field in the Image dialog*/
       image_title: true,

@@ -1,18 +1,20 @@
 <header class="fw-bolder fs-5">
   <!-- navbar -->
-  <nav class="navbar bg-light">
+  <nav class="navbar bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="../Dashboard" style="font-family: 'Merienda One', cursive;"><img width="50px"
-          style="margin-top: -17px;" src="../../img/Logo.png" alt=""> <span class="fs-2 p-2">ToSee News</span></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-        aria-controls="offcanvasNavbar">
-        <span class="navbar-toggler-icon"></span>
+      <a class="navbar-brand navbar-dark" href="../Dashboard" style="font-family: 'Merienda One', cursive;"><img
+          width="50px" style="margin-top: -17px" src="../../img/Logo-Putih.png" alt=""> <span class="fs-2 p-2">ToSee
+          News</span></a>
+      <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon navbar-dark"></span>
       </button>
-      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas offcanvas-start navbar-dark bg-dark" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title fw-bolder fs-4" id="offcanvasNavbarLabel"
+          <h5 class="offcanvas-title fw-bolder fs-4 text-white" id="offcanvasNavbarLabel"
             style="font-family: 'Merienda One', cursive;">
-            <img style="margin-top: -12px;" width="50px" src="../../img/Logo.png" alt=""> ToSee
+            <img style="margin-top: -12px;" width="50px" src="../../img/Logo-Putih.png" alt=""> ToSee
             News
           </h5>
 
@@ -37,7 +39,7 @@
             </li>
           </ul>
         </div>
-        <h5 class="text-center my-5">
+        <h5 class="text-center my-5 text-white">
           Halo <span class="fw-bolder ">
             <?php echo $nama["username"]; ?>
           </span> (Admin)
@@ -47,18 +49,18 @@
           data-bs-target="#exampleModal">
           Logout
         </button>
-
-        <!-- Modal -->
       </div>
+
+      <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
+          <div class="modal-content bg-dark">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>
+              <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Logout</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Yakin Ingin Logout?
+              <p class="text-white">Yakin Ingin Logout?</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

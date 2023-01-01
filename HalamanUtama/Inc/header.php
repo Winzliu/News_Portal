@@ -21,11 +21,11 @@
             </a>
             <ul class="dropdown-menu">
               <?php foreach ($kategori as $row): ?>
-              <li><a class="dropdown-item"
-                  href="../HalamanUtama/kategori.php?kategori=<?php echo $row["namaKategori"]; ?>">
-                  <?php echo $row["namaKategori"]; ?>
-                </a></li>
-              <?php endforeach; ?>
+                <li><a class="dropdown-item"
+                    href="../HalamanUtama/kategori.php?kategori=<?php echo $row["namaKategori"]; ?>">
+                    <?php echo $row["namaKategori"]; ?>
+                  </a></li>
+                <?php endforeach; ?>
             </ul>
           </li>
         </ul>

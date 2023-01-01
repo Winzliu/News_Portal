@@ -60,9 +60,10 @@ $kategori = query("SELECT * FROM kategori LIMIT $IndeksData,$JumlahDataPerHal");
         <input type="search" class="form-control fs-5" id="search" placeholder="search" name="search"
           autocomplete="off">
       </div>
-      <table id="container" class="table table-striped table-bordered">
+      <table id="container" class="table table-striped table-bordered rounded-3 overflow-hidden"
+        style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
         <thead>
-          <tr class="text-center">
+          <tr class="text-center bg-dark text-white">
             <th class="text-center">#</th>
             <th>Kategori</th>
             <th class="d-none d-md-table-cell text-center">Tanggal Pembuatan</th>
@@ -72,55 +73,55 @@ $kategori = query("SELECT * FROM kategori LIMIT $IndeksData,$JumlahDataPerHal");
         <tbody>
           <?php $i = 1 ?>
           <?php foreach ($kategori as $k): ?>
-          <tr>
-            <th scope="row" class="text-center">
-              <?php echo $i + ($HalSekarang - 1) * $JumlahDataPerHal; ?>
-            </th>
-            <td>
-              <?php echo $k["namaKategori"]; ?>
-            </td>
-            <td class="d-none d-md-table-cell">
-              <?php echo $k["tanggalPosting"]; ?>
-            </td>
-            <td class="text-center">
-              <a href="editKategori.php?id=<?php echo $k["id"]; ?>" class="btn btn-success py-1 ps-2 pe-1 opacity-75">
-                <ion-icon name="create" class="fs-5"></ion-icon>
-              </a>
-            </td>
-            <td class="text-center">
-              <a href="confirmKategori.php?id=<?php echo $k["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
-                <ion-icon name="trash" class="fs-5"></ion-icon>
-              </a>
-            </td>
-          </tr>
-          <?php $i++ ?>
-          <?php endforeach; ?>
+            <tr>
+              <th scope="row" class="text-center">
+                <?php echo $i + ($HalSekarang - 1) * $JumlahDataPerHal; ?>
+              </th>
+              <td>
+                <?php echo $k["namaKategori"]; ?>
+              </td>
+              <td class="d-none d-md-table-cell">
+                <?php echo $k["tanggalPosting"]; ?>
+              </td>
+              <td class="text-center">
+                <a href="editKategori.php?id=<?php echo $k["id"]; ?>" class="btn btn-success py-1 ps-2 pe-1 opacity-75">
+                  <ion-icon name="create" class="fs-5"></ion-icon>
+                </a>
+              </td>
+              <td class="text-center">
+                <a href="confirmKategori.php?id=<?php echo $k["id"]; ?>" class="btn btn-danger py-1 px-2 opacity-75">
+                  <ion-icon name="trash" class="fs-5"></ion-icon>
+                </a>
+              </td>
+            </tr>
+            <?php $i++ ?>
+            <?php endforeach; ?>
         </tbody>
       </table>
       <ul class="pagination pagination-sm justify-content-end">
         <?php if ($HalSekarang > 1): ?>
-        <li class="page-item">
-          <a class="page-link" href="?page=<?= $HalSekarang - 1; ?>">Sebelumnya</a>
-        </li>
-        <?php endif; ?>
+          <li class="page-item">
+            <a class="page-link" href="?page=<?= $HalSekarang - 1; ?>">&lt;&lt;</a>
+          </li>
+          <?php endif; ?>
 
         <?php for ($i = 1; $i <= $JumlahHalaman; $i++): ?>
-        <?php if ($i == $HalSekarang): ?>
-        <li class="page-item active"><a class="page-link" href="?page=<?= $i ?>">
-            <?php echo $i; ?>
-          </a></li>
-        <?php else: ?>
-        <li class="page-item"><a class="page-link" href="?page=<?= $i ?>">
-            <?php echo $i; ?>
-          </a></li>
-        <?php endif; ?>
-        <?php endfor; ?>
+          <?php if ($i == $HalSekarang): ?>
+            <li class="page-item active"><a class="page-link" href="?page=<?= $i ?>">
+                <?php echo $i; ?>
+              </a></li>
+            <?php else: ?>
+            <li class="page-item"><a class="page-link" href="?page=<?= $i ?>">
+                <?php echo $i; ?>
+              </a></li>
+            <?php endif; ?>
+          <?php endfor; ?>
 
         <?php if ($HalSekarang < $JumlahHalaman): ?>
-        <li class="page-item">
-          <a class="page-link" href="?page=<?= $HalSekarang + 1; ?>">Selanjutnya</a>
-        </li>
-        <?php endif; ?>
+          <li class="page-item">
+            <a class="page-link" href="?page=<?= $HalSekarang + 1; ?>">&gt;&gt;</a>
+          </li>
+          <?php endif; ?>
       </ul>
     </div>
 
