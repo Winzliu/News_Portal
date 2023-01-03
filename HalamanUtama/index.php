@@ -118,6 +118,9 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
         <li><a class="dropdown-item fs-5" href="../User/">
             <ion-icon name="settings-outline" class="fs-6"></ion-icon> Edit Profile
           </a></li>
+        <li><a class="dropdown-item fs-5" href="../User/ubahPass.php">
+            <ion-icon name="key-outline" class="fs-6"></ion-icon> Ubah Password
+          </a></li>
 
         <!-- Button trigger modal -->
         <a href="../logout.php" class="dropdown-item fs-5 " data-bs-toggle="modal" data-bs-target="#exampleModal">

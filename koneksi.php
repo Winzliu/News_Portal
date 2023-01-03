@@ -168,11 +168,9 @@ function edit($edit, $idUser)
   global $conn;
   $user = query("SELECT * FROM user WHERE id = $idUser");
   $usernameLama = $user[0]['username'];
-  $passwordLama = $user[0]["password"];
   $emailLama = $user[0]["email"];
   $email = mysqli_real_escape_string($conn, $edit["email"]);
   $username = mysqli_real_escape_string($conn, htmlspecialchars($edit["username"]));
-  $password = mysqli_real_escape_string($conn, $edit["password"]);
   $gambarLama = $edit["gambarLama"];
   $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
   $resultEmail = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
@@ -190,12 +188,6 @@ function edit($edit, $idUser)
     return false;
   }
 
-  if ($password == $passwordLama) {
-    $password = $passwordLama;
-  } else {
-    $password = password_hash($password, PASSWORD_DEFAULT);
-  }
-
   if ($_FILES["gambar"]['error'] === 4) {
     $gambar = $gambarLama;
   } else {
@@ -211,7 +203,7 @@ function edit($edit, $idUser)
   mysqli_query($conn, "UPDATE balasan SET username = '$username' WHERE idUser = '$id'");
 
   // upload ke database
-  mysqli_query($conn, "UPDATE user SET  username = '$username', email = '$email', password = '$password',gambar = '$gambar' WHERE id = $id");
+  mysqli_query($conn, "UPDATE user SET  username = '$username', email = '$email',gambar = '$gambar' WHERE id = $id");
 
 
   return mysqli_affected_rows($conn);
@@ -560,5 +552,45 @@ function balasan($data)
   return mysqli_affected_rows($conn);
 }
 // akhir fungsi balasan
+
+
+// fungsi edit password
+function editPass($dataUser, $id)
+{
+  global $conn;
+  $idUser = $id;
+  $passwordLama = htmlspecialchars($dataUser["passwordLama"]);
+  $passwordBaru = mysqli_real_escape_string($conn, $dataUser["passwordBaru"]);
+  $konfirmasiPass = mysqli_real_escape_string($conn, $dataUser["passwordKonfirmasi"]);
+  $Users = mysqli_query($conn, "SELECT password FROM user WHERE id = '$idUser'");
+  $password = mysqli_fetch_assoc($Users);
+
+
+  // ada gk email yang sama
+  if (password_verify($passwordLama, $password['password'])) {
+    // konfirmasi password
+    if ($passwordBaru !== $konfirmasiPass) {
+      echo "<script>
+    alert('Konfirmasi Password Baru Salah');
+    </script>";
+      return false;
+    } else {
+      // enkripsi password hash
+      $passwordBaru = password_hash($passwordBaru, PASSWORD_DEFAULT);
+
+      // tambah password ke database
+      mysqli_query($conn, "UPDATE user SET password ='$passwordBaru' WHERE 
+  id ='$idUser'");
+
+      return mysqli_affected_rows($conn);
+    }
+  } else {
+    echo "<script>
+  alert('Password Lama Salah');
+  </script>";
+    return 0;
+  }
+}
+// akhir fungsi edit password
 
 ?>

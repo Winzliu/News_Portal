@@ -18,14 +18,14 @@ $beritaFull = query("SELECT * FROM berita WHERE judul LIKE '%$keyword%' ORDER BY
 
 ?>
 
-<div class="position-absolute top-100 w-100 mt-1 rounded" id="container">
+<div class="position-absolute top-100 w-100 mt-1 rounded" style="z-index:9999;" id="container">
   <ul class="list-group fs-6">
     <?php foreach ($beritaFull as $berita): ?>
-    <a class="text-decoration-none focus" href="../HalamanDetail/index.php?id=<?php echo $berita['id']; ?>">
-      <li class="list-group-item rounded btn btn-light" style="margin-top: 1px;height: 38px; overflow: hidden;">
-        <?php echo $berita['judul']; ?>
-      </li>
-    </a>
-    <?php endforeach; ?>
+      <a class="text-decoration-none focus" href="../HalamanDetail/Berita/index.php?id=<?php echo $berita['id']; ?>">
+        <li class="list-group-item rounded btn btn-light" style="margin-top: 1px;height: 38px; overflow: hidden;">
+          <?php echo $berita['judul']; ?>
+        </li>
+      </a>
+      <?php endforeach; ?>
   </ul>
 </div>
