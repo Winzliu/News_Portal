@@ -3,11 +3,14 @@ session_start();
 // koneksi ke database
 include '../koneksi.php';
 if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
-  header("Location: ../logout.php");
+  header("Location: ../login");
 }
 // user
 $idUser = $_SESSION["id"];
 $users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
+if ($users->num_rows == 0) {
+  header("Location: ../login");
+}
 $user = mysqli_fetch_assoc($users);
 $kategori = query("SELECT * FROM kategori");
 

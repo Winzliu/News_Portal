@@ -7,6 +7,9 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
 // user
 $idUser = $_SESSION["id"];
 $users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
+if ($users->num_rows == 0) {
+  header("Location: ../login");
+}
 $user = mysqli_fetch_assoc($users);
 // kategori
 $kategori = query("SELECT * FROM kategori");
