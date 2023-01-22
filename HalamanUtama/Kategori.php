@@ -1,13 +1,13 @@
 <?php
 session_start();
 require '../koneksi.php';
+if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
+  header("Location: ../login");
+}
 // user
 $idUser = $_SESSION["id"];
 $users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
 $user = mysqli_fetch_assoc($users);
-if (!isset($_SESSION["login"]) || !isset($user["id"])) {
-  header("Location: ../login");
-}
 // kategori
 $kategoriHal = $_GET["kategori"];
 $kategori = query("SELECT * FROM kategori");
@@ -80,7 +80,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
               Lanjut</a>
           </div>
         </div>
-        <?php endforeach; ?>
+      <?php endforeach; ?>
       <!-- akhir berita 1 -->
       <!-- pagination -->
       <ul class="pagination pagination-sm justify-content-center my-4">
@@ -88,25 +88,25 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
           <li class="page-item">
             <a class="page-link" href="?page=<?= $HalSekarang - 1; ?>&kategori=<?php echo $kategoriHal ?>">Sebelumnya</a>
           </li>
-          <?php endif; ?>
+        <?php endif; ?>
 
         <?php for ($i = 1; $i <= $JumlahHalaman; $i++): ?>
           <?php if ($i == $HalSekarang): ?>
             <li class="page-item active"><a class="page-link" href="?page=<?= $i ?>&kategori=<?php echo $kategoriHal ?>">
                 <?php echo $i; ?>
               </a></li>
-            <?php else: ?>
+          <?php else: ?>
             <li class="page-item"><a class="page-link" href="?page=<?= $i ?>&kategori=<?php echo $kategoriHal ?>">
                 <?php echo $i; ?>
               </a></li>
-            <?php endif; ?>
-          <?php endfor; ?>
+          <?php endif; ?>
+        <?php endfor; ?>
 
         <?php if ($HalSekarang < $JumlahHalaman): ?>
           <li class="page-item">
             <a class="page-link" href="?page=<?= $HalSekarang + 1; ?>&kategori=<?php echo $kategoriHal ?>">Selanjutnya</a>
           </li>
-          <?php endif; ?>
+        <?php endif; ?>
       </ul>
       <!-- akhir pagination -->
     </div>
@@ -125,7 +125,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
                 <?php echo $row["namaKategori"]; ?>
               </li>
             </a>
-            <?php endforeach; ?>
+          <?php endforeach; ?>
         </ul>
       </div>
       <!-- akhir side bar katogori -->
@@ -141,7 +141,7 @@ $beritaBaru = query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
                 <?php echo $baru['judul'] ?>
               </li>
             </a>
-            <?php endforeach; ?>
+          <?php endforeach; ?>
         </ul>
       </div>
       <!-- akhir side bar berita terbaru -->

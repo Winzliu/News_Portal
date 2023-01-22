@@ -1,13 +1,13 @@
 <?php
 session_start();
 require '../../koneksi.php';
+if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
+  header("Location: ../../login");
+}
 // user
 $idUser = $_SESSION["id"];
 $users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
 $user = mysqli_fetch_assoc($users);
-if (!isset($_SESSION["login"]) || !isset($user["id"])) {
-  header("Location: ../../login");
-}
 // kategori
 $kategori = query("SELECT * FROM kategori");
 // berita
@@ -143,9 +143,9 @@ if (isset($_POST['balasan'])) {
                               <?php echo $r['balasan']; ?>
                             </p>
                           </div>
-                          <?php endif; ?>
                         <?php endif; ?>
-                      <?php endforeach; ?>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
                     <!-- akhir reply -->
                     <!-- button balasan -->
                     <div class="w-100 text-end mb-3">
@@ -170,10 +170,10 @@ if (isset($_POST['balasan'])) {
                     </form>
                     <!-- akhir form reply -->
                   </div>
-                  <?php else: ?>
+                <?php else: ?>
                   <div></div>
-                  <?php endif; ?>
-                <?php endforeach; ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
             </div>
           </li>
         </ul>
@@ -213,7 +213,7 @@ if (isset($_POST['balasan'])) {
                 <?php echo $row["namaKategori"]; ?>
               </li>
             </a>
-            <?php endforeach; ?>
+          <?php endforeach; ?>
         </ul>
       </div>
       <!-- akhir side bar katogori -->
@@ -229,7 +229,7 @@ if (isset($_POST['balasan'])) {
                 <?php echo $baru['judul'] ?>
               </li>
             </a>
-            <?php endforeach; ?>
+          <?php endforeach; ?>
         </ul>
       </div>
       <!-- akhir side bar berita terbaru -->
@@ -265,13 +265,13 @@ if (isset($_POST['balasan'])) {
       </script>
       <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
       <?php unset($_SESSION['submitKomentar']); ?>
-      <?php else: ?>
+    <?php else: ?>
       <script>
         swal("Komentar Gagal Ditambahkan", "", "error");
       </script>
       <?php unset($_SESSION['submitKomentar']); ?>
-      <?php endif; ?>
     <?php endif; ?>
+  <?php endif; ?>
 
   <!-- reply -->
   <script>
@@ -299,13 +299,13 @@ if (isset($_POST['balasan'])) {
       </script>
       <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
       <?php unset($_SESSION['balasan']); ?>
-      <?php else: ?>
+    <?php else: ?>
       <script>
         swal("Balasan Gagal Ditambahkan", "", "error");
       </script>
       <?php unset($_SESSION['balasan']); ?>
-      <?php endif; ?>
     <?php endif; ?>
+  <?php endif; ?>
 
 </body>
 

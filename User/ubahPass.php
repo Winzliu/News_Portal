@@ -2,13 +2,13 @@
 session_start();
 // koneksi ke database
 include '../koneksi.php';
+if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
+  header("Location: ../logout.php");
+}
 // user
 $idUser = $_SESSION["id"];
 $users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
 $user = mysqli_fetch_assoc($users);
-if (!isset($_SESSION["login"]) || !isset($user["id"])) {
-  header("Location: ../logout.php");
-}
 $kategori = query("SELECT * FROM kategori");
 
 $id = $_SESSION["id"];
@@ -114,13 +114,13 @@ if (isset($_POST["submit"])) {
       </script>
       <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
       <?php unset($_SESSION['editPass']); ?>
-      <?php else: ?>
+    <?php else: ?>
       <script>
         swal("Gagal Mengubah Password", "", "error");
       </script>
       <?php unset($_SESSION['editPass']); ?>
-      <?php endif; ?>
     <?php endif; ?>
+  <?php endif; ?>
 
 
   <!-- showpassword -->

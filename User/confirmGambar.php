@@ -1,13 +1,13 @@
 <?php
 session_start();
 require '../koneksi.php';
+if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
+  header("Location: ../login");
+}
 // user
 $idUser = $_SESSION["id"];
 $users = mysqli_query($conn, "SELECT * FROM user WHERE id = '$idUser'");
 $user = mysqli_fetch_assoc($users);
-if (!isset($_SESSION["login"]) || !isset($user["id"])) {
-  header("Location: ../login");
-}
 $id = $_GET['id'];
 $user = query("SELECT * FROM user WHERE id = $id");
 
@@ -63,24 +63,24 @@ if (isset($_POST["hapus"])) {
   <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
     di dalam session sukses  -->
   <?php if (isset($_POST['hapus'])): ?>
-  <?php if (isset($_SESSION['hapusGambar'])): ?>
-  <script>
-    swal("Berhasil Menghapus Gambar", "", "success");
-    setTimeout(function () {
-      document.location = "../HalamanUtama/";
-    }, 2500)
-  </script>
-  <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
-  <?php unset($_SESSION['hapusGambar']); ?>
-  <?php else: ?>
-  <script>
-    swal("Gagal Menghapus Gambar", "", "error");
-    setTimeout(function () {
-      document.location = "../HalamanUtama/";
-    }, 2500)
-      <?php unset($_SESSION[' edit ']); ?>
-  </script>
-  <?php endif; ?>
+    <?php if (isset($_SESSION['hapusGambar'])): ?>
+      <script>
+        swal("Berhasil Menghapus Gambar", "", "success");
+        setTimeout(function () {
+          document.location = "../HalamanUtama/";
+        }, 2500)
+      </script>
+      <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+      <?php unset($_SESSION['hapusGambar']); ?>
+    <?php else: ?>
+      <script>
+        swal("Gagal Menghapus Gambar", "", "error");
+        setTimeout(function () {
+          document.location = "../HalamanUtama/";
+        }, 2500)
+          <?php unset($_SESSION[' edit ']); ?>
+      </script>
+    <?php endif; ?>
   <?php endif; ?>
 
 </body>
