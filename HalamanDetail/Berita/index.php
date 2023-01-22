@@ -87,7 +87,7 @@ if (isset($_POST['balasan'])) {
         alt="...">
       <!-- akhir gambar -->
       <!-- isi berita -->
-      <div class="card-body mb-5">
+      <div class="card-body mb-5 overflow-hidden">
         <div class="card-text">
           <?php echo $b['berita']; ?>
         </div>
