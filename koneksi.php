@@ -55,7 +55,7 @@ function registrasi($data)
   $password = password_hash($password, PASSWORD_DEFAULT);
 
   // tambah password ke database
-  mysqli_query($conn, "INSERT INTO user VALUES('','$email','$username','$password','$gambar')");
+  mysqli_query($conn, "INSERT INTO user (email, username, password, gambar) VALUES('$email','$username','$password','$gambar')");
 
   return mysqli_affected_rows($conn);
 }
@@ -254,7 +254,7 @@ function tambahkategori($data)
   }
 
   // tambah password ke database
-  mysqli_query($conn, "INSERT INTO kategori VALUES('','$namaKategori', current_timestamp()	)");
+  mysqli_query($conn, "INSERT INTO kategori (namaKategori, tanggalPosting) VALUES('$namaKategori', current_timestamp()	)");
 
   return mysqli_affected_rows($conn);
 }
@@ -286,7 +286,7 @@ function tambahberita($data)
   }
 
   // tambah berita ke database
-  mysqli_query($conn, "INSERT INTO berita VALUES('','$judul', '$kategori', '$isiBerita', current_timestamp(), '$gambar', '$admin')");
+  mysqli_query($conn, "INSERT INTO berita (judul, kategori, berita, tanggal, gambar, oleh) VALUES('$judul', '$kategori', '$isiBerita', current_timestamp(), '$gambar', '$admin')");
 
   return mysqli_affected_rows($conn);
 }
@@ -529,7 +529,7 @@ function komentar($data)
   $idUser = $data["idUser"];
 
   // tambah password ke database
-  mysqli_query($conn, "INSERT INTO komentar VALUES('','$idBerita','$idUser','$username','$gambar','$komentar', current_timestamp(), 0 )");
+  mysqli_query($conn, "INSERT INTO komentar (idBerita, idUser, username, gambar, komentar, tanggalPost, status) VALUES('$idBerita','$idUser','$username','$gambar','$komentar', current_timestamp(), 0 )");
 
   return mysqli_affected_rows($conn);
 }
@@ -546,8 +546,7 @@ function balasan($data)
   $balasan = mysqli_real_escape_string($conn, $data["isiBalasan"]);
   $idUser = $data["idUser"];
 
-  // tambah password ke database
-  mysqli_query($conn, "INSERT INTO balasan VALUES('','$idBerita','$idKomentar','$idUser','$username','$balasan', current_timestamp(), 0 )");
+  mysqli_query($conn, "INSERT INTO balasan (idBerita, idKomentar, idUser, username, balasan, tanggal, status) VALUES('$idBerita','$idKomentar','$idUser','$username','$balasan', current_timestamp(), 0 )");
 
   return mysqli_affected_rows($conn);
 }
